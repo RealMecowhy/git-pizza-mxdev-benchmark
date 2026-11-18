@@ -1,0 +1,188 @@
+orderNumber,lineNo,seq,type,key,name,price,isDefault
+1001,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1001,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1001,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1001,2,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1001,2,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1001,2,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1002,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1002,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1002,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1003,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1003,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1003,1,3,CHEESE,buffalo_mozzarella,Buffalo Mozzarella,0.00,true
+1003,1,4,ADD,jalapenos,Jalapeños,2.50,false
+1004,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1004,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1004,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1005,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1005,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1005,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1006,1,1,CRUST,thin_client,Thin Client,0.00,false
+1006,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1006,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1006,1,4,ADD,arugula,Wild arugula,2.00,false
+1007,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1007,1,2,SAUCE,truffle_cream,Black Truffle Cream,0.00,true
+1007,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1008,1,1,CRUST,cheese_stuffed_v2,Cheese-Stuffed v2,2.50,false
+1008,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1008,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1008,1,4,ADD,nduja,'Nduja,3.50,false
+1009,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1009,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1009,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1010,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1010,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1010,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1011,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1011,1,2,SAUCE,no_sauce,No Sauce (bianca),0.00,true
+1011,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1012,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1012,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1012,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1012,2,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1012,2,2,SAUCE,smoked_bbq,Smoked BBQ,0.00,true
+1012,2,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1013,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1013,1,2,SAUCE,yellow_tomato,Yellow Tomato,0.00,true
+1013,1,3,CHEESE,vegan_cashew_mozz,Vegan Cashew Mozzarella,0.00,true
+1014,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1014,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1014,1,3,CHEESE,buffalo_mozzarella,Buffalo Mozzarella,0.00,true
+1014,2,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1014,2,2,SAUCE,smoked_bbq,Smoked BBQ,0.00,true
+1014,2,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1015,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1015,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1015,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1016,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1016,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1016,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1016,1,4,REMOVE,jalapeno,Fresh jalapeños,0.00,false
+1016,2,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1016,2,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1016,2,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1017,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1017,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1017,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1017,2,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1017,2,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1017,2,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1017,3,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1017,3,2,SAUCE,yellow_tomato,Yellow Tomato,0.00,true
+1017,3,3,CHEESE,vegan_cashew_mozz,Vegan Cashew Mozzarella,0.00,true
+1018,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1018,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1018,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1018,1,4,ADD,hot_honey,Hot honey drizzle,2.00,false
+1019,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1019,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1019,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1020,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1020,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1020,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1021,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1021,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1021,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1022,1,1,CRUST,cheese_stuffed_v2,Cheese-Stuffed v2,2.50,false
+1022,1,2,SAUCE,truffle_cream,Black Truffle Cream,0.00,true
+1022,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1022,2,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1022,2,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1022,2,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1023,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1023,1,2,SAUCE,smoked_bbq,Smoked BBQ,0.00,true
+1023,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1024,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1024,1,2,SAUCE,yellow_tomato,Yellow Tomato,0.00,true
+1024,1,3,CHEESE,vegan_cashew_mozz,Vegan Cashew Mozzarella,0.00,true
+1025,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1025,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1025,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1025,2,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1025,2,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1025,2,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1026,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1026,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1026,1,3,CHEESE,buffalo_mozzarella,Buffalo Mozzarella,0.00,true
+1026,1,4,ADD,stracciatella,Stracciatella,3.00,false
+1026,1,5,REMOVE,chili_flakes,Crushed red pepper,0.00,false
+1027,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1027,1,2,SAUCE,no_sauce,No Sauce (bianca),0.00,true
+1027,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1028,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1028,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1028,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1029,1,1,CRUST,thin_client,Thin Client,0.00,false
+1029,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1029,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1029,1,4,ADD,mushrooms,Cremini mushrooms,2.50,false
+1029,2,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1029,2,2,SAUCE,smoked_bbq,Smoked BBQ,0.00,true
+1029,2,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1030,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1030,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1030,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1030,2,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1030,2,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1030,2,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1031,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1031,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1031,1,3,CHEESE,buffalo_mozzarella,Buffalo Mozzarella,0.00,true
+1032,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1032,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1032,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1032,2,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1032,2,2,SAUCE,truffle_cream,Black Truffle Cream,0.00,true
+1032,2,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1033,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1033,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1033,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1033,1,4,ADD,jalapenos,Jalapeños,2.00,false
+1034,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1034,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1034,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1035,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1035,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1035,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1035,1,4,ADD,stracciatella,Stracciatella,3.50,false
+1036,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1036,1,2,SAUCE,smoked_bbq,Smoked BBQ,0.00,true
+1036,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1037,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1037,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1037,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1038,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1038,1,2,SAUCE,no_sauce,No Sauce (bianca),0.00,true
+1038,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1038,1,4,ADD,hot_honey,Hot honey drizzle,2.00,false
+1039,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1039,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1039,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1040,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1040,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1040,1,3,CHEESE,buffalo_mozzarella,Buffalo Mozzarella,0.00,true
+1040,1,4,ADD,jalapenos,Jalapeños,2.50,false
+1040,2,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1040,2,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1040,2,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1041,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1041,1,2,SAUCE,yellow_tomato,Yellow Tomato,0.00,true
+1041,1,3,CHEESE,vegan_cashew_mozz,Vegan Cashew Mozzarella,0.00,true
+1042,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1042,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1042,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1043,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1043,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1043,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1044,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1044,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1044,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1045,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1045,1,2,SAUCE,san_marzano,San Marzano Tomato,0.00,true
+1045,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true
+1045,1,4,REMOVE,jalapeno,Fresh jalapeños,0.00,false
+1046,1,1,CRUST,neapolitan_core,Neapolitan Core,0.00,true
+1046,1,2,SAUCE,truffle_cream,Black Truffle Cream,0.00,true
+1046,1,3,CHEESE,fior_di_latte,Fior di Latte Mozzarella,0.00,true

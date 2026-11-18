@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<title>Order confirmed — Git Pizza MxDev</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Geist:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link rel="stylesheet" href="_shared/proto.css">
+<style>
+  .ok-icon { width: 88px; height: 88px; border-radius: var(--r-lg); background: var(--surface-container); display: flex; align-items: center; justify-content: center; color: var(--success-text); font-size: 34px; font-weight: 700; flex-shrink: 0; box-shadow: var(--glow-l); position: relative; }
+  .ok-icon img { width: 64px; height: 64px; }
+  .ok-icon::after { content: ''; position: absolute; top: -4px; right: -4px; width: 14px; height: 14px; border-radius: 9999px; background: var(--success); box-shadow: 0 0 8px rgba(114,255,112,0.8); }
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .tile { background: var(--surface-container); border: 1px solid var(--border); border-radius: var(--r-md); padding: 16px; display: grid; gap: 8px; align-content: start; }
+  .hashbox { display: flex; align-items: center; gap: 12px; background: var(--surface-container); border: 1px solid var(--border); border-radius: var(--r-md); padding: 12px 16px; flex-wrap: wrap; }
+  @media (max-width: 767px) { .tiles { grid-template-columns: 1fr; } .ok-icon { width: 64px; height: 64px; font-size: 24px; } .ok-icon img { width: 48px; height: 48px; } }
+</style>
+</head>
+<body class="grid-bg" data-screen="SCR-08" data-nav="track">
+<main id="main"><div class="page" aria-hidden="true" style="opacity:.3"><h1 class="t-display c-primary">checkout_config.json</h1></div></main>
+<script src="_shared/proto.js"></script>
+<script>
+(function () {
+  var st = GP.state(), E = GP.esc;
+  GP.registerStates([['default', 'Delivery (tracking link)'], ['pickup', 'Pickup order']]);
+  var mode = GP.currentState();
+  var o = GP.findOrder(GP.param('id') || st.lastOrder || 0);
+  if ((!o || GP.param('state')) && !GP.param('ok')) {
+    // build a demo paid order for the preview
+    var a = GP.defaultLine('PZ-05'); a.size = 'LARGE'; a.extras = ['EX-21']; st.cart.lines = [a, GP.defaultLine('DR-01')]; st.cart.coupon = null;
+    st.checkout.type = mode === 'pickup' ? 'PICKUP' : 'DELIVERY';
+    st.checkout.addr = { line1: '2290 Mission Street', line2: 'Apt 5', city: 'San Francisco', state: 'CA', zip: '94110', notes: '' };
+    st.checkout.contact = { name: 'Taylor Brooks', email: 'taylor.brooks@example.com', phone: '(415) 555-0128' };
+    o = GP.createOrder(); o.fixed = null; o.paid = true; o.paymentStatus = 'PAID'; o.method = 'CARD'; o.card = 'VISA_4242'; o.txn = 'txn_sim_' + GP.hex(12); o.paidTs = Date.now();
+    o.attempts = [{ n: 1, method: 'CARD', card: 'VISA_4242', status: 'SUCCEEDED', txn: o.txn }]; GP.setElapsed(o, 0); GP.saveOrder(o);
+    st.cart = { lines: [], coupon: null }; st.pendingOrder = null; st.lastOrder = o.no; GP.save();
+    location.href = 'SCR-08-order-confirmation.html?id=MX-' + o.no + '&state=' + mode + '&ok=1'; return;
+  }
+  var deliv = o.type === 'DELIVERY';
+  var qpos = 2; // BR-SIM-16c: queue position at T-02 (TXT-PAY-19); the prototype has no competing traffic
+  var link = location.origin + location.pathname.replace('SCR-08-order-confirmation.html', 'SCR-09-order-tracking.html') + '?id=MX-' + o.no + '&t=' + (o.token || '').slice(0, 16);
+  var scrim = GP.h('<div class="scrim" style="background:rgba(0,0,0,.4)"></div>');
+  var m = GP.h('<div class="modal wide fullscreen-phone" role="dialog" aria-modal="true" aria-labelledby="ok-t"></div>');
+  function eta() {
+    var ls = GP.liveStatus(o), rem = 0;
+    if (ls.segs) { for (var i = ls.idx; i < ls.segs.length; i++) rem += ls.segs[i][1]; rem -= ls.inStatus || 0; }
+    return rem;
+  }
+  function render() {
+    var rem = eta(), at = new Date(Date.now() + rem * 1000);
+    m.innerHTML = '<div class="modal-head"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-small c-muted" style="flex:1">tty: deploy-runner · mission-kitchen</span><span class="badge st-deployed">HTTP 200 OK</span></div>' +
+      '<div class="modal-body stack-lg"><div class="row" style="gap:20px;flex-wrap:nowrap;align-items:flex-start"><div class="ok-icon" aria-hidden="true"><img src="../../assets/brand/logo-mark.svg" alt=""></div><div><div class="t-label c-green"><span class="live-dot" aria-hidden="true"></span> DEPLOYMENT SUCCESSFUL // 200 OK</div>' +
+      '<h1 class="t-h1 mt-8" id="ok-t">Order placed and paid</h1><p class="t-body-long" style="margin:8px 0 0">The kitchen accepted your order. Position <strong class="c-primary">' + qpos + '</strong> in the build queue.</p></div></div>' +
+      '<div class="hashbox"><span class="ms c-primary" aria-hidden="true">fingerprint</span><span class="t-small c-secondary">DEPLOYMENT_HASH:</span><span class="c-green" style="font-weight:700" id="hash">#' + o.hash + '</span><span class="t-small c-muted">· order MX-' + o.no + '</span>' +
+      '<button class="btn btn-ghost btn-sm" data-copy="#' + o.hash + '" style="margin-left:auto" aria-label="Copy commit hash"><span class="ms sm" aria-hidden="true">content_copy</span>COPY HASH</button></div>' +
+      '<div class="tiles"><div class="tile"><div class="between"><span class="t-label c-secondary">' + (deliv ? 'ESTIMATED_DELIVERY' : 'READY_FOR_PICKUP') + '</span><span class="ms c-primary" aria-hidden="true">schedule</span></div><div class="t-price-lg c-primary" aria-live="off">ETA ' + GP.mmss(rem) + '</div><div class="t-small c-muted">' + (deliv ? 'Delivered at about ' : 'Ready at about ') + GP.hhmm(at) + ' · demo time</div></div>' +
+      '<div class="tile"><div class="between"><span class="t-label c-secondary">HARDWARE_CLUSTER</span><span class="ms c-orange" aria-hidden="true">local_fire_department</span></div><div class="t-h3">Oven assigned when baking starts</div><div class="t-small c-green">● 2/2 ovens online · thermal load 50%</div></div>' + /* TXT-PAY-24, A-74: no oven name before baking */
+      '<div class="tile"><div class="between"><span class="t-label c-secondary">TX_PROTOCOL</span><span class="ms c-green" aria-hidden="true">verified_user</span></div><div class="t-h3 c-green">' + (o.method === 'CARD' ? GP.TEST_CARDS[o.card].label : GP.METHODS[o.method]) + '</div><div class="t-small">STATUS: <span class="c-green">PAID // ' + GP.money(o.t.total) + '</span></div><div class="t-micro c-muted">TxID ' + o.txn + ' (simulated)</div></div></div>' +
+      '<div class="term"><div class="term-bar"><span class="ms sm c-green" aria-hidden="true">terminal</span><span>PIPELINE_STREAMS // STDOUT</span><span style="margin-left:auto" class="c-green"><span class="live-dot" aria-hidden="true"></span> LIVE</span></div><div class="term-body">' +
+      '<div class="log-line"><span class="ts">[' + GP.hhmmss(new Date(o.placedTs || Date.now())) + ']</span><span class="tag tag-success">[INIT]</span><span>Order MX-' + o.no + ' staged. Commit #' + o.hash + ' signed.</span></div>' +
+      '<div class="log-line"><span class="ts">[' + GP.hhmmss(new Date(o.paidTs || Date.now())) + ']</span><span class="tag tag-success">[PAYMENT]</span><span>Payment confirmed. TxID ' + o.txn + '</span></div>' +
+      '<div class="log-line"><span class="ts">[' + GP.hhmmss(new Date(o.paidTs || Date.now())) + ']</span><span class="tag tag-orange">[KITCHEN]</span><span>Order queued at position ' + qpos + '.<span class="cursor"></span></span></div></div></div>' +
+      ('<div class="panel panel-pad"><div class="section-label"><span class="ms" aria-hidden="true">link</span>TRACKING_LINK</div><p class="t-small c-secondary" style="margin-top:0">Save this link to follow your order. You can also find it with your order number and email: <strong>MX-' + o.no + '</strong> and ' + E(o.contact.email) + '.</p>' +
+        '<div class="row" style="flex-wrap:nowrap"><input class="input" readonly value="' + E(link) + '" aria-label="Tracking link"><button class="btn btn-ghost" data-copy="' + E(link) + '" aria-label="Copy tracking link"><span class="ms md">content_copy</span></button></div><p class="t-micro c-muted mt-8" style="margin-bottom:0">We use your email only to let you look up this order. No emails are sent in this demo.</p></div>') +
+      '</div><div class="modal-foot"><a class="btn btn-ghost" href="SCR-13-order-detail-and-receipt.html?id=MX-' + o.no + '"><span class="ms md" aria-hidden="true">receipt_long</span>View receipt</a>' +
+      '<a class="btn btn-primary" href="SCR-09-order-tracking.html?id=MX-' + o.no + '" aria-label="Track this order"><span class="ms md" aria-hidden="true">monitoring</span>MONITOR PIPELINE →</a></div>';
+  }
+  m.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-copy]'); if (!b) return;
+    try { navigator.clipboard.writeText(b.dataset.copy); } catch (x) {}
+    GP.toast('Copied to clipboard.', 'info');
+  });
+  render(); setInterval(function () { var t = m.querySelector('.t-price-lg'); if (t) t.textContent = 'ETA ' + GP.mmss(eta()); }, 1000);
+  document.body.appendChild(scrim); document.body.appendChild(m);
+})();
+</script>
+</body>
+</html>

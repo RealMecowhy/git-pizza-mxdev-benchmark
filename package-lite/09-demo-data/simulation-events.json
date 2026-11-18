@@ -1,0 +1,471 @@
+[
+  {
+    "seq": 1,
+    "occurredAt": "T-01:52:07",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1019 payment attempt 1: SUCCEEDED",
+    "order": "MX-1019"
+  },
+  {
+    "seq": 2,
+    "occurredAt": "T-01:49:39",
+    "type": "COURIER_ASSIGNED",
+    "message": "Marek // Moto-v3 assigned to MX-1019",
+    "order": "MX-1019"
+  },
+  {
+    "seq": 3,
+    "occurredAt": "T-01:49:09",
+    "type": "COURIER_ARRIVED",
+    "message": "Marek // Moto-v3 arrived at the store for MX-1019",
+    "order": "MX-1019"
+  },
+  {
+    "seq": 4,
+    "occurredAt": "T-01:47:08",
+    "type": "DELIVERY_COMPLETED",
+    "message": "MX-1019 delivered to 94103 by Marek // Moto-v3",
+    "order": "MX-1019"
+  },
+  {
+    "seq": 5,
+    "occurredAt": "T-01:41:30",
+    "type": "ORDER_SPAWNED",
+    "message": "Spawned MX-1020 (PICKUP, 2 items)",
+    "order": "MX-1020"
+  },
+  {
+    "seq": 6,
+    "occurredAt": "T-01:41:27",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1020 payment attempt 1: SUCCEEDED",
+    "order": "MX-1020"
+  },
+  {
+    "seq": 7,
+    "occurredAt": "T-01:37:37",
+    "type": "PICKUP_COMPLETED",
+    "message": "MX-1020 collected by the customer",
+    "order": "MX-1020"
+  },
+  {
+    "seq": 8,
+    "occurredAt": "T-01:30:02",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1021 payment attempt 1: FAILED DECLINED",
+    "order": "MX-1021"
+  },
+  {
+    "seq": 9,
+    "occurredAt": "T-01:29:35",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1021 payment attempt 2: FAILED INSUFFICIENT_FUNDS",
+    "order": "MX-1021"
+  },
+  {
+    "seq": 10,
+    "occurredAt": "T-01:28:44",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1021 payment attempt 3: FAILED GATEWAY_TIMEOUT",
+    "order": "MX-1021"
+  },
+  {
+    "seq": 11,
+    "occurredAt": "T-01:28:44",
+    "type": "AUTO_CANCELLED",
+    "message": "MX-1021 rolled back: Payment failed 3 times",
+    "order": "MX-1021"
+  },
+  {
+    "seq": 12,
+    "occurredAt": "T-01:18:40",
+    "type": "ORDER_SPAWNED",
+    "message": "Spawned MX-1022 (DELIVERY, 94114, 4 items)",
+    "order": "MX-1022"
+  },
+  {
+    "seq": 13,
+    "occurredAt": "T-01:18:37",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1022 payment attempt 1: SUCCEEDED",
+    "order": "MX-1022"
+  },
+  {
+    "seq": 14,
+    "occurredAt": "T-01:16:29",
+    "type": "QA_FAILED",
+    "message": "MX-1022 failed QA (demo.kitchen): remake 1 of 2",
+    "order": "MX-1022"
+  },
+  {
+    "seq": 15,
+    "occurredAt": "T-01:14:24",
+    "type": "COURIER_ASSIGNED",
+    "message": "Alex // Node-v2 assigned to MX-1022",
+    "order": "MX-1022"
+  },
+  {
+    "seq": 16,
+    "occurredAt": "T-01:13:54",
+    "type": "COURIER_ARRIVED",
+    "message": "Alex // Node-v2 arrived at the store for MX-1022",
+    "order": "MX-1022"
+  },
+  {
+    "seq": 17,
+    "occurredAt": "T-01:11:45",
+    "type": "DELIVERY_COMPLETED",
+    "message": "MX-1022 delivered to 94114 by Alex // Node-v2",
+    "order": "MX-1022"
+  },
+  {
+    "seq": 18,
+    "occurredAt": "T-01:05:17",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1023 payment attempt 1: SUCCEEDED",
+    "order": "MX-1023"
+  },
+  {
+    "seq": 19,
+    "occurredAt": "T-00:52:42",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1024 payment attempt 1: SUCCEEDED",
+    "order": "MX-1024"
+  },
+  {
+    "seq": 20,
+    "occurredAt": "T-00:41:07",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1025 payment attempt 1: SUCCEEDED",
+    "order": "MX-1025"
+  },
+  {
+    "seq": 21,
+    "occurredAt": "T-00:33:27",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1026 payment attempt 1: FAILED DECLINED",
+    "order": "MX-1026"
+  },
+  {
+    "seq": 22,
+    "occurredAt": "T-00:33:05",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1026 payment attempt 2: SUCCEEDED",
+    "order": "MX-1026"
+  },
+  {
+    "seq": 23,
+    "occurredAt": "T-00:30:40",
+    "type": "COURIER_ASSIGNED",
+    "message": "Sofia // eBike-v4 assigned to MX-1026",
+    "order": "MX-1026"
+  },
+  {
+    "seq": 24,
+    "occurredAt": "T-00:30:10",
+    "type": "COURIER_ARRIVED",
+    "message": "Sofia // eBike-v4 arrived at the store for MX-1026",
+    "order": "MX-1026"
+  },
+  {
+    "seq": 25,
+    "occurredAt": "T-00:27:33",
+    "type": "DELIVERY_COMPLETED",
+    "message": "MX-1026 delivered to 94158 by Sofia // eBike-v4",
+    "order": "MX-1026"
+  },
+  {
+    "seq": 26,
+    "occurredAt": "T-00:24:47",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1027 payment attempt 1: FAILED INSUFFICIENT_FUNDS",
+    "order": "MX-1027"
+  },
+  {
+    "seq": 27,
+    "occurredAt": "T-00:16:20",
+    "type": "ORDER_SPAWNED",
+    "message": "Spawned MX-1028 (DELIVERY, 94105, 2 items)",
+    "order": "MX-1028"
+  },
+  {
+    "seq": 28,
+    "occurredAt": "T-00:16:17",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1028 payment attempt 1: SUCCEEDED",
+    "order": "MX-1028"
+  },
+  {
+    "seq": 29,
+    "occurredAt": "T-00:13:54",
+    "type": "COURIER_ASSIGNED",
+    "message": "Alex // Node-v2 assigned to MX-1028",
+    "order": "MX-1028"
+  },
+  {
+    "seq": 30,
+    "occurredAt": "T-00:13:24",
+    "type": "COURIER_ARRIVED",
+    "message": "Alex // Node-v2 arrived at the store for MX-1028",
+    "order": "MX-1028"
+  },
+  {
+    "seq": 31,
+    "occurredAt": "T-00:10:27",
+    "type": "DELIVERY_COMPLETED",
+    "message": "MX-1028 delivered to 94105 by Alex // Node-v2",
+    "order": "MX-1028"
+  },
+  {
+    "seq": 32,
+    "occurredAt": "T-00:06:21",
+    "type": "ORDER_SPAWNED",
+    "message": "Spawned MX-1029 (DELIVERY, 94107, 3 items)",
+    "order": "MX-1029"
+  },
+  {
+    "seq": 33,
+    "occurredAt": "T-00:06:18",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1029 payment attempt 1: SUCCEEDED",
+    "order": "MX-1029"
+  },
+  {
+    "seq": 34,
+    "occurredAt": "T-00:04:54",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1030 payment attempt 1: SUCCEEDED",
+    "order": "MX-1030"
+  },
+  {
+    "seq": 35,
+    "occurredAt": "T-00:04:11",
+    "type": "ORDER_SPAWNED",
+    "message": "Spawned MX-1031 (DELIVERY, 94110, 2 items)",
+    "order": "MX-1031"
+  },
+  {
+    "seq": 36,
+    "occurredAt": "T-00:04:08",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1031 payment attempt 1: SUCCEEDED",
+    "order": "MX-1031"
+  },
+  {
+    "seq": 37,
+    "occurredAt": "T-00:03:52",
+    "type": "COURIER_ASSIGNED",
+    "message": "Jamal // Moto-v2 assigned to MX-1029",
+    "order": "MX-1029"
+  },
+  {
+    "seq": 38,
+    "occurredAt": "T-00:03:47",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1032 payment attempt 1: SUCCEEDED",
+    "order": "MX-1032"
+  },
+  {
+    "seq": 39,
+    "occurredAt": "T-00:03:22",
+    "type": "COURIER_ARRIVED",
+    "message": "Jamal // Moto-v2 arrived at the store for MX-1029",
+    "order": "MX-1029"
+  },
+  {
+    "seq": 40,
+    "occurredAt": "T-00:03:06",
+    "type": "ORDER_SPAWNED",
+    "message": "Spawned MX-1033 (DELIVERY, 94114, 3 items)",
+    "order": "MX-1033"
+  },
+  {
+    "seq": 41,
+    "occurredAt": "T-00:03:03",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1033 payment attempt 1: SUCCEEDED",
+    "order": "MX-1033"
+  },
+  {
+    "seq": 42,
+    "occurredAt": "T-00:02:58",
+    "type": "ORDER_SPAWNED",
+    "message": "Spawned MX-1034 (DELIVERY, 94117, 3 items)",
+    "order": "MX-1034"
+  },
+  {
+    "seq": 43,
+    "occurredAt": "T-00:02:55",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1034 payment attempt 1: SUCCEEDED",
+    "order": "MX-1034"
+  },
+  {
+    "seq": 44,
+    "occurredAt": "T-00:02:40",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1035 payment attempt 1: SUCCEEDED",
+    "order": "MX-1035"
+  },
+  {
+    "seq": 45,
+    "occurredAt": "T-00:02:25",
+    "type": "COURIER_ASSIGNED",
+    "message": "Marek // Moto-v3 assigned to MX-1030",
+    "order": "MX-1030"
+  },
+  {
+    "seq": 46,
+    "occurredAt": "T-00:02:15",
+    "type": "ORDER_SPAWNED",
+    "message": "Spawned MX-1036 (DELIVERY, 94110, 3 items)",
+    "order": "MX-1036"
+  },
+  {
+    "seq": 47,
+    "occurredAt": "T-00:02:12",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1036 payment attempt 1: SUCCEEDED",
+    "order": "MX-1036"
+  },
+  {
+    "seq": 48,
+    "occurredAt": "T-00:02:02",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1037 payment attempt 1: SUCCEEDED",
+    "order": "MX-1037"
+  },
+  {
+    "seq": 49,
+    "occurredAt": "T-00:01:55",
+    "type": "COURIER_ARRIVED",
+    "message": "Marek // Moto-v3 arrived at the store for MX-1030",
+    "order": "MX-1030"
+  },
+  {
+    "seq": 50,
+    "occurredAt": "T-00:01:47",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1038 payment attempt 1: SUCCEEDED",
+    "order": "MX-1038"
+  },
+  {
+    "seq": 51,
+    "occurredAt": "T-00:01:45",
+    "type": "COURIER_ASSIGNED",
+    "message": "Sofia // eBike-v4 assigned to MX-1031",
+    "order": "MX-1031"
+  },
+  {
+    "seq": 52,
+    "occurredAt": "T-00:01:35",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1039 payment attempt 1: FAILED DECLINED",
+    "order": "MX-1039"
+  },
+  {
+    "seq": 53,
+    "occurredAt": "T-00:01:23",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1040 payment attempt 1: SUCCEEDED",
+    "order": "MX-1040"
+  },
+  {
+    "seq": 54,
+    "occurredAt": "T-00:01:15",
+    "type": "COURIER_ARRIVED",
+    "message": "Sofia // eBike-v4 arrived at the store for MX-1031",
+    "order": "MX-1031"
+  },
+  {
+    "seq": 55,
+    "occurredAt": "T-00:01:01",
+    "type": "DELIVERY_COMPLETED",
+    "message": "MX-1029 delivered to 94107 by Jamal // Moto-v2",
+    "order": "MX-1029"
+  },
+  {
+    "seq": 56,
+    "occurredAt": "T-00:01:00",
+    "type": "ORDER_SPAWNED",
+    "message": "Spawned MX-1041 (PICKUP, 2 items)",
+    "order": "MX-1041"
+  },
+  {
+    "seq": 57,
+    "occurredAt": "T-00:00:57",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1041 payment attempt 1: SUCCEEDED",
+    "order": "MX-1041"
+  },
+  {
+    "seq": 58,
+    "occurredAt": "T-00:00:28",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1042 payment attempt 1: FAILED DECLINED",
+    "order": "MX-1042"
+  },
+  {
+    "seq": 59,
+    "occurredAt": "T-00:00:14",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1043 payment attempt 1: SUCCEEDED",
+    "order": "MX-1043"
+  },
+  {
+    "seq": 60,
+    "occurredAt": "T-00:00:12",
+    "type": "COURIER_ASSIGNED",
+    "message": "Alex // Node-v2 assigned to MX-1035",
+    "order": "MX-1035"
+  },
+  {
+    "seq": 61,
+    "occurredAt": "T-00:00:09",
+    "type": "QA_FAILED",
+    "message": "MX-1033 failed QA (demo.kitchen): remake 1 of 2",
+    "order": "MX-1033"
+  },
+  {
+    "seq": 62,
+    "occurredAt": "T-00:00:09",
+    "type": "ORDER_SPAWNED",
+    "message": "Spawned MX-1044 (PICKUP, 2 items)",
+    "order": "MX-1044"
+  },
+  {
+    "seq": 63,
+    "occurredAt": "T-00:00:06",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1044 payment attempt 1: FAILED INSUFFICIENT_FUNDS",
+    "order": "MX-1044"
+  },
+  {
+    "seq": 64,
+    "occurredAt": "T-00:00:06",
+    "type": "ORDER_SPAWNED",
+    "message": "Spawned MX-1045 (DELIVERY, 94103, 2 items)",
+    "order": "MX-1045"
+  },
+  {
+    "seq": 65,
+    "occurredAt": "T-00:00:03",
+    "type": "PAYMENT_RESULT",
+    "message": "MX-1045 payment attempt 1: SUCCEEDED",
+    "order": "MX-1045"
+  },
+  {
+    "seq": 66,
+    "occurredAt": "T-00:00:01",
+    "type": "ORDER_SPAWNED",
+    "message": "Spawned MX-1046 (PICKUP, 2 items)",
+    "order": "MX-1046"
+  },
+  {
+    "seq": 67,
+    "occurredAt": "T-00:00:00",
+    "type": "RESET",
+    "message": "Demo data reset by SYSTEM (initial seed). 0 orders removed. Seed restored.",
+    "order": null
+  }
+]

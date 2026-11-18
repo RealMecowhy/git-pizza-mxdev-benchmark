@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<title>Payment — Git Pizza MxDev</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Geist:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link rel="stylesheet" href="_shared/proto.css">
+<style>
+  .backdrop-hint { opacity: 0.35; pointer-events: none; }
+  .pay-opts { display: grid; gap: 8px; }
+  .pay-opts .opt { flex-direction: row; align-items: center; gap: 12px; min-height: 48px; }
+  .attempts { display: flex; gap: 6px; }
+  .attempts i { width: 28px; height: 6px; border-radius: 9999px; background: var(--surface-highest); display: block; }
+  .attempts i.f { background: var(--error); } .attempts i.r { background: var(--primary); } .attempts i.s { background: var(--success); }
+</style>
+</head>
+<body data-screen="SCR-07" data-nav="checkout">
+<main id="main"><div class="page backdrop-hint" aria-hidden="true"><h1 class="t-display c-primary">checkout_config.json</h1><p class="c-muted">Execute Order --force</p></div></main>
+<script src="_shared/proto.js"></script>
+<script>
+(function () {
+  var st = GP.state(), E = GP.esc;
+  GP.registerStates([['processing', 'Processing (VISA 4242)'], ['declined', 'Failed: declined'], ['insufficient', 'Failed: insufficient funds'], ['timeout', 'Failed: gateway timeout'], ['third', 'Third failure: rolled back']]);
+  var mode = GP.currentState();
+  function ensureCart() { if (!st.cart.lines.length) { var a = GP.defaultLine('PZ-05'); a.size = 'LARGE'; st.cart.lines = [a, GP.defaultLine('DR-01')]; }
+    if (!st.checkout.contact.email) { st.checkout.contact = { name: 'Taylor Brooks', email: 'taylor.brooks@example.com', phone: '(415) 555-0128' }; st.checkout.addr = { line1: '2290 Mission Street', line2: 'Apt 5', city: 'San Francisco', state: 'CA', zip: '94110', notes: '' }; } }
+  if (!GP.param('ok') && mode !== 'processing' && GP.param('state')) {
+    ensureCart();
+    var card = { declined: 'VISA_0002', insufficient: 'VISA_9995', timeout: 'AMEX_0005', third: 'VISA_0002' }[mode];
+    st.checkout.method = 'CARD'; st.checkout.card = card; GP.save();
+    var o = GP.createOrder();
+    if (mode === 'third') { o.attempts = [mkAttempt(1, 'CARD', 'VISA_0002', 'FAILED', 'DECLINED'), mkAttempt(2, 'CARD', 'VISA_9995', 'FAILED', 'INSUFFICIENT_FUNDS')]; o.fixed = 'PAYMENT_FAILED'; GP.saveOrder(o); }
+    location.href = 'SCR-07-payment-sheet.html?state=' + mode + '&ok=1'; return;
+  }
+  if (mode === 'processing' && !GP.param('ok') && GP.param('state')) { ensureCart(); st.checkout.method = 'CARD'; st.checkout.card = 'VISA_4242'; GP.save(); GP.createOrder(); location.href = 'SCR-07-payment-sheet.html?state=processing&ok=1'; return; }
+
+  function mkAttempt(n, method, card, status, code) { return { n: n, method: method, card: method === 'CARD' ? card : null, status: status, code: code || null, amount: 0, at: GP.hhmmss(new Date()), txn: status === 'SUCCEEDED' ? 'txn_sim_' + GP.hex(12) : null }; }
+  var o = st.pendingOrder ? st.orders.filter(function (x) { return x.no === st.pendingOrder; })[0] : null;
+  var scrim = GP.h('<div class="scrim"></div>');
+  var m = GP.h('<div class="modal sheet" role="dialog" aria-modal="true" aria-labelledby="pay-t" aria-describedby="pay-d"></div>');
+  document.body.appendChild(scrim); document.body.appendChild(m);
+  if (!o) {
+    m.innerHTML = '<div class="modal-head"><span class="ms c-muted" aria-hidden="true">lock</span><h2 class="t-h3" id="pay-t">PAYMENT_PROTOCOL</h2></div><div class="modal-body" id="pay-d"><p>No payment is waiting. Start from the checkout.</p></div><div class="modal-foot"><a class="btn btn-primary" href="SCR-06-checkout.html">Go to checkout</a></div>';
+    return;
+  }
+  var sel = { method: st.checkout.method, card: st.checkout.card };
+  var lines = [];
+  function log(tag, cls, msg) { lines.push('<div class="log-line"><span class="ts">[' + GP.hhmmss(new Date()) + ']</span><span class="tag ' + cls + '">[' + tag + ']</span><span>' + msg + '</span></div>'); }
+  function head(icon, cls, title) { return '<div class="modal-head"><span class="ms ' + cls + '" aria-hidden="true">' + icon + '</span><div style="flex:1"><div class="t-micro c-muted">PAYMENT_PROTOCOL · MX-' + o.no + ' · #' + o.hash + '</div><h2 class="t-h3" id="pay-t">' + title + '</h2></div><span class="chip tag-badge">SIMULATED</span></div>'; }
+  function attemptsBar() { var h = '<div class="attempts" aria-label="Payment attempt ' + o.attempts.length + ' of 3">'; for (var i = 0; i < 3; i++) { var a = o.attempts[i]; h += '<i class="' + (!a ? '' : a.status === 'FAILED' ? 'f' : a.status === 'SUCCEEDED' ? 's' : 'r') + '"></i>'; } return h + '</div>'; }
+  function methodLabel(a) { return a.method === 'CARD' ? GP.TEST_CARDS[a.card].label : GP.METHODS[a.method]; }
+  function term() { return '<div class="term mt-16"><div class="term-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span>bash — payment.log</span></div><div class="term-body" aria-live="polite">' + lines.join('') + '</div></div>'; }
+
+  function processing(a) {
+    var dur = (a.card === 'AMEX_0005' ? GP.DUR.paymentTimeout : GP.DUR.paymentProcessing) * 1000;
+    m.innerHTML = head('sync', 'c-primary', 'Processing payment…') + '<div class="modal-body" id="pay-d"><div class="between"><div><div class="t-small c-secondary">Charging <strong class="c-primary">' + GP.money(o.t.total) + '</strong> to ' + E(methodLabel(a)) + '</div><div class="t-micro c-muted mt-8">Attempt ' + a.n + ' of 3 · do not close this window</div></div>' + attemptsBar() + '</div>' +
+      '<div class="progress orange mt-16" aria-hidden="true"><i id="pp" style="width:0"></i></div>' + term() + '</div><div class="modal-foot"><button class="btn btn-ghost" disabled>Cancel order</button><button class="btn btn-primary" disabled><span class="ms md" aria-hidden="true">hourglass_top</span>Processing…</button></div>';
+    requestAnimationFrame(function () { var pp = document.getElementById('pp'); pp.style.transition = 'width ' + dur + 'ms linear'; pp.style.width = '100%'; });
+    setTimeout(function () { outcome(a); }, dur);
+  }
+  function startAttempt() {
+    var a = mkAttempt(o.attempts.length + 1, sel.method, sel.card, 'PROCESSING');
+    o.attempts.push(a); o.fixed = 'PAYMENT_PENDING'; GP.saveOrder(o);
+    if (a.n === 1) { log('INIT', 'tag-success', 'Order MX-' + o.no + ' staged. Commit #' + o.hash + ' signed.'); log('PAYMENT', 'tag-info', 'Handshake with payment gateway (simulated)…'); }
+    else log('PAYMENT', 'tag-info', 'Retrying payment (attempt ' + a.n + ' of 3)…');
+    processing(a);
+  }
+  function outcome(a) {
+    var ok = a.method !== 'CARD' || GP.TEST_CARDS[a.card].ok;
+    if (ok) {
+      a.status = 'SUCCEEDED'; a.txn = 'txn_sim_' + GP.hex(12); o.fixed = null; o.paid = true; o.paymentStatus = 'PAID'; o.method = a.method; o.card = a.card; o.txn = a.txn; o.paidTs = Date.now();
+      GP.setElapsed(o, 0); GP.saveOrder(o);
+      st.cart = { lines: [], coupon: null }; st.pendingOrder = null; st.lastOrder = o.no; GP.save();
+      log('PAYMENT', 'tag-success', 'Payment confirmed. TxID ' + a.txn); log('KITCHEN', 'tag-orange', 'Order queued at position 2.');
+      m.querySelector('.term-body').innerHTML = lines.join('');
+      setTimeout(function () { location.href = 'SCR-08-order-confirmation.html?id=MX-' + o.no; }, 700);
+      return;
+    }
+    a.status = 'FAILED'; a.code = GP.TEST_CARDS[a.card].code;
+    log('PAYMENT', 'tag-error', 'ERROR 402: ' + GP.FAILURES[a.code] + '. Attempt ' + a.n + ' of 3.');
+    if (a.n >= 3) { o.fixed = 'CANCELLED'; o.cancelReason = 'Payment failed 3 times'; o.cancelledBy = 'SYSTEM'; o.frozenAt = null; st.pendingOrder = null; log('ROLLBACK', 'tag-error', 'Order rolled back: payment failed 3 times.'); GP.saveOrder(o); rolledBack(); return; }
+    o.fixed = 'PAYMENT_FAILED'; GP.saveOrder(o); failed(a);
+  }
+  function failed(a) {
+    var hint = { DECLINED: 'Your card issuer declined the payment.', INSUFFICIENT_FUNDS: 'The card has insufficient funds.', GATEWAY_TIMEOUT: 'The payment gateway did not answer in time. You were not charged.' }[a.code];
+    m.innerHTML = head('error', 'c-error', 'ERROR 402 // PAYMENT_FAILED') + '<div class="modal-body" id="pay-d"><div class="notice error" role="alert"><span class="ms" aria-hidden="true">credit_card_off</span><div><strong>' + GP.FAILURES[a.code] + '</strong> (' + E(methodLabel(a)) + '). ' + hint + '</div></div>' +
+      '<div class="between mt-16"><span class="t-small c-secondary">Attempt ' + a.n + ' of 3 failed · ' + (3 - a.n) + ' attempt' + (3 - a.n === 1 ? '' : 's') + ' left · same total ' + GP.money(o.t.total) + '</span>' + attemptsBar() + '</div>' +
+      '<div class="field-label mt-16" id="m-l">Choose a payment method and retry</div><div class="pay-opts mt-8" role="radiogroup" aria-labelledby="m-l">' +
+      ['APPLE_PAY', 'GOOGLE_PAY'].map(function (k) { return '<button type="button" class="opt" role="radio" aria-checked="' + (sel.method === k) + '" data-m="' + k + '"><span class="ms c-primary" aria-hidden="true">' + (k === 'APPLE_PAY' ? 'phone_iphone' : 'account_balance_wallet') + '</span><span class="o-title" style="flex:1">' + GP.METHODS[k] + '</span><span class="badge st-deployed">Approves</span></button>'; }).join('') +
+      Object.keys(GP.TEST_CARDS).map(function (k) { var c = GP.TEST_CARDS[k]; return '<button type="button" class="opt" role="radio" aria-checked="' + (sel.method === 'CARD' && sel.card === k) + '" data-c="' + k + '"><span class="ms c-primary" aria-hidden="true">credit_card</span><span class="o-title" style="flex:1">' + c.label + '</span><span class="badge ' + (c.ok ? 'st-deployed' : 'st-failed') + '">' + c.outcome + '</span></button>'; }).join('') +
+      '</div>' + term() + '<p class="t-micro c-muted mt-8">Unpaid orders are rolled back automatically after 10 minutes. Your manifest is kept until payment succeeds.</p></div>' +
+      '<div class="modal-foot"><button class="btn btn-danger" id="cancel" aria-label="Cancel order">Cancel order</button><button class="btn btn-primary" id="retry" aria-label="Retry payment ' + GP.money(o.t.total) + '"><span class="ms md" aria-hidden="true">replay</span>Retry payment</button></div>';
+  }
+  function rolledBack() {
+    m.innerHTML = head('undo', 'c-error', 'ROLLED_BACK // payment failed 3 times') + '<div class="modal-body" id="pay-d"><div class="notice error" role="alert"><span class="ms" aria-hidden="true">block</span><div><strong>Order MX-' + o.no + ' was rolled back.</strong> Payment failed 3 times, so the order was cancelled. You were not charged. Your manifest is unchanged — you can review it and check out again.</div></div>' + term() + '</div>' +
+      '<div class="modal-foot"><a class="btn btn-ghost" href="SCR-09-order-tracking.html?id=MX-' + o.no + '">View order status</a><a class="btn btn-primary" href="SCR-05-cart.html">Back to manifest</a></div>';
+  }
+  m.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b || b.disabled) return;
+    if (b.dataset.m) { sel.method = b.dataset.m; failed(o.attempts[o.attempts.length - 1]); }
+    else if (b.dataset.c) { sel.method = 'CARD'; sel.card = b.dataset.c; failed(o.attempts[o.attempts.length - 1]); }
+    else if (b.id === 'retry') { st.checkout.method = sel.method; st.checkout.card = sel.card; GP.save(); startAttempt(); }
+    else if (b.id === 'cancel') GP.confirmDialog({ title: 'Cancel order MX-' + o.no + '?', body: 'Nothing has been charged. Your manifest stays as it is.', ok: 'Cancel order', okLabel: 'Cancel order', cancel: 'Keep order', danger: true, icon: 'undo',
+      onOk: function () { o.fixed = 'CANCELLED'; o.cancelReason = 'Cancelled by customer before payment'; o.cancelledBy = 'GUEST'; st.pendingOrder = null; GP.saveOrder(o); location.href = 'SCR-05-cart.html'; } });
+  });
+  // resume: an order that is already PAYMENT_FAILED shows the failure state, otherwise start a new attempt
+  if (o.fixed === 'PAYMENT_FAILED' && o.attempts.length) {
+    o.attempts.forEach(function (a) { log('PAYMENT', 'tag-error', 'ERROR 402: ' + GP.FAILURES[a.code] + '. Attempt ' + a.n + ' of 3.'); });
+    if (mode === 'third') { sel.method = 'CARD'; sel.card = 'AMEX_0005'; }
+    failed(o.attempts[o.attempts.length - 1]);
+  } else if (o.attempts.length && o.attempts[o.attempts.length - 1].status === 'PROCESSING') {
+    log('PAYMENT', 'tag-info', 'Resuming attempt ' + o.attempts.length + ' of 3…'); processing(o.attempts[o.attempts.length - 1]);
+  } else startAttempt();
+})();
+</script>
+</body>
+</html>

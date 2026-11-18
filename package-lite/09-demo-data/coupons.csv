@@ -1,0 +1,4 @@
+code,description,discountType,value,maxDiscount,minSubtotal,validFrom,validUntil,isActive,deliveryOnly
+GITHUB_STUDENT,"Student discount: 15% off, up to $10.",PERCENT,15.00,10.00,20.00,,2027-06-30 23:59,true,false
+FREE_DISPATCH,Free delivery on this order.,FREE_DELIVERY,,,15.00,,,true,true
+HOTFIX10,10% off (October hotfix sale).,PERCENT,10.00,,0.00,,2026-10-31 23:59,true,false

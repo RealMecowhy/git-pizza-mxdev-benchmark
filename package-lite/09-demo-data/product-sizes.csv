@@ -1,0 +1,48 @@
+productCode,sizeCode,diameterInches,servingDescription,price,calories,slices,isDefault
+PZ-01,SMALL,10,"10"" · 6 slices",11.99,760,6,false
+PZ-01,MEDIUM,12,"12"" · 8 slices",14.99,1080,8,true
+PZ-01,LARGE,14,"14"" · 8 slices",17.99,1470,8,false
+PZ-02,SMALL,10,"10"" · 6 slices",13.49,900,6,false
+PZ-02,MEDIUM,12,"12"" · 8 slices",16.99,1290,8,true
+PZ-02,LARGE,14,"14"" · 8 slices",20.49,1750,8,false
+PZ-03,SMALL,10,"10"" · 6 slices",14.99,970,6,false
+PZ-03,MEDIUM,12,"12"" · 8 slices",18.49,1380,8,true
+PZ-03,LARGE,14,"14"" · 8 slices",22.49,1880,8,false
+PZ-04,SMALL,10,"10"" · 6 slices",15.99,1020,6,false
+PZ-04,MEDIUM,12,"12"" · 8 slices",19.99,1460,8,true
+PZ-04,LARGE,14,"14"" · 8 slices",24.00,1990,8,false
+PZ-05,SMALL,10,"10"" · 6 slices",14.49,920,6,false
+PZ-05,MEDIUM,12,"12"" · 8 slices",18.49,1310,8,true
+PZ-05,LARGE,14,"14"" · 8 slices",22.50,1780,8,false
+PZ-06,SMALL,10,"10"" · 6 slices",15.99,1110,6,false
+PZ-06,MEDIUM,12,"12"" · 8 slices",19.99,1590,8,true
+PZ-06,LARGE,14,"14"" · 8 slices",24.49,2160,8,false
+PZ-07,SMALL,10,"10"" · 6 slices",16.49,950,6,false
+PZ-07,MEDIUM,12,"12"" · 8 slices",20.49,1350,8,true
+PZ-07,LARGE,14,"14"" · 8 slices",24.99,1840,8,false
+PZ-08,SMALL,10,"10"" · 6 slices",13.99,990,6,false
+PZ-08,MEDIUM,12,"12"" · 8 slices",17.49,1420,8,true
+PZ-08,LARGE,14,"14"" · 8 slices",21.49,1930,8,false
+PZ-09,SMALL,10,"10"" · 6 slices",12.99,780,6,false
+PZ-09,MEDIUM,12,"12"" · 8 slices",16.49,1120,8,true
+PZ-09,LARGE,14,"14"" · 8 slices",19.99,1520,8,false
+PZ-10,SMALL,10,"10"" · 6 slices",13.49,740,6,false
+PZ-10,MEDIUM,12,"12"" · 8 slices",16.99,1060,8,true
+PZ-10,LARGE,14,"14"" · 8 slices",20.49,1440,8,false
+PZ-11,SMALL,10,"10"" · 6 slices",13.49,850,6,false
+PZ-11,MEDIUM,12,"12"" · 8 slices",16.99,1210,8,true
+PZ-11,LARGE,14,"14"" · 8 slices",20.49,1650,8,false
+PZ-12,MEDIUM,12,"12"" · 1 piece (not sliced)",16.49,1240,1,true
+SD-01,REGULAR,,6 pieces + 2 fl oz marinara,6.50,520,,true
+SD-02,REGULAR,,1 bowl,8.95,430,,true
+SD-03,REGULAR,,8 wings + blue cheese dip + celery,11.95,760,,true
+SD-04,REGULAR,,2 fl oz,1.50,210,,true
+SD-05,REGULAR,,2 fl oz,1.50,190,,true
+DR-01,REGULAR,,12 fl oz can,4.50,15,,true
+DR-02,REGULAR,,12 fl oz bottle,4.75,10,,true
+DR-03,REGULAR,,12 fl oz can,2.75,140,,true
+DR-04,REGULAR,,11.2 fl oz bottle,3.25,150,,true
+DR-05,REGULAR,,16.9 fl oz bottle,2.95,0,,true
+DS-01,REGULAR,,1 cup,7.50,450,,true
+DS-02,REGULAR,,2 pieces,6.95,520,,true
+DS-03,REGULAR,,1 cake,7.25,480,,true

@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<title>Checkout — Git Pizza MxDev</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Geist:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link rel="stylesheet" href="_shared/proto.css">
+<style>
+  .co { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 32px; margin-top: 28px; align-items: start; }
+  .co-right { position: sticky; top: calc(var(--header-h) + var(--banner-h) + 16px); display: grid; gap: 16px; }
+  .fgrid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+  .s6 { grid-column: span 6; } .s4 { grid-column: span 4; } .s3 { grid-column: span 3; } .s2 { grid-column: span 2; } .s1 { grid-column: span 1; }
+  .method { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .method .opt { align-items: center; text-align: center; min-height: 96px; }
+  .method .opt .ms { font-size: 32px; }
+  .addr-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; margin-bottom: 14px; }
+  .pay-list { display: grid; gap: 8px; }
+  .pay-list .opt { flex-direction: row; align-items: center; gap: 12px; }
+  .pay-list .opt .ms { color: var(--primary-light); }
+  .tips { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .tips .opt { align-items: center; text-align: center; }
+  .sum-line { display: flex; gap: 10px; font-size: 13px; padding: 6px 0; border-bottom: 1px solid var(--border-subtle); }
+  .sum-line .q { color: var(--success-text); font-weight: 700; flex-shrink: 0; }
+  .phone-exec { display: none; }
+  @media (max-width: 1023px) { .co { grid-template-columns: 1fr; } .co-right { position: static; } }
+  @media (max-width: 767px) {
+    .fgrid .s4, .fgrid .s3 { grid-column: span 6; } .fgrid .s1 { grid-column: span 2; } .fgrid .s2 { grid-column: span 4; }
+    .tips { grid-template-columns: repeat(2, 1fr); }
+    .phone-exec { display: flex; position: fixed; left: 0; right: 0; bottom: calc(var(--bottomnav-h) + env(safe-area-inset-bottom)); z-index: 95; gap: 12px; align-items: center; padding: 10px 16px; background: var(--surface-container); border-top: 1px solid var(--border-strong); box-shadow: var(--shadow-top); }
+    .phone-exec .btn { flex: 1; }
+    .page { padding-bottom: 120px; }
+  }
+</style>
+</head>
+<body data-screen="SCR-06" data-nav="checkout">
+<main id="main"><div class="page" id="page"></div></main>
+<script src="_shared/proto.js"></script>
+<script>
+(function () {
+  var st = GP.state(), E = GP.esc, ck = st.checkout;
+  GP.registerStates([['delivery', 'Delivery'], ['pickup', 'Pickup'], ['guest', 'Empty form'], ['guest-filled', 'Pre-filled'],
+    ['errors', 'Validation errors'], ['outside-zone', 'Outside delivery zone'], ['empty', 'Empty cart redirect']]);
+  var mode = GP.currentState(), showErrors = false;
+  function sample() { if (!st.cart.lines.length) { var a = GP.defaultLine('PZ-05'); a.size = 'LARGE'; a.extras = ['EX-21']; st.cart.lines = [a, Object.assign(GP.defaultLine('DR-01'), { qty: 1 })]; } }
+  if (!GP.param('ok') && GP.param('state')) {
+    var setups = {
+      delivery: function () { sample(); ck.type = 'DELIVERY'; },
+      pickup: function () { sample(); ck.type = 'PICKUP'; },
+      guest: function () { sample(); ck.type = 'DELIVERY'; ck.addr = { line1: '', line2: '', city: 'San Francisco', state: 'CA', zip: '', notes: '' }; ck.contact = { name: '', email: '', phone: '' }; },
+      'guest-filled': function () { sample(); ck.type = 'DELIVERY'; ck.addr = { line1: '2290 Mission Street', line2: 'Apt 5', city: 'San Francisco', state: 'CA', zip: '94110', notes: 'Gate code 2048, leave at the door.' }; ck.contact = { name: 'Taylor Brooks', email: 'taylor.brooks@example.com', phone: '(415) 555-0128' }; ck.method = 'CARD'; ck.card = 'VISA_4242'; ck.tip = 'FIFTEEN'; },
+      errors: function () { sample(); ck.type = 'DELIVERY'; ck.addr = { line1: '', line2: '', city: 'San Francisco', state: 'CA', zip: '9411', notes: '' }; ck.contact = { name: 'Taylor Brooks', email: 'taylor@', phone: '555' }; },
+      'outside-zone': function () { sample(); ck.type = 'DELIVERY'; ck.addr = { line1: '4120 Geary Boulevard', line2: '', city: 'San Francisco', state: 'CA', zip: '94121', notes: '' }; ck.contact = { name: 'Taylor Brooks', email: 'taylor.brooks@example.com', phone: '(415) 555-0128' }; },
+      empty: function () { GP.clearCart(); }
+    };
+    if (setups[mode]) { setups[mode](); GP.save(); location.href = 'SCR-06-checkout.html?state=' + mode + '&ok=1'; return; }
+  }
+  if (mode === 'errors') showErrors = true;
+  var page = document.getElementById('page');
+  if (!st.cart.lines.length) {
+    page.innerHTML = '<div class="panel panel-pad" style="max-width:560px;margin:40px auto;text-align:center"><span class="ms xl c-warn" aria-hidden="true">inventory_2</span><h1 class="t-h2 mt-16">MANIFEST.LOCK is empty</h1><p class="c-muted">MANIFEST.LOCK is empty. Import a module first. Redirecting to <span class="c-primary">./menu.ts</span>…</p><a class="btn btn-primary" href="SCR-02-menu.html">git checkout menu</a></div>';
+    setTimeout(function () { location.href = 'SCR-02-menu.html'; }, 3000); return;
+  }
+  // Lite: guests only, so the delivery address is always typed for this order (no saved addresses)
+  function curAddr() { return ck.addr; }
+
+  function validate() {
+    var e = {}, a = curAddr(), c = ck.contact;
+    if (ck.type === 'DELIVERY') {
+      if (!a.line1.trim()) e.line1 = 'ADDRESS_LINE_1 is required';
+      if (!a.city.trim()) e.city = 'CITY is required';
+      if (!/^[A-Z]{2}$/.test(a.state.trim())) e.state = 'STATE must be a 2-letter state code, e.g. CA';
+      if (!a.zip.trim()) e.zip = 'ZIP_CODE is required'; else if (!/^\d{5}$/.test(a.zip.trim())) e.zip = 'ZIP_CODE must be 5 digits';
+      if (!e.zip && a.zip && !GP.ZONES[a.zip]) e.zone = 'ZIP ' + a.zip + ' is outside our delivery zone.';
+    }
+    if (!c.name.trim()) e.name = 'CONTACT_NAME is required';
+    if (!c.email.trim()) e.email = 'CONTACT_EMAIL is required'; else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(c.email.trim())) e.email = 'CONTACT_EMAIL is not a valid email address';
+    var digits = c.phone.replace(/^\+1/, '').replace(/\D/g, '');
+    if (!c.phone.trim()) e.phone = 'CONTACT_PHONE is required'; else if (digits.length !== 10) e.phone = 'CONTACT_PHONE must be a 10-digit US phone number';
+    return e;
+  }
+  function fld(id, label, value, err, cls, opts) {
+    opts = opts || {};
+    return '<div class="field ' + cls + (err ? ' invalid' : '') + '"><label for="f-' + id + '">' + label + (opts.req ? ' <span class="c-error" aria-hidden="true">*</span>' : '') + '</label><div class="prompt-wrap"><input class="input prompt" id="f-' + id + '" data-f="' + id + '" value="' + E(value) + '"' +
+      (opts.ph ? ' placeholder="' + E(opts.ph) + '"' : '') + (opts.type ? ' type="' + opts.type + '"' : '') + (opts.ac ? ' autocomplete="' + opts.ac + '"' : '') + (opts.req ? ' aria-required="true"' : '') + (err ? ' aria-invalid="true" aria-describedby="e-' + id + '"' : '') + '></div>' +
+      (opts.hint ? '<div class="hint">' + opts.hint + '</div>' : '') + (err ? '<div class="field-error" id="e-' + id + '"><span class="ms sm" aria-hidden="true">error</span>' + err + '</div>' : '') + '</div>';
+  }
+  function render() {
+    var t = GP.cartTotals(), err = showErrors ? validate() : {}, a = curAddr(), zone = a && GP.ZONES[a.zip];
+    var unavail = st.cart.lines.some(function (l) { return !GP.lineAvailable(l); });
+    var nErr = Object.keys(err).length;
+    var h = '<div class="t-micro c-muted">src/pizza-mxdev/checkout_config.json</div><h1 class="t-display c-primary mt-8" style="font-size:clamp(28px,5vw,48px)">checkout_config.json</h1>' +
+      '<p class="t-body-long" style="max-width:720px;margin:12px 0 0">Configure your deployment parameters, then execute the order. Payment, kitchen and delivery are simulated.</p>';
+    /* BR-ERR-05: form summary TXT-VAL-01 only with 2 or more errors; single errors are shown inline */
+    if (nErr >= 2) h += '<div class="notice error mt-16" role="alert"><span class="ms" aria-hidden="true">error</span><div><strong>Lint failed: ' + nErr + ' env variables need attention.</strong> ' + Object.keys(err).map(function (k) { return E(err[k]); }).join(' · ') + '</div></div>';
+    if (unavail) h += '<div class="notice error mt-16"><span class="ms" aria-hidden="true">block</span><div>Some items in your manifest are no longer available. <a href="SCR-05-cart.html">Review the cart</a> to continue.</div></div>';
+    h += '<div class="co"><div class="stack-lg">';
+    // method
+    h += '<section class="panel panel-pad"><h2 class="section-label" style="text-transform:none;font-size:14px"><span class="k">const</span>&nbsp;method <span class="p">=</span> <span class="s">\'' + ck.type.toLowerCase() + '\'</span><span class="p">;</span></h2><div class="method" role="radiogroup" aria-label="Order type">' +
+      '<button type="button" class="opt" role="radio" aria-checked="' + (ck.type === 'DELIVERY') + '" data-type="DELIVERY"><span class="ms" aria-hidden="true">local_shipping</span><span class="o-title">DELIVERY</span><span class="o-sub">to an address in San Francisco · ' + GP.money(GP.STORE.deliveryFee) + ', free from ' + GP.money(GP.STORE.freeThreshold) + '</span></button>' +
+      '<button type="button" class="opt" role="radio" aria-checked="' + (ck.type === 'PICKUP') + '" data-type="PICKUP"><span class="ms" aria-hidden="true">storefront</span><span class="o-title">PICKUP</span><span class="o-sub">at Mission Kitchen · no fee, no minimum</span></button></div></section>';
+    // destination
+    if (ck.type === 'DELIVERY') {
+      h += '<section class="panel panel-pad"><h2 class="section-label"><span class="ms" aria-hidden="true">terminal</span>Environment variables (destination)</h2>';
+      h += '<div class="fgrid">' + fld('line1', 'ADDRESS_LINE_1', ck.addr.line1, err.line1, 's6', { req: 1, ph: 'Street and number', ac: 'address-line1', hint: 'Street and number' }) +
+        fld('line2', 'ADDRESS_LINE_2', ck.addr.line2, null, 's6', { ph: 'Apartment, floor, suite (optional)', ac: 'address-line2' }) +
+        fld('city', 'CITY', ck.addr.city, err.city, 's3', { req: 1, ac: 'address-level2' }) + fld('state', 'STATE', ck.addr.state, err.state, 's1', { req: 1, ac: 'address-level1' }) +
+        fld('zip', 'ZIP_CODE', ck.addr.zip, err.zip, 's2', { req: 1, ac: 'postal-code', ph: '94110' }) +
+        fld('notes', 'DELIVERY_NOTES', ck.addr.notes, null, 's6', { ph: "--msg 'Gate code, floor, where to leave it' (optional)" }) + '</div>';
+      if (a && /^\d{5}$/.test(a.zip)) h += zone ? '<div class="field-ok mt-16" role="status"><span class="ms sm" aria-hidden="true">check_circle</span> ZIP ' + a.zip + ' · ' + zone[0] + ' · ' + zone[1].toFixed(1) + ' mi from the kitchen — in delivery zone</div>'
+        : '<div class="notice error mt-16" role="alert"><span class="ms" aria-hidden="true">wrong_location</span><div><strong>ZIP ' + a.zip + ' is outside our delivery zone.</strong> We deliver to ' + Object.keys(GP.ZONES).join(', ') + '. Choose another address or switch to pickup.</div></div>';
+      if (t.belowMin) h += '<div class="notice warn mt-16"><span class="ms" aria-hidden="true">warning</span><div>Delivery requires a subtotal of ' + GP.money(GP.STORE.minDelivery) + '. Add ' + GP.money(t.missingForMin) + ' more or choose pickup.</div></div>';
+      h += '</section>';
+    } else {
+      h += '<section class="panel panel-pad"><h2 class="section-label"><span class="ms" aria-hidden="true">storefront</span>Pickup location</h2><div class="code"><span class="k">const</span> store <span class="p">= {</span>\n  name: <span class="s">\'' + E(GP.STORE.name) + '\'</span><span class="p">,</span>\n  address: <span class="s">\'' + E(GP.STORE.address) + '\'</span><span class="p">,</span>\n  phone: <span class="s">\'' + GP.STORE.phone + '\'</span>\n<span class="p">};</span></div>' +
+        '<p class="t-small c-muted" style="margin-bottom:0">Ready about 4 minutes after payment (compressed demo time). We show the exact time on the tracking page.</p></section>';
+    }
+    // contact
+    h += '<section class="panel panel-pad"><h2 class="section-label"><span class="ms" aria-hidden="true">badge</span>Contact</h2><div class="fgrid">' +
+      fld('name', 'CONTACT_NAME', ck.contact.name, err.name, 's6', { req: 1, ac: 'name' }) + fld('email', 'CONTACT_EMAIL', ck.contact.email, err.email, 's3', { req: 1, type: 'email', ac: 'email', ph: 'you@example.com' }) +
+      fld('phone', 'CONTACT_PHONE', ck.contact.phone, err.phone, 's3', { req: 1, type: 'tel', ac: 'tel', ph: '(415) 555-0128' }) + '</div>' +
+      '<p class="t-micro c-muted mt-8" style="margin-bottom:0">You can find this order later with the order number and this email.</p></section>';
+    // payment
+    h += '<section class="panel panel-pad"><div class="between"><h2 class="section-label" style="margin:0"><span class="ms" aria-hidden="true">lock</span>PAYMENT_PROTOCOL</h2><span class="chip tag-badge">SIMULATED</span></div><div class="pay-list mt-16" role="radiogroup" aria-label="Payment method">' +
+      Object.keys(GP.METHODS).map(function (m) { var ic = { CARD: 'credit_card', APPLE_PAY: 'phone_iphone', GOOGLE_PAY: 'account_balance_wallet' }[m];
+        return '<button type="button" class="opt" role="radio" aria-checked="' + (ck.method === m) + '" data-method="' + m + '"><span class="ms" aria-hidden="true">' + ic + '</span><span><span class="o-title">' + GP.METHODS[m] + '</span><br><span class="o-sub">' + (m === 'CARD' ? 'choose a demo test card' : 'simulated wallet — always approves') + '</span></span></button>'; }).join('') + '</div>';
+    if (ck.method === 'CARD') h += '<div class="field-label mt-16" id="tc-l">Demo test card</div><div class="pay-list mt-8" role="radiogroup" aria-labelledby="tc-l">' + Object.keys(GP.TEST_CARDS).map(function (k) { var c = GP.TEST_CARDS[k];
+      return '<button type="button" class="opt" role="radio" aria-checked="' + (ck.card === k) + '" data-card="' + k + '"><span class="ms" aria-hidden="true">credit_card</span><span style="flex:1"><span class="o-title">' + c.label + '</span></span><span class="badge ' + (c.ok ? 'st-deployed' : 'st-failed') + '">' + c.outcome + '</span></button>'; }).join('') + '</div>';
+    h += '<p class="t-micro c-muted mt-16" style="margin-bottom:0">No card number is ever entered. The chosen test card decides the simulated outcome, so failed payments can be demonstrated.</p></section>';
+    // tip
+    if (ck.type === 'DELIVERY') {
+      var base = t.subtotal - t.discount;
+      h += '<section class="panel panel-pad"><h2 class="section-label"><span class="ms" aria-hidden="true">volunteer_activism</span>Courier tip</h2><div class="tips" role="radiogroup" aria-label="Courier tip">' + Object.keys(GP.TIPS).map(function (k) {
+        var pct = GP.TIPS[k], amt = Math.floor((base * pct + 50) / 100);
+        return '<button type="button" class="opt" role="radio" aria-checked="' + (ck.tip === k) + '" data-tip="' + k + '"><span class="o-title">' + pct + ' %</span><span class="o-sub">' + GP.money(amt) + '</span></button>'; }).join('') + '</div><p class="t-micro c-muted mt-8" style="margin-bottom:0">Percent of subtotal after discount. Tips go to the courier (simulated).</p></section>';
+    }
+    h += '</div>';
+    // right column
+    h += '<div class="co-right">';
+    if (ck.type === 'DELIVERY') {
+      h += '<div class="term"><div class="term-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span>live_route_preview</span></div><div class="map-well">' + '<img class="map-base" src="' + GP.ASSETS + 'illustrations/map-sf-dark.jpg" alt="">' +
+        '<div class="map-pin store" style="left:30%;top:62%"><span class="mk"><span class="ms md" aria-hidden="true">local_pizza</span></span><span class="nm">MISSION_KITCHEN</span></div>' +
+        (zone ? '<div class="map-pin dest" style="left:' + (30 + zone[1] * 18) + '%;top:' + (62 - zone[1] * 12) + '%"><span class="mk"><span class="ms md" aria-hidden="true">location_on</span></span><span class="nm">DESTINATION_LOCK</span></div>' : '') +
+        '</div><div class="between" style="padding:12px 16px"><span class="t-label c-secondary">ESTIMATED_ETA</span><span class="c-green" style="font-weight:700">' + (zone ? '~' + Math.round((20 + 90 + 30 + 35 + 60 + 40 * zone[1]) / 60) + ' min after payment' : 'enter a ZIP in the zone') + '</span></div></div>';
+    }
+    var cc = t.coupon;
+    h += '<section class="panel panel-pad"><div class="between"><h2 class="section-label" style="margin:0"><span class="ms" aria-hidden="true">inventory_2</span>PACKAGE_MANIFEST</h2><a class="t-small" href="SCR-05-cart.html">edit</a></div><div class="mt-8">' +
+      st.cart.lines.map(function (l) { var p = GP.BY_CODE[l.p]; return '<div class="sum-line"><span class="q">' + l.qty + '×</span><div style="flex:1;min-width:0"><div>' + E(p.name) + '</div><div class="t-micro c-muted">' + E(GP.lineMods(l).join(' · ')) + '</div></div><span>' + GP.money(GP.unitPrice(l) * l.qty) + '</span></div>'; }).join('') + '</div>' +
+      (st.cart.coupon ? '<div class="t-small mt-8 ' + (cc.state === 'APPLIED' ? 'c-green' : 'c-warn') + '">$ coupon --apply ' + E(st.cart.coupon) + ' → ' + E(cc.msg) + '</div>' : '') +
+      '<div class="mt-16"><div class="sum-row"><span class="lbl">SUBTOTAL_PAYLOAD</span><span>' + GP.money(t.subtotal) + '</span></div>' +
+      (t.discount ? '<div class="sum-row discount"><span class="lbl">Discount ' + E(st.cart.coupon) + '</span><span>' + GP.money(-t.discount) + '</span></div>' : '') +
+      (ck.type === 'DELIVERY' ? '<div class="sum-row"><span class="lbl">Pipeline Transit Fee</span><span>' + GP.money(t.deliveryFee) + (t.feeWaived ? ' <span class="t-micro c-green">FREE_DISPATCH</span>' : '') + '</span></div>' : '') +
+      '<div class="sum-row"><span class="lbl">SALES_TAX 8.625 %</span><span>' + GP.money(t.tax) + '</span></div>' +
+      (ck.type === 'DELIVERY' ? '<div class="sum-row"><span class="lbl">Courier tip ' + t.tipPct + ' %</span><span>' + GP.money(t.tip) + '</span></div>' : '') +
+      '<div class="sum-total"><span class="t-label">EXEC_TOTAL</span><span class="t-price-lg c-primary" id="total">' + GP.money(t.total) + '</span></div></div>' +
+      '<button class="btn btn-primary btn-lg btn-block mt-16 hide-phone" data-exec' + (unavail ? ' disabled' : '') + ' aria-label="Place order and pay ' + GP.money(t.total) + '"><span class="ms" aria-hidden="true">bolt</span>Execute Order --force</button>' +
+      '<p class="t-micro c-muted mt-8" style="margin-bottom:0">Executing creates the order and starts the simulated payment. No real charge is made.</p></section></div></div>';
+    h += '<div class="phone-exec"><div><div class="t-micro c-muted">EXEC_TOTAL</div><div class="price">' + GP.money(t.total) + '</div></div><button class="btn btn-primary btn-lg" data-exec' + (unavail ? ' disabled' : '') + ' aria-label="Place order and pay ' + GP.money(t.total) + '"><span class="ms" aria-hidden="true">bolt</span>Execute Order --force</button></div>';
+    var focusId = document.activeElement && document.activeElement.id, selS = document.activeElement && document.activeElement.selectionStart;
+    page.innerHTML = h;
+    if (focusId && document.getElementById(focusId)) { var fe = document.getElementById(focusId); fe.focus(); try { fe.setSelectionRange(selS, selS); } catch (x) {} }
+  }
+  page.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b || b.disabled) return;
+    if (b.dataset.type) ck.type = b.dataset.type;
+    else if (b.dataset.method) ck.method = b.dataset.method;
+    else if (b.dataset.card) ck.card = b.dataset.card;
+    else if (b.dataset.tip) ck.tip = b.dataset.tip;
+    else if (b.hasAttribute('data-exec')) {
+      showErrors = true; var err = validate(), t = GP.cartTotals();
+      if (Object.keys(err).length || (ck.type === 'DELIVERY' && t.belowMin)) { render(); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+      GP.save(); GP.createOrder(); location.href = 'SCR-07-payment-sheet.html'; return;
+    } else return;
+    GP.save(); render();
+  });
+  page.addEventListener('input', function (e) {
+    var f = e.target.dataset.f; if (!f) return;
+    if (['name', 'email', 'phone'].indexOf(f) >= 0) ck.contact[f] = e.target.value; else ck.addr[f] = f === 'state' ? e.target.value.toUpperCase() : e.target.value;
+    GP.save();
+    if (f === 'zip' && (e.target.value.length === 5 || showErrors)) render(); else if (showErrors) render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

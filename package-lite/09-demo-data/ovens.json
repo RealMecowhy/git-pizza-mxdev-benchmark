@@ -1,0 +1,20 @@
+[
+  {
+    "code": "OVEN_01",
+    "displayName": "OVEN_01::CORE",
+    "ovenType": "Stone deck, wood-fired",
+    "targetTempF": 850,
+    "currentTempF": null,
+    "capacityOrders": 3,
+    "status": "ONLINE"
+  },
+  {
+    "code": "OVEN_02",
+    "displayName": "OVEN_02::CONVECT",
+    "ovenType": "Electric deck",
+    "targetTempF": 780,
+    "currentTempF": null,
+    "capacityOrders": 3,
+    "status": "ONLINE"
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "code": "PIZZAS",
+    "fileName": "pizzas.json",
+    "displayName": "Pizzas",
+    "productKind": "PIZZA",
+    "sortOrder": 1
+  },
+  {
+    "code": "SIDES",
+    "fileName": "sides.yml",
+    "displayName": "Sides & Dips",
+    "productKind": "SIDE",
+    "sortOrder": 2
+  },
+  {
+    "code": "DRINKS",
+    "fileName": "drinks.env",
+    "displayName": "Drinks",
+    "productKind": "DRINK",
+    "sortOrder": 3
+  },
+  {
+    "code": "DESSERTS",
+    "fileName": "desserts.md",
+    "displayName": "Desserts",
+    "productKind": "DESSERT",
+    "sortOrder": 4
+  }
+]

@@ -1,0 +1,41 @@
+code,key,name,description,group,priceClass,surcharge,priceSmall,priceMedium,priceLarge,availableSizes,ingredientCode,isActive,versionTag,sortOrder
+CR-01,neapolitan_core,Neapolitan Core,"Puffy, leopard-spotted rim. 48-hour ferment.",CRUST,FLAT,0.00,,,,SMALL|MEDIUM|LARGE,dough_neapolitan,true,,1
+CR-02,thin_client,Thin Client,"Thin, crisp and light. Low memory footprint.",CRUST,FLAT,0.00,,,,SMALL|MEDIUM|LARGE,dough_thin,true,,2
+CR-03,sourdough_build,Sourdough Build,72-hour wheat and rye sourdough. Tangy and airy.,CRUST,FLAT,1.50,,,,SMALL|MEDIUM|LARGE,dough_sourdough,true,,3
+CR-04,cheese_stuffed_v2,Cheese-Stuffed v2,Mozzarella-filled rim.,CRUST,FLAT,2.50,,,,MEDIUM|LARGE,dough_stuffed,true,,4
+CR-05,gluten_free_fork,Gluten-Free Fork,"Rice-flour base, made without gluten ingredients. 10"" only.",CRUST,FLAT,3.00,,,,SMALL,dough_gluten_free,true,,5
+SA-01,san_marzano,San Marzano Tomato,,SAUCE,FLAT,0.00,,,,SMALL|MEDIUM|LARGE,tomato_san_marzano,true,,1
+SA-02,smoked_bbq,Smoked BBQ,,SAUCE,FLAT,0.00,,,,SMALL|MEDIUM|LARGE,bbq_sauce_smoked,true,,2
+SA-03,garlic_cream,Garlic Cream,,SAUCE,FLAT,0.00,,,,SMALL|MEDIUM|LARGE,garlic_cream,true,,3
+SA-04,truffle_cream,Black Truffle Cream,,SAUCE,FLAT,2.00,,,,SMALL|MEDIUM|LARGE,truffle_cream,true,,4
+SA-05,yellow_tomato,Yellow Tomato,,SAUCE,FLAT,0.00,,,,SMALL|MEDIUM|LARGE,tomato_yellow,true,,5
+SA-06,no_sauce,No Sauce (bianca),,SAUCE,FLAT,0.00,,,,SMALL|MEDIUM|LARGE,,true,,6
+CH-01,fior_di_latte,Fior di Latte Mozzarella,,CHEESE,FLAT,0.00,,,,SMALL|MEDIUM|LARGE,fior_di_latte,true,,1
+CH-02,buffalo_mozzarella,Buffalo Mozzarella,,CHEESE,FLAT,2.00,,,,SMALL|MEDIUM|LARGE,buffalo_mozzarella,true,,2
+CH-03,vegan_cashew_mozz,Vegan Cashew Mozzarella,,CHEESE,FLAT,1.50,,,,SMALL|MEDIUM|LARGE,cashew_mozzarella,true,,3
+CH-04,no_cheese,No Cheese,,CHEESE,FLAT,0.00,,,,SMALL|MEDIUM|LARGE,,true,,4
+EX-01,extra_cheese,Extra mozzarella,,EXTRA,STANDARD,,1.50,2.00,2.50,SMALL|MEDIUM|LARGE,fior_di_latte,true,v1.2.0 · core,1
+EX-02,fresh_basil,Fresh basil,,EXTRA,STANDARD,,1.50,2.00,2.50,SMALL|MEDIUM|LARGE,basil,true,v0.8.0 · beta,2
+EX-03,mushrooms,Cremini mushrooms,,EXTRA,STANDARD,,1.50,2.00,2.50,SMALL|MEDIUM|LARGE,cremini,true,v1.4.2,3
+EX-04,red_onion,Red onion,,EXTRA,STANDARD,,1.50,2.00,2.50,SMALL|MEDIUM|LARGE,red_onion,true,v1.0.3,4
+EX-05,caramelized_onion,Caramelized onions,,EXTRA,STANDARD,,1.50,2.00,2.50,SMALL|MEDIUM|LARGE,caramelized_onion,true,v2.1.0,5
+EX-06,green_pepper,Green bell pepper,,EXTRA,STANDARD,,1.50,2.00,2.50,SMALL|MEDIUM|LARGE,green_pepper,true,v1.0.0,6
+EX-07,roasted_red_pepper,Roasted red peppers,,EXTRA,STANDARD,,1.50,2.00,2.50,SMALL|MEDIUM|LARGE,roasted_red_pepper,true,v1.3.1,7
+EX-08,olives,Taggiasca olives,,EXTRA,STANDARD,,1.50,2.00,2.50,SMALL|MEDIUM|LARGE,black_olives,true,v1.1.0,8
+EX-09,jalapenos,Jalapeños,,EXTRA,STANDARD,,1.50,2.00,2.50,SMALL|MEDIUM|LARGE,jalapeno,true,v3.0.0 · hot,9
+EX-10,pineapple,Roasted pineapple,,EXTRA,STANDARD,,1.50,2.00,2.50,SMALL|MEDIUM|LARGE,pineapple,true,v0.9.9 · legacy,10
+EX-11,cherry_tomatoes,Cherry tomatoes,,EXTRA,STANDARD,,1.50,2.00,2.50,SMALL|MEDIUM|LARGE,cherry_tomatoes,true,v1.2.4,11
+EX-12,arugula,Wild arugula,,EXTRA,STANDARD,,1.50,2.00,2.50,SMALL|MEDIUM|LARGE,arugula,true,v1.0.1,12
+EX-13,roasted_garlic,Roasted garlic,,EXTRA,STANDARD,,1.50,2.00,2.50,SMALL|MEDIUM|LARGE,roasted_garlic,true,v1.1.2,13
+EX-14,hot_honey,Hot honey drizzle,,EXTRA,STANDARD,,1.50,2.00,2.50,SMALL|MEDIUM|LARGE,hot_honey,true,v2.0.0,14
+EX-15,garlic_butter,Garlic butter crust brush,,EXTRA,STANDARD,,1.50,2.00,2.50,SMALL|MEDIUM|LARGE,garlic_butter,true,v1.1.2 · shell,15
+EX-16,spicy_pepperoni,Pepperoni,,EXTRA,PREMIUM,,2.50,3.00,3.50,SMALL|MEDIUM|LARGE,pepperoni,true,v2.4.1 · addon,16
+EX-17,italian_sausage,Fennel Italian sausage,,EXTRA,PREMIUM,,2.50,3.00,3.50,SMALL|MEDIUM|LARGE,italian_sausage,true,v2.0.0,17
+EX-18,smoked_bacon,Applewood-smoked bacon,,EXTRA,PREMIUM,,2.50,3.00,3.50,SMALL|MEDIUM|LARGE,smoked_bacon,true,v1.5.0,18
+EX-19,prosciutto_cotto,Italian ham (prosciutto cotto),,EXTRA,PREMIUM,,2.50,3.00,3.50,SMALL|MEDIUM|LARGE,prosciutto_cotto,true,v1.0.0,19
+EX-20,spianata,Spianata calabrese,,EXTRA,PREMIUM,,2.50,3.00,3.50,SMALL|MEDIUM|LARGE,spianata_calabrese,true,v2.4.0 · hot,20
+EX-21,nduja,'Nduja,,EXTRA,PREMIUM,,2.50,3.00,3.50,SMALL|MEDIUM|LARGE,nduja,true,v1.0.0 · hot,21
+EX-22,pulled_pork,Smoked pulled pork,,EXTRA,PREMIUM,,2.50,3.00,3.50,SMALL|MEDIUM|LARGE,pulled_pork,true,v2.0.4,22
+EX-23,grilled_chicken,Grilled chicken,,EXTRA,PREMIUM,,2.50,3.00,3.50,SMALL|MEDIUM|LARGE,grilled_chicken,true,v1.0.0,23
+EX-24,stracciatella,Stracciatella,,EXTRA,PREMIUM,,2.50,3.00,3.50,SMALL|MEDIUM|LARGE,stracciatella,true,v1.1.0,24
+EX-25,porcini,Porcini mushrooms,,EXTRA,PREMIUM,,2.50,3.00,3.50,SMALL|MEDIUM|LARGE,porcini,true,v1.0.2,25

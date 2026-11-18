@@ -1,0 +1,33 @@
+{
+  "isPaused": false,
+  "lastResumedAt": "T-00:00:00",
+  "speedFactor": "X1",
+  "autoAdvanceKitchen": true,
+  "autoDispatch": true,
+  "autoPickup": true,
+  "trafficEnabled": true,
+  "trafficIntervalSeconds": 120,
+  "trafficMaxActiveOrders": 8,
+  "randomPaymentFailurePercent": 0,
+  "qaFailurePercent": 0,
+  "durations": {
+    "paymentProcessing": 3,
+    "paymentTimeout": 10,
+    "paymentFailedTimeout": 600,
+    "simulatedRetryDelay": 15,
+    "queueWait": 20,
+    "bake": 90,
+    "overbakeWarn": 15,
+    "overbakeCritical": 60,
+    "qa": 30,
+    "courierToStore": 30,
+    "handover": 5,
+    "travelBase": 60,
+    "travelPerMile": 40,
+    "pickupArrival": 90,
+    "ovenTempTick": 5
+  },
+  "retentionHours": 24,
+  "lastResetAt": "T-00:00:00",
+  "lastResetBy": null
+}

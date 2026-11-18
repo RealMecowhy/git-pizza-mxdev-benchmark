@@ -1,0 +1,89 @@
+{
+  "notice": "All items are prepared in a kitchen that handles gluten, milk, eggs, tree nuts, mustard, fish and other allergens. Cross-contact is possible. The Gluten-Free Fork crust is made without gluten ingredients but is not certified gluten-free.",
+  "allergens": [
+    {
+      "key": "GLUTEN",
+      "shortCode": "GLU",
+      "caption": "Cereals containing gluten",
+      "sortOrder": 1
+    },
+    {
+      "key": "CRUSTACEANS",
+      "shortCode": "CRU",
+      "caption": "Crustaceans",
+      "sortOrder": 2
+    },
+    {
+      "key": "EGGS",
+      "shortCode": "EGG",
+      "caption": "Eggs",
+      "sortOrder": 3
+    },
+    {
+      "key": "FISH",
+      "shortCode": "FSH",
+      "caption": "Fish",
+      "sortOrder": 4
+    },
+    {
+      "key": "PEANUTS",
+      "shortCode": "PNT",
+      "caption": "Peanuts",
+      "sortOrder": 5
+    },
+    {
+      "key": "SOYBEANS",
+      "shortCode": "SOY",
+      "caption": "Soybeans",
+      "sortOrder": 6
+    },
+    {
+      "key": "MILK",
+      "shortCode": "MLK",
+      "caption": "Milk",
+      "sortOrder": 7
+    },
+    {
+      "key": "TREE_NUTS",
+      "shortCode": "TNT",
+      "caption": "Tree nuts",
+      "sortOrder": 8
+    },
+    {
+      "key": "CELERY",
+      "shortCode": "CEL",
+      "caption": "Celery",
+      "sortOrder": 9
+    },
+    {
+      "key": "MUSTARD",
+      "shortCode": "MUS",
+      "caption": "Mustard",
+      "sortOrder": 10
+    },
+    {
+      "key": "SESAME",
+      "shortCode": "SES",
+      "caption": "Sesame",
+      "sortOrder": 11
+    },
+    {
+      "key": "SULPHITES",
+      "shortCode": "SUL",
+      "caption": "Sulphur dioxide and sulphites",
+      "sortOrder": 12
+    },
+    {
+      "key": "LUPIN",
+      "shortCode": "LUP",
+      "caption": "Lupin",
+      "sortOrder": 13
+    },
+    {
+      "key": "MOLLUSCS",
+      "shortCode": "MOL",
+      "caption": "Molluscs",
+      "sortOrder": 14
+    }
+  ]
+}

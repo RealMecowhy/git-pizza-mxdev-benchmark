@@ -1,0 +1,472 @@
+[
+  {
+    "productCode": "PZ-01",
+    "sizeCode": "SMALL",
+    "diameterInches": 10,
+    "servingDescription": "10\" · 6 slices",
+    "price": 11.99,
+    "calories": 760,
+    "slices": 6,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-01",
+    "sizeCode": "MEDIUM",
+    "diameterInches": 12,
+    "servingDescription": "12\" · 8 slices",
+    "price": 14.99,
+    "calories": 1080,
+    "slices": 8,
+    "isDefault": true
+  },
+  {
+    "productCode": "PZ-01",
+    "sizeCode": "LARGE",
+    "diameterInches": 14,
+    "servingDescription": "14\" · 8 slices",
+    "price": 17.99,
+    "calories": 1470,
+    "slices": 8,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-02",
+    "sizeCode": "SMALL",
+    "diameterInches": 10,
+    "servingDescription": "10\" · 6 slices",
+    "price": 13.49,
+    "calories": 900,
+    "slices": 6,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-02",
+    "sizeCode": "MEDIUM",
+    "diameterInches": 12,
+    "servingDescription": "12\" · 8 slices",
+    "price": 16.99,
+    "calories": 1290,
+    "slices": 8,
+    "isDefault": true
+  },
+  {
+    "productCode": "PZ-02",
+    "sizeCode": "LARGE",
+    "diameterInches": 14,
+    "servingDescription": "14\" · 8 slices",
+    "price": 20.49,
+    "calories": 1750,
+    "slices": 8,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-03",
+    "sizeCode": "SMALL",
+    "diameterInches": 10,
+    "servingDescription": "10\" · 6 slices",
+    "price": 14.99,
+    "calories": 970,
+    "slices": 6,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-03",
+    "sizeCode": "MEDIUM",
+    "diameterInches": 12,
+    "servingDescription": "12\" · 8 slices",
+    "price": 18.49,
+    "calories": 1380,
+    "slices": 8,
+    "isDefault": true
+  },
+  {
+    "productCode": "PZ-03",
+    "sizeCode": "LARGE",
+    "diameterInches": 14,
+    "servingDescription": "14\" · 8 slices",
+    "price": 22.49,
+    "calories": 1880,
+    "slices": 8,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-04",
+    "sizeCode": "SMALL",
+    "diameterInches": 10,
+    "servingDescription": "10\" · 6 slices",
+    "price": 15.99,
+    "calories": 1020,
+    "slices": 6,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-04",
+    "sizeCode": "MEDIUM",
+    "diameterInches": 12,
+    "servingDescription": "12\" · 8 slices",
+    "price": 19.99,
+    "calories": 1460,
+    "slices": 8,
+    "isDefault": true
+  },
+  {
+    "productCode": "PZ-04",
+    "sizeCode": "LARGE",
+    "diameterInches": 14,
+    "servingDescription": "14\" · 8 slices",
+    "price": 24,
+    "calories": 1990,
+    "slices": 8,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-05",
+    "sizeCode": "SMALL",
+    "diameterInches": 10,
+    "servingDescription": "10\" · 6 slices",
+    "price": 14.49,
+    "calories": 920,
+    "slices": 6,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-05",
+    "sizeCode": "MEDIUM",
+    "diameterInches": 12,
+    "servingDescription": "12\" · 8 slices",
+    "price": 18.49,
+    "calories": 1310,
+    "slices": 8,
+    "isDefault": true
+  },
+  {
+    "productCode": "PZ-05",
+    "sizeCode": "LARGE",
+    "diameterInches": 14,
+    "servingDescription": "14\" · 8 slices",
+    "price": 22.5,
+    "calories": 1780,
+    "slices": 8,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-06",
+    "sizeCode": "SMALL",
+    "diameterInches": 10,
+    "servingDescription": "10\" · 6 slices",
+    "price": 15.99,
+    "calories": 1110,
+    "slices": 6,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-06",
+    "sizeCode": "MEDIUM",
+    "diameterInches": 12,
+    "servingDescription": "12\" · 8 slices",
+    "price": 19.99,
+    "calories": 1590,
+    "slices": 8,
+    "isDefault": true
+  },
+  {
+    "productCode": "PZ-06",
+    "sizeCode": "LARGE",
+    "diameterInches": 14,
+    "servingDescription": "14\" · 8 slices",
+    "price": 24.49,
+    "calories": 2160,
+    "slices": 8,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-07",
+    "sizeCode": "SMALL",
+    "diameterInches": 10,
+    "servingDescription": "10\" · 6 slices",
+    "price": 16.49,
+    "calories": 950,
+    "slices": 6,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-07",
+    "sizeCode": "MEDIUM",
+    "diameterInches": 12,
+    "servingDescription": "12\" · 8 slices",
+    "price": 20.49,
+    "calories": 1350,
+    "slices": 8,
+    "isDefault": true
+  },
+  {
+    "productCode": "PZ-07",
+    "sizeCode": "LARGE",
+    "diameterInches": 14,
+    "servingDescription": "14\" · 8 slices",
+    "price": 24.99,
+    "calories": 1840,
+    "slices": 8,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-08",
+    "sizeCode": "SMALL",
+    "diameterInches": 10,
+    "servingDescription": "10\" · 6 slices",
+    "price": 13.99,
+    "calories": 990,
+    "slices": 6,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-08",
+    "sizeCode": "MEDIUM",
+    "diameterInches": 12,
+    "servingDescription": "12\" · 8 slices",
+    "price": 17.49,
+    "calories": 1420,
+    "slices": 8,
+    "isDefault": true
+  },
+  {
+    "productCode": "PZ-08",
+    "sizeCode": "LARGE",
+    "diameterInches": 14,
+    "servingDescription": "14\" · 8 slices",
+    "price": 21.49,
+    "calories": 1930,
+    "slices": 8,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-09",
+    "sizeCode": "SMALL",
+    "diameterInches": 10,
+    "servingDescription": "10\" · 6 slices",
+    "price": 12.99,
+    "calories": 780,
+    "slices": 6,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-09",
+    "sizeCode": "MEDIUM",
+    "diameterInches": 12,
+    "servingDescription": "12\" · 8 slices",
+    "price": 16.49,
+    "calories": 1120,
+    "slices": 8,
+    "isDefault": true
+  },
+  {
+    "productCode": "PZ-09",
+    "sizeCode": "LARGE",
+    "diameterInches": 14,
+    "servingDescription": "14\" · 8 slices",
+    "price": 19.99,
+    "calories": 1520,
+    "slices": 8,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-10",
+    "sizeCode": "SMALL",
+    "diameterInches": 10,
+    "servingDescription": "10\" · 6 slices",
+    "price": 13.49,
+    "calories": 740,
+    "slices": 6,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-10",
+    "sizeCode": "MEDIUM",
+    "diameterInches": 12,
+    "servingDescription": "12\" · 8 slices",
+    "price": 16.99,
+    "calories": 1060,
+    "slices": 8,
+    "isDefault": true
+  },
+  {
+    "productCode": "PZ-10",
+    "sizeCode": "LARGE",
+    "diameterInches": 14,
+    "servingDescription": "14\" · 8 slices",
+    "price": 20.49,
+    "calories": 1440,
+    "slices": 8,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-11",
+    "sizeCode": "SMALL",
+    "diameterInches": 10,
+    "servingDescription": "10\" · 6 slices",
+    "price": 13.49,
+    "calories": 850,
+    "slices": 6,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-11",
+    "sizeCode": "MEDIUM",
+    "diameterInches": 12,
+    "servingDescription": "12\" · 8 slices",
+    "price": 16.99,
+    "calories": 1210,
+    "slices": 8,
+    "isDefault": true
+  },
+  {
+    "productCode": "PZ-11",
+    "sizeCode": "LARGE",
+    "diameterInches": 14,
+    "servingDescription": "14\" · 8 slices",
+    "price": 20.49,
+    "calories": 1650,
+    "slices": 8,
+    "isDefault": false
+  },
+  {
+    "productCode": "PZ-12",
+    "sizeCode": "MEDIUM",
+    "diameterInches": 12,
+    "servingDescription": "12\" · 1 piece (not sliced)",
+    "price": 16.49,
+    "calories": 1240,
+    "slices": 1,
+    "isDefault": true
+  },
+  {
+    "productCode": "SD-01",
+    "sizeCode": "REGULAR",
+    "diameterInches": null,
+    "servingDescription": "6 pieces + 2 fl oz marinara",
+    "price": 6.5,
+    "calories": 520,
+    "slices": null,
+    "isDefault": true
+  },
+  {
+    "productCode": "SD-02",
+    "sizeCode": "REGULAR",
+    "diameterInches": null,
+    "servingDescription": "1 bowl",
+    "price": 8.95,
+    "calories": 430,
+    "slices": null,
+    "isDefault": true
+  },
+  {
+    "productCode": "SD-03",
+    "sizeCode": "REGULAR",
+    "diameterInches": null,
+    "servingDescription": "8 wings + blue cheese dip + celery",
+    "price": 11.95,
+    "calories": 760,
+    "slices": null,
+    "isDefault": true
+  },
+  {
+    "productCode": "SD-04",
+    "sizeCode": "REGULAR",
+    "diameterInches": null,
+    "servingDescription": "2 fl oz",
+    "price": 1.5,
+    "calories": 210,
+    "slices": null,
+    "isDefault": true
+  },
+  {
+    "productCode": "SD-05",
+    "sizeCode": "REGULAR",
+    "diameterInches": null,
+    "servingDescription": "2 fl oz",
+    "price": 1.5,
+    "calories": 190,
+    "slices": null,
+    "isDefault": true
+  },
+  {
+    "productCode": "DR-01",
+    "sizeCode": "REGULAR",
+    "diameterInches": null,
+    "servingDescription": "12 fl oz can",
+    "price": 4.5,
+    "calories": 15,
+    "slices": null,
+    "isDefault": true
+  },
+  {
+    "productCode": "DR-02",
+    "sizeCode": "REGULAR",
+    "diameterInches": null,
+    "servingDescription": "12 fl oz bottle",
+    "price": 4.75,
+    "calories": 10,
+    "slices": null,
+    "isDefault": true
+  },
+  {
+    "productCode": "DR-03",
+    "sizeCode": "REGULAR",
+    "diameterInches": null,
+    "servingDescription": "12 fl oz can",
+    "price": 2.75,
+    "calories": 140,
+    "slices": null,
+    "isDefault": true
+  },
+  {
+    "productCode": "DR-04",
+    "sizeCode": "REGULAR",
+    "diameterInches": null,
+    "servingDescription": "11.2 fl oz bottle",
+    "price": 3.25,
+    "calories": 150,
+    "slices": null,
+    "isDefault": true
+  },
+  {
+    "productCode": "DR-05",
+    "sizeCode": "REGULAR",
+    "diameterInches": null,
+    "servingDescription": "16.9 fl oz bottle",
+    "price": 2.95,
+    "calories": 0,
+    "slices": null,
+    "isDefault": true
+  },
+  {
+    "productCode": "DS-01",
+    "sizeCode": "REGULAR",
+    "diameterInches": null,
+    "servingDescription": "1 cup",
+    "price": 7.5,
+    "calories": 450,
+    "slices": null,
+    "isDefault": true
+  },
+  {
+    "productCode": "DS-02",
+    "sizeCode": "REGULAR",
+    "diameterInches": null,
+    "servingDescription": "2 pieces",
+    "price": 6.95,
+    "calories": 520,
+    "slices": null,
+    "isDefault": true
+  },
+  {
+    "productCode": "DS-03",
+    "sizeCode": "REGULAR",
+    "diameterInches": null,
+    "servingDescription": "1 cake",
+    "price": 7.25,
+    "calories": 480,
+    "slices": null,
+    "isDefault": true
+  }
+]

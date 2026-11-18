@@ -1,0 +1,38 @@
+[
+  {
+    "code": "GITHUB_STUDENT",
+    "description": "Student discount: 15% off, up to $10.",
+    "discountType": "PERCENT",
+    "value": 15,
+    "maxDiscount": 10,
+    "minSubtotal": 20,
+    "validFrom": null,
+    "validUntil": "2027-06-30 23:59",
+    "isActive": true,
+    "deliveryOnly": false
+  },
+  {
+    "code": "FREE_DISPATCH",
+    "description": "Free delivery on this order.",
+    "discountType": "FREE_DELIVERY",
+    "value": null,
+    "maxDiscount": null,
+    "minSubtotal": 15,
+    "validFrom": null,
+    "validUntil": null,
+    "isActive": true,
+    "deliveryOnly": true
+  },
+  {
+    "code": "HOTFIX10",
+    "description": "10% off (October hotfix sale).",
+    "discountType": "PERCENT",
+    "value": 10,
+    "maxDiscount": null,
+    "minSubtotal": 0,
+    "validFrom": null,
+    "validUntil": "2026-10-31 23:59",
+    "isActive": true,
+    "deliveryOnly": false
+  }
+]

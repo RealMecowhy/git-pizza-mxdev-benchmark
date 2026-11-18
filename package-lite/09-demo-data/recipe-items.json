@@ -1,0 +1,366 @@
+[
+  {
+    "productCode": "PZ-01",
+    "ingredientCode": "basil",
+    "role": "FINISH",
+    "isRemovable": true,
+    "sortOrder": 1
+  },
+  {
+    "productCode": "PZ-01",
+    "ingredientCode": "evoo",
+    "role": "FINISH",
+    "isRemovable": true,
+    "sortOrder": 2
+  },
+  {
+    "productCode": "PZ-02",
+    "ingredientCode": "pepperoni",
+    "role": "TOPPING",
+    "isRemovable": false,
+    "sortOrder": 1
+  },
+  {
+    "productCode": "PZ-02",
+    "ingredientCode": "oregano",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 2
+  },
+  {
+    "productCode": "PZ-02",
+    "ingredientCode": "hot_honey",
+    "role": "FINISH",
+    "isRemovable": true,
+    "sortOrder": 3
+  },
+  {
+    "productCode": "PZ-03",
+    "ingredientCode": "italian_sausage",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 1
+  },
+  {
+    "productCode": "PZ-03",
+    "ingredientCode": "cremini",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 2
+  },
+  {
+    "productCode": "PZ-03",
+    "ingredientCode": "green_pepper",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 3
+  },
+  {
+    "productCode": "PZ-03",
+    "ingredientCode": "red_onion",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 4
+  },
+  {
+    "productCode": "PZ-03",
+    "ingredientCode": "black_olives",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 5
+  },
+  {
+    "productCode": "PZ-03",
+    "ingredientCode": "oregano",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 6
+  },
+  {
+    "productCode": "PZ-04",
+    "ingredientCode": "pulled_pork",
+    "role": "TOPPING",
+    "isRemovable": false,
+    "sortOrder": 1
+  },
+  {
+    "productCode": "PZ-04",
+    "ingredientCode": "smoked_provolone",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 2
+  },
+  {
+    "productCode": "PZ-04",
+    "ingredientCode": "caramelized_onion",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 3
+  },
+  {
+    "productCode": "PZ-04",
+    "ingredientCode": "red_onion",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 4
+  },
+  {
+    "productCode": "PZ-04",
+    "ingredientCode": "basil",
+    "role": "FINISH",
+    "isRemovable": true,
+    "sortOrder": 5
+  },
+  {
+    "productCode": "PZ-05",
+    "ingredientCode": "spianata_calabrese",
+    "role": "TOPPING",
+    "isRemovable": false,
+    "sortOrder": 1
+  },
+  {
+    "productCode": "PZ-05",
+    "ingredientCode": "jalapeno",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 2
+  },
+  {
+    "productCode": "PZ-05",
+    "ingredientCode": "chili_oil",
+    "role": "FINISH",
+    "isRemovable": true,
+    "sortOrder": 3
+  },
+  {
+    "productCode": "PZ-05",
+    "ingredientCode": "chili_flakes",
+    "role": "FINISH",
+    "isRemovable": true,
+    "sortOrder": 4
+  },
+  {
+    "productCode": "PZ-06",
+    "ingredientCode": "pepperoni",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 1
+  },
+  {
+    "productCode": "PZ-06",
+    "ingredientCode": "italian_sausage",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 2
+  },
+  {
+    "productCode": "PZ-06",
+    "ingredientCode": "smoked_bacon",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 3
+  },
+  {
+    "productCode": "PZ-06",
+    "ingredientCode": "prosciutto_cotto",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 4
+  },
+  {
+    "productCode": "PZ-06",
+    "ingredientCode": "oregano",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 5
+  },
+  {
+    "productCode": "PZ-07",
+    "ingredientCode": "porcini",
+    "role": "TOPPING",
+    "isRemovable": false,
+    "sortOrder": 1
+  },
+  {
+    "productCode": "PZ-07",
+    "ingredientCode": "cremini",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 2
+  },
+  {
+    "productCode": "PZ-07",
+    "ingredientCode": "stracciatella",
+    "role": "FINISH",
+    "isRemovable": true,
+    "sortOrder": 3
+  },
+  {
+    "productCode": "PZ-07",
+    "ingredientCode": "truffle_oil",
+    "role": "FINISH",
+    "isRemovable": true,
+    "sortOrder": 4
+  },
+  {
+    "productCode": "PZ-08",
+    "ingredientCode": "gorgonzola",
+    "role": "TOPPING",
+    "isRemovable": false,
+    "sortOrder": 1
+  },
+  {
+    "productCode": "PZ-08",
+    "ingredientCode": "fontina",
+    "role": "TOPPING",
+    "isRemovable": false,
+    "sortOrder": 2
+  },
+  {
+    "productCode": "PZ-08",
+    "ingredientCode": "parmesan_style",
+    "role": "TOPPING",
+    "isRemovable": false,
+    "sortOrder": 3
+  },
+  {
+    "productCode": "PZ-08",
+    "ingredientCode": "evoo",
+    "role": "FINISH",
+    "isRemovable": true,
+    "sortOrder": 4
+  },
+  {
+    "productCode": "PZ-09",
+    "ingredientCode": "zucchini",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 1
+  },
+  {
+    "productCode": "PZ-09",
+    "ingredientCode": "eggplant",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 2
+  },
+  {
+    "productCode": "PZ-09",
+    "ingredientCode": "roasted_red_pepper",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 3
+  },
+  {
+    "productCode": "PZ-09",
+    "ingredientCode": "cherry_tomatoes",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 4
+  },
+  {
+    "productCode": "PZ-09",
+    "ingredientCode": "red_onion",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 5
+  },
+  {
+    "productCode": "PZ-09",
+    "ingredientCode": "basil",
+    "role": "FINISH",
+    "isRemovable": true,
+    "sortOrder": 6
+  },
+  {
+    "productCode": "PZ-10",
+    "ingredientCode": "artichoke",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 1
+  },
+  {
+    "productCode": "PZ-10",
+    "ingredientCode": "black_olives",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 2
+  },
+  {
+    "productCode": "PZ-10",
+    "ingredientCode": "cherry_tomatoes",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 3
+  },
+  {
+    "productCode": "PZ-10",
+    "ingredientCode": "cashew_ricotta",
+    "role": "FINISH",
+    "isRemovable": true,
+    "sortOrder": 4
+  },
+  {
+    "productCode": "PZ-10",
+    "ingredientCode": "arugula",
+    "role": "FINISH",
+    "isRemovable": true,
+    "sortOrder": 5
+  },
+  {
+    "productCode": "PZ-10",
+    "ingredientCode": "evoo",
+    "role": "FINISH",
+    "isRemovable": true,
+    "sortOrder": 6
+  },
+  {
+    "productCode": "PZ-11",
+    "ingredientCode": "prosciutto_cotto",
+    "role": "TOPPING",
+    "isRemovable": false,
+    "sortOrder": 1
+  },
+  {
+    "productCode": "PZ-11",
+    "ingredientCode": "pineapple",
+    "role": "TOPPING",
+    "isRemovable": false,
+    "sortOrder": 2
+  },
+  {
+    "productCode": "PZ-11",
+    "ingredientCode": "jalapeno",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 3
+  },
+  {
+    "productCode": "PZ-12",
+    "ingredientCode": "ricotta",
+    "role": "TOPPING",
+    "isRemovable": false,
+    "sortOrder": 1
+  },
+  {
+    "productCode": "PZ-12",
+    "ingredientCode": "prosciutto_cotto",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 2
+  },
+  {
+    "productCode": "PZ-12",
+    "ingredientCode": "cremini",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 3
+  },
+  {
+    "productCode": "PZ-12",
+    "ingredientCode": "basil",
+    "role": "TOPPING",
+    "isRemovable": true,
+    "sortOrder": 4
+  }
+]

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<title>Error — Git Pizza MxDev</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Geist:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link rel="stylesheet" href="_shared/proto.css">
+</head>
+<!-- SCR-41 Unexpected error (ERROR 500 // SEG_FAULT). Minimal frame like SCR-40. Layout of Stitch desktop/system-error (obsolete branding replaced).
+     Texts: TXT-ERR-03, 04, 08, 09, 12, 14, 16, 17. The stack trace is decorative: real error details are never shown. -->
+<body class="grid-bg" data-screen="SCR-41" data-no-shell>
+<noscript>ERROR 500 // SEG_FAULT — this prototype page needs JavaScript.</noscript>
+<script src="_shared/proto.js"></script>
+<script>
+(function () {
+  GP.registerStates([['default', 'Default']]);
+  var trace = [
+    '<span class="c-error">[FATAL] Segmentation fault in OvenCluster.dispatch()</span>',
+    '<span class="k">at</span> <span class="f">Pipeline.run</span>() <span class="cm">// pipeline.ts:88:7</span>',
+    '<span class="k">at</span> <span class="f">Kitchen.handle</span>() <span class="cm">// kitchen.ts:211:9</span>',
+    '<span class="k">at</span> <span class="f">GitPizza.boot</span>() <span class="cm">// main.js:1:1</span>'
+  ];
+  function incident() { var d = new Date(), p = function (n) { return (n < 10 ? '0' : '') + n; }; return 'ERR-' + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '-' + p(d.getHours()) + p(d.getMinutes()) + p(d.getSeconds()) + '-' + ('000' + Math.floor(Math.random() * 65536).toString(16).toUpperCase()).slice(-4); }
+  function uptime() { var now = new Date(), start = new Date(now); start.setHours(4, 0, 0, 0); if (start > now) start.setDate(start.getDate() - 1); var s = Math.floor((now - start) / 1000); return [Math.floor(s / 3600), Math.floor(s / 60) % 60, s % 60].map(function (n) { return (n < 10 ? '0' : '') + n; }).join(':'); }
+  document.body.insertAdjacentHTML('afterbegin', GP.demoBanner() + '<div class="code-rain" id="rain" aria-hidden="true"></div>' +
+    '<main class="err-page" id="main"><div class="err-wrap">' +
+    '<a class="err-logo" href="' + GP.PAGES.home + '" aria-label="Git Pizza MxDev home"><img src="' + GP.ASSETS + 'brand/logo-horizontal.svg" alt="Git Pizza MxDev logo" width="271" height="48"></a>' +
+    '<div class="err-head"><img class="err-illus" src="' + GP.ASSETS + 'illustrations/error-seg-fault.png" alt="" width="240" height="180"><div style="flex:1;min-width:260px">' +
+      '<h1 style="margin:0"><span class="err-code"><span class="ms" aria-hidden="true">bug_report</span>ERROR 500</span><span class="t-h1 err-title" style="display:block">SEG_FAULT <span class="cursor amber" aria-hidden="true"></span></span><span class="sr-only"> — Unexpected error</span></h1>' +
+      '<p class="t-body-long" style="margin:0">Something went wrong on our side. Your manifest and orders are safe.</p>' +
+      '<p class="t-small c-secondary" style="margin:8px 0 0">INCIDENT_ID: <code>' + incident() + '</code></p></div></div>' + /* E-09, TXT-ERR-24 (BR-ERR-02) */
+    '<section class="term" aria-label="Stack trace (decorative)"><div class="term-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span>stack_trace.log</span></div>' +
+      '<div class="term-body trace collapsed" id="trace">' + trace.map(function (l, i) { return '<div><span class="ln">' + (i + 1) + '</span>' + l + '</div>'; }).join('') +
+      '<button class="btn btn-ghost btn-sm more" id="more" type="button">Show more</button></div></section>' +
+    '<div class="t-small"><span class="cm">// SUGGESTED RESOLUTION:</span> Re-synchronize with the main branch.</div>' +
+    '<div class="row err-actions"><button class="btn btn-primary" id="retry" type="button" aria-label="Try again"><span class="ms md" aria-hidden="true">refresh</span>RETRY_DEPLOYMENT</button>' +
+      '<a class="btn btn-secondary" href="' + GP.PAGES.home + '" aria-label="Go to the home page"><span class="ms md" aria-hidden="true">terminal</span>RETURN_TO_MAIN</a></div>' +
+    '<div class="t-micro c-muted" aria-hidden="true">LATENCY ' + (Math.round(performance.now() % 40) + 8) + ' ms · STATUS SEG_FAULT · UPTIME ' + uptime() + '</div>' +
+    '</div></main>');
+  document.getElementById('more').onclick = function () { document.getElementById('trace').classList.remove('collapsed'); this.remove(); };
+  /* RETRY_DEPLOYMENT repeats the failed navigation; in the prototype it reloads the page */
+  document.getElementById('retry').onclick = function () { this.disabled = true; this.innerHTML = '<span class="ms md" aria-hidden="true">progress_activity</span>RETRY_DEPLOYMENT'; setTimeout(function () { location.reload(); }, 900); };
+  var rain = document.getElementById('rain'), snippets = ['git checkout menu', 'oven.bake({ temp: 850 })', 'const dough = await ferment(48)', 'npm install toppings', 'git pull origin crust', 'while (hungry) { order(); }', 'SELECT * FROM pizzas', 'SIGSEGV: core dumped', 'git revert MX-1025'];
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setInterval(function () { var s = document.createElement('span'); s.textContent = snippets[Math.floor(Math.random() * snippets.length)]; s.style.left = Math.random() * 100 + '%';
+      var d = 6 + Math.random() * 8; s.style.animationDuration = d + 's'; rain.appendChild(s); setTimeout(function () { s.remove(); }, d * 1000); }, 900);
+  }
+})();
+</script>
+</body>
+</html>

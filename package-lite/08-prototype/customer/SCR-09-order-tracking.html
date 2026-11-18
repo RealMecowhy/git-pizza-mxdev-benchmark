@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<title>Order tracking — Git Pizza MxDev</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Geist:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link rel="stylesheet" href="_shared/proto.css">
+<style>
+  .trk-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; padding-bottom: 20px; border-bottom: 1px solid var(--border-strong); }
+  .trk { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 24px; margin-top: 24px; align-items: start; }
+  .stage-detail { display: flex; align-items: center; gap: 16px; background: var(--surface-lowest); border: 1px solid var(--border); border-radius: var(--r-md); padding: 14px 16px; margin-top: 24px; }
+  .stage-detail .progress { flex: 1; }
+  .logbox { max-height: 320px; overflow-y: auto; }
+  .eta-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; padding: 14px 16px; flex-wrap: wrap; }
+  .courier { display: flex; gap: 12px; align-items: center; padding: 12px 16px; border-top: 1px solid var(--border); }
+  .courier .av { width: 44px; height: 44px; border-radius: var(--r-md); background: var(--primary); color: var(--primary-on); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .ord-line { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--border-subtle); font-size: 13px; }
+  @media (max-width: 1023px) { .trk { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body data-screen="SCR-09" data-nav="track">
+<main id="main"><div class="page" id="page"></div></main>
+<script src="_shared/proto.js"></script>
+<script>
+(function () {
+  var st = GP.state(), E = GP.esc;
+  var STATES = [['live', 'Live (current)'], ['PAYMENT_PENDING', 'STAGED'], ['PAYMENT_FAILED', 'PAYMENT_FAILED'], ['QUEUED', 'QUEUED (rollback allowed)'], ['BAKING', 'BAKING (rollback rejected)'], ['QA_CHECK', 'QA_CHECK'],
+    ['READY_FOR_DISPATCH', 'DISPATCH_READY'], ['OUT_FOR_DELIVERY', 'IN_TRANSIT'], ['DELIVERED', 'DEPLOYED'], ['READY_FOR_PICKUP', 'READY_TO_PULL (pickup)'], ['PICKED_UP', 'PULLED (pickup)'],
+    ['CANCELLED', 'ROLLED_BACK (by customer)'], ['invalid', 'Invalid / expired link']];
+  GP.registerStates(STATES);
+  var mode = GP.currentState(), page = document.getElementById('page');
+  var o = GP.param('id') ? GP.findOrder(GP.param('id')) : null;
+
+  // ---- prototype state presets: build a demo order and jump to the requested status
+  if (GP.param('state') && mode !== 'live' && mode !== 'invalid' && !GP.param('ok')) {
+    var pickup = mode === 'READY_FOR_PICKUP' || mode === 'PICKED_UP';
+    var a = GP.defaultLine('PZ-05'); a.size = 'LARGE'; a.extras = ['EX-21'];
+    st.cart.lines = [a, GP.defaultLine('DR-01')]; st.cart.coupon = null;
+    st.checkout.type = pickup ? 'PICKUP' : 'DELIVERY';
+    st.checkout.addr = { line1: '500 Howard Street', line2: 'Floor 4, Suite 410', city: 'San Francisco', state: 'CA', zip: '94105', notes: 'Ring the call box #410.' };
+    st.checkout.contact = { name: 'Taylor Brooks', email: 'taylor.brooks@example.com', phone: '(415) 555-0128' };
+    var n = GP.createOrder(); n.method = 'CARD'; n.card = 'VISA_4242'; st.cart = { lines: [], coupon: null }; st.pendingOrder = null;
+    if (mode === 'PAYMENT_PENDING') { n.attempts = [{ n: 1, method: 'CARD', card: 'VISA_4242', status: 'PROCESSING' }]; }
+    else if (mode === 'PAYMENT_FAILED') { n.fixed = 'PAYMENT_FAILED'; n.card = 'VISA_0002'; n.attempts = [{ n: 1, method: 'CARD', card: 'VISA_0002', status: 'FAILED', code: 'DECLINED' }]; }
+    else {
+      n.fixed = null; n.paid = true; n.paymentStatus = 'PAID'; n.txn = 'txn_sim_' + GP.hex(12); n.paidTs = Date.now() - 5000;
+      n.attempts = [{ n: 1, method: 'CARD', card: 'VISA_4242', status: 'SUCCEEDED', txn: n.txn }];
+      var target = mode === 'CANCELLED' ? 'QUEUED' : mode;
+      var segs = GP.segments(n), acc = 0;
+      for (var i = 0; i < segs.length; i++) { if (segs[i][0] === target) break; acc += segs[i][1]; }
+      var off = { QUEUED: 4, BAKING: 40, QA_CHECK: 8, READY_FOR_DISPATCH: 12, OUT_FOR_DELIVERY: 60, READY_FOR_PICKUP: 10 }[target] || 0;
+      GP.setElapsed(n, acc + off);
+      if (mode === 'CANCELLED') { n.fixed = 'CANCELLED'; n.frozenAt = 'QUEUED'; n.cancelledBy = 'GUEST'; n.cancelReason = 'Cancelled by customer'; n.paymentStatus = 'REFUNDED'; n.refundId = 'rfd_sim_' + GP.hex(12); }
+    }
+    GP.saveOrder(n); GP.save();
+    location.href = 'SCR-09-order-tracking.html?id=MX-' + n.no + '&state=' + mode + '&ok=1'; return;
+  }
+  if (!o && mode !== 'invalid' && !GP.param('id')) { o = GP.activeOrder() || GP.lastOrder(); }
+  if (!o || mode === 'invalid') {
+    page.innerHTML = '<div class="panel panel-pad" style="max-width:640px;margin:40px auto"><h1 class="t-h2 c-error">ERROR 404 // DEPLOYMENT_NOT_FOUND</h1>' +
+      '<p class="t-body-long mt-8">This tracking link is invalid, or the order no longer exists (the demo may have been reset).</p>' +
+      '<pre class="code"><span class="c-muted">$</span> git log --grep=<span class="s">"' + E(GP.param('id') || 'MX-????') + '"</span>\n<span class="c-error">fatal: bad revision</span></pre>' +
+      '<div class="row mt-16"><a class="btn btn-primary" href="SCR-10-track-order-lookup.html" aria-label="Find my order">git log --grep</a><a class="btn btn-ghost" href="SCR-01-home.html">RETURN_TO_MAIN</a></div></div>';
+    return;
+  }
+  var deliv = o.type === 'DELIVERY';
+  var COURIER = { name: 'Marek Nowak', handle: 'Marek // Moto-v3', vehicle: 'Scooter', plate: '8MXD992', icon: 'moped' };
+  var zone = deliv && o.addr ? GP.ZONES[o.addr.zip] : null, dist = o.distance || (zone ? zone[1] : 2.8);
+  var STORE_XY = [28, 66], DEST_XY = [78, 26], PARK_XY = [62, 82];
+
+  function stageIndex(s) { return { QUEUED: 0, BAKING: 1, QA_CHECK: 2, READY_FOR_DISPATCH: 3, OUT_FOR_DELIVERY: 3, READY_FOR_PICKUP: 3, DELIVERED: 4, PICKED_UP: 4 }[s]; }
+  function events(ls) {
+    // customer-visible log lines (order-lifecycle section 4)
+    var ev = [], el = ls.el == null ? null : ls.el, now = Date.now(), speed = st.speed || 1;
+    function at(e) { return new Date(now - Math.max(0, (el - e)) * 1000 / speed); }
+    var t0 = new Date(o.placedTs || now - (el || 0) * 1000 - 5000);
+    ev.push([t0, 'INIT', 'tag-success', 'Order MX-' + o.no + ' staged. Commit #' + o.hash + ' signed.']);
+    ev.push([t0, 'PAYMENT', 'tag-info', 'Handshake with payment gateway (simulated)…']);
+    (o.attempts || []).forEach(function (a) { if (a.status === 'FAILED') ev.push([t0, 'PAYMENT', 'tag-error', 'ERROR 402: ' + GP.FAILURES[a.code] + '. Attempt ' + a.n + ' of 3.']); });
+    if (!o.paid && !o.history) {
+      if (o.fixed === 'CANCELLED') ev.push([new Date(), 'ROLLBACK', 'tag-error', o.cancelReason === 'Payment failed 3 times' ? 'Order rolled back: payment failed 3 times.' : 'Order rolled back by customer before payment.']);
+      return ev;
+    }
+    var segs = GP.segments(o), starts = {}, acc = 0; segs.forEach(function (s) { starts[s[0]] = acc; acc += s[1]; });
+    var cap = el == null ? 1e9 : el;
+    if (o.fixed === 'CANCELLED' && o.frozenAt) cap = starts[o.frozenAt] + 3;
+    function add(e, tag, cls, msg) { if (e <= cap) ev.push([at(e), tag, cls, msg]); }
+    add(0, 'PAYMENT', 'tag-success', 'Payment confirmed. TxID ' + (o.txn || 'txn_sim_…'));
+    add(0, 'KITCHEN', 'tag-orange', 'Order queued at position 2.');
+    add(starts.BAKING, 'KITCHEN', 'tag-orange', 'Dough stretched, toppings injected.');
+    add(starts.BAKING, 'OVEN', 'tag-orange', 'Entered OVEN_01 at 850°F. Bake timer 01:30.');
+    add(starts.QA_CHECK, 'OVEN', 'tag-orange', 'Pulled from OVEN_01 after 01:30.');
+    add(starts.QA_CHECK, 'QA', 'tag-qa', 'Quality check started.');
+    var slices = o.lines.reduce(function (s, l) { var p = GP.BY_CODE[l.p]; return s + (p.kind === 'PIZZA' ? l.qty * (p.slices || GP.SIZES[l.size].slices) : 0); }, 0);
+    if (deliv) {
+      add(starts.READY_FOR_DISPATCH, 'QA', 'tag-qa', 'Passed: ' + slices + ' slices, dips added, box sealed.');
+      add(starts.READY_FOR_DISPATCH, 'ROUTER', 'tag-info', 'Waiting for courier…');
+      add(starts.READY_FOR_DISPATCH + 1, 'ROUTER', 'tag-info', 'Courier ' + COURIER.handle + ' assigned, arriving at the kitchen in 00:30.');
+      add(starts.OUT_FOR_DELIVERY, 'ROUTER', 'tag-info', 'Handed over to ' + COURIER.handle + '.');
+      add(starts.OUT_FOR_DELIVERY, 'COURIER', 'tag-info', 'On the way. Distance ' + dist.toFixed(1) + ' mi.');
+      add(starts.DELIVERED, 'DEPLOY', 'tag-success', 'Delivered. Enjoy your build!');
+    } else {
+      add(starts.READY_FOR_PICKUP, 'QA', 'tag-qa', 'Passed: box sealed.');
+      add(starts.READY_FOR_PICKUP, 'DEPLOY', 'tag-success', 'Ready for pickup at the counter.');
+      add(starts.PICKED_UP, 'DEPLOY', 'tag-success', 'Picked up. Enjoy your build!');
+    }
+    if (o.fixed === 'CANCELLED') ev.push([new Date(), 'ROLLBACK', 'tag-error', 'Order rolled back by customer. Refund issued.']);
+    return ev;
+  }
+  function render() {
+    var ls = GP.liveStatus(o), s = ls.status, meta = GP.STATUS[s];
+    var rem = 0; if (ls.segs) { for (var i = ls.idx; i < ls.segs.length; i++) rem += ls.segs[i][1]; rem -= ls.inStatus || 0; }
+    var readyRem = 0; if (ls.segs) { for (var j = ls.idx; j < ls.segs.length && ['QUEUED', 'BAKING', 'QA_CHECK'].indexOf(ls.segs[j][0]) >= 0; j++) readyRem += ls.segs[j][1]; if (['QUEUED', 'BAKING', 'QA_CHECK'].indexOf(s) >= 0) readyRem -= ls.inStatus || 0; }
+    var frozen = s === 'CANCELLED' ? o.frozenAt : null;
+    var cur = s === 'CANCELLED' ? (frozen ? stageIndex(frozen) : -1) : stageIndex(s);
+    if (s === 'PAYMENT_PENDING' || s === 'PAYMENT_FAILED') cur = -1;
+    var labels = deliv ? [['QUEUED', 'Order received'], ['BAKING', 'In the oven'], ['QA_CHECK', 'Quality check'], ['DISPATCH', s === 'OUT_FOR_DELIVERY' ? 'Courier on the way' : 'Waiting for courier'], ['DEPLOYED', 'Delivered']]
+                       : [['QUEUED', 'Order received'], ['BAKING', 'In the oven'], ['QA_CHECK', 'Quality check'], ['READY_TO_PULL', 'Ready for pickup'], ['PULLED', 'Picked up']];
+    var icons = ['inventory_2', 'local_pizza', 'fact_check', deliv ? 'local_shipping' : 'storefront', 'done_all']; /* SCR-09 E-05 */
+    var finalDone = s === 'DELIVERED' || s === 'PICKED_UP';
+    var stepper = '<div class="pipeline" role="list" aria-label="Order pipeline">' + labels.map(function (l, k) {
+      var cls = finalDone ? 'done' : k < cur ? 'done' : k === cur ? 'current' + (s === 'CANCELLED' ? ' failed' : '') : '';
+      return '<div class="pipe-step ' + cls + '" role="listitem" aria-current="' + (k === cur && !finalDone ? 'step' : 'false') + '"><span class="node"><span class="ms" aria-hidden="true">' + (cls.indexOf('done') === 0 ? 'check' : icons[k]) + '</span></span><div><div class="lbl">' + (k + 1) + '. ' + l[0] + '</div><div class="sub">' + l[1] + (k === cur && s === 'CANCELLED' ? ' · rolled back' : '') + '</div></div></div>';
+    }).join('') + '<i class="fill" style="width:' + (finalDone ? 80 : Math.max(0, cur) * 20) + '%"></i></div>';
+    // stage detail
+    var detail = '';
+    if (s === 'BAKING') { var pct = Math.min(100, Math.floor(100 * ls.inStatus / ls.dur)); /* BR-SIM-16b */ detail = '<span class="t-small">' + (pct >= 100 ? 'Coming out of the oven' : 'Baking in OVEN_01::CORE · ' + pct + '%') + '</span><div class="progress orange" role="progressbar" aria-valuenow="' + pct + '" aria-valuemin="0" aria-valuemax="100" aria-label="Bake progress"><i style="width:' + pct + '%"></i></div>'; }
+    else if (s === 'QUEUED') detail = '<span class="t-small">Waiting for a free oven slot · position ' + (GP.queuePos(o) || 1) + ' in the queue</span>'; /* TXT-TRK-08, BR-SIM-16c */
+    else if (s === 'QA_CHECK') detail = '<span class="t-small">Slicing, adding dips and sealing the box…</span>';
+    else if (s === 'READY_FOR_DISPATCH') detail = '<span class="t-small">Packed on the dispatch shelf. ' + COURIER.handle + ' is arriving at the kitchen (' + GP.mmss(ls.dur - ls.inStatus) + ').</span>';
+    else if (s === 'OUT_FOR_DELIVERY') { var rp = Math.round(ls.inStatus / ls.dur * 100); detail = '<span class="t-small">' + COURIER.handle + ' is on the way</span><div class="progress" role="progressbar" aria-valuenow="' + rp + '" aria-valuemin="0" aria-valuemax="100" aria-label="Route progress"><i style="width:' + rp + '%;background:var(--info)"></i></div><span class="c-info" style="font-weight:700">' + rp + '%</span>'; }
+    else if (s === 'READY_FOR_PICKUP') detail = '<span class="t-small c-info">Ready at the counter — ' + E(GP.STORE.address) + '. Show order number MX-' + o.no + '.</span>';
+    else if (finalDone) detail = '<span class="t-small c-green">' + (s === 'DELIVERED' ? 'Delivered' : 'Picked up') + '. Enjoy your build!</span>';
+    // banners
+    var banner = '';
+    if (s === 'PAYMENT_PENDING') banner = '<div class="notice warn mt-16" role="status"><span class="ms" aria-hidden="true">hourglass_top</span><div><strong>STAGED — Processing payment…</strong> The pipeline starts as soon as the simulated payment is confirmed.</div></div>';
+    if (s === 'PAYMENT_FAILED') banner = '<div class="notice error mt-16" role="alert"><span class="ms" aria-hidden="true">credit_card_off</span><div style="flex:1"><strong>PAYMENT_FAILED.</strong> ' + GP.FAILURES[(o.attempts[o.attempts.length - 1] || {}).code || 'DECLINED'] + ' (attempt ' + o.attempts.length + ' of 3). Retry with another method or cancel the order. Unpaid orders are rolled back after 10 minutes.<div class="row mt-8"><a class="btn btn-primary btn-sm" href="SCR-07-payment-sheet.html" onclick="GP.state().pendingOrder=' + o.no + ';GP.save()">Retry payment</a></div></div></div>';
+    if (s === 'CANCELLED') {
+      var who = (o.cancelReason || '').indexOf('Payment') === 0 || !o.paid ? 'Payment was not completed.' : 'You cancelled it.';
+      var refund = o.paymentStatus === 'REFUNDED' ? ' Refund of ' + GP.money(o.t.total) + ' issued to ' + (o.method === 'CARD' && o.card ? GP.TEST_CARDS[o.card].label : GP.METHODS[o.method || 'CARD']) + ' (simulated).' : '';
+      banner = '<div class="notice error mt-16" role="status"><span class="ms" aria-hidden="true">undo</span><div><strong>ROLLED_BACK — This order was rolled back.</strong> ' + who + refund + '</div></div>';
+    }
+    // rollback control (BR-ORD-08)
+    var canRb = s === 'QUEUED' || s === 'PAYMENT_FAILED';
+    var rejMsg = { BAKING: 'your order is already in the oven.', QA_CHECK: 'your order is already in the oven.', READY_FOR_DISPATCH: 'your order is already packed.', READY_FOR_PICKUP: 'your order is already packed.', OUT_FOR_DELIVERY: 'your order is already on its way.' }[s];
+    var rb = canRb ? '<button class="btn btn-danger btn-block" id="rollback" aria-label="Cancel order"><span class="ms md" aria-hidden="true">undo</span>Rollback order</button><p class="t-micro c-muted mt-8" style="margin-bottom:0">You can cancel until baking starts' + (s === 'QUEUED' ? '; you get a full refund (simulated).' : '.') + '</p>'
+      : rejMsg ? '<button class="btn btn-danger btn-block" disabled aria-disabled="true" aria-describedby="rb-msg">Rollback order</button><p class="t-small c-error mt-8" id="rb-msg" style="margin-bottom:0">ROLLBACK REJECTED — ' + rejMsg + '</p>' : '';
+    // map / pickup
+    var right = '';
+    if (deliv) {
+      var cx = PARK_XY, show = false, distRem = dist;
+      // BR-TRK-09: the courier marker appears only from OUT_FOR_DELIVERY; before that the helper TXT-TRK-28
+      if (s === 'OUT_FOR_DELIVERY') { var g = ls.inStatus / ls.dur; cx = [STORE_XY[0] + (DEST_XY[0] - STORE_XY[0]) * g, STORE_XY[1] + (DEST_XY[1] - STORE_XY[1]) * g]; show = true; distRem = dist * (1 - g); }
+      if (s === 'DELIVERED') { cx = DEST_XY; show = true; distRem = 0; }
+      var live = s === 'OUT_FOR_DELIVERY' || s === 'READY_FOR_DISPATCH';
+      right += '<section class="panel" aria-label="Simulated map"><div class="between" style="padding:12px 16px;border-bottom:1px solid var(--border)"><span class="t-label">GEOLOCATION</span>' + (live ? '<span class="badge st-deployed"><span class="live-dot" aria-hidden="true"></span>LIVE</span>' : '<span class="badge st-queued">' + (finalDone ? 'ARRIVED' : 'STANDBY') + '</span>') + '</div>' +
+        '<div class="map-well" style="border-radius:0">' + '<img class="map-base" src="' + GP.ASSETS + 'illustrations/map-sf-dark.jpg" alt="">' +
+        '<div class="map-pin store" style="left:' + STORE_XY[0] + '%;top:' + STORE_XY[1] + '%"><span class="mk"><span class="ms md" aria-hidden="true">local_pizza</span></span><span class="nm">MISSION_KITCHEN</span></div>' +
+        '<div class="map-pin dest" style="left:' + DEST_XY[0] + '%;top:' + DEST_XY[1] + '%"><span class="mk"><span class="ms md" aria-hidden="true">location_on</span></span><span class="nm">' + E(o.addr ? o.addr.zip : '') + '</span></div>' +
+        (!show && !finalDone && s !== 'CANCELLED' ? '<div class="t-micro c-muted" style="position:absolute;left:12px;bottom:10px;background:var(--surface-lowest);padding:4px 8px">The live map starts when the courier picks up your order.</div>' : '') +
+        (show ? '<div class="map-pin courier" style="left:' + cx[0] + '%;top:' + cx[1] + '%"><span class="mk"><span class="ms md" aria-hidden="true">' + COURIER.icon + '</span></span><span class="nm">' + COURIER.handle + '</span></div>' : '') + '</div>' +
+        '<div class="eta-row"><div><div class="t-label c-secondary">ESTIMATED_ETA</div><div class="t-price-lg c-green">' + (finalDone ? 'DEPLOYED' : s === 'CANCELLED' || s.indexOf('PAYMENT') === 0 ? '--:--' : GP.mmss(rem)) + '</div>' + (!finalDone && s !== 'CANCELLED' && s.indexOf('PAYMENT') !== 0 ? '<div class="t-micro c-muted">~' + GP.hhmm(new Date(Date.now() + rem * 1000)) + ' · demo time</div>' : '') + '</div>' +
+        '<div style="text-align:right"><div class="t-label c-secondary">DISTANCE_REMAINING</div><div style="font-weight:700">' + distRem.toFixed(1) + ' mi</div></div></div>' +
+        (s === 'READY_FOR_DISPATCH' || s === 'OUT_FOR_DELIVERY' || s === 'DELIVERED' ? '<div class="courier"><span class="av"><span class="ms" aria-hidden="true">' + COURIER.icon + '</span></span><div><div style="font-weight:700">' + COURIER.handle + '</div><div class="t-small c-muted">' + COURIER.name + ' · ' + COURIER.vehicle + ' · ' + COURIER.plate + '</div></div></div>' : '') + '</section>';
+    } else {
+      right += '<section class="panel panel-pad"><div class="section-label"><span class="ms" aria-hidden="true">storefront</span>PICKUP // MISSION_KITCHEN</div><div style="font-weight:700">' + E(GP.STORE.name) + '</div><div class="t-small c-secondary">' + E(GP.STORE.address) + ' · ' + GP.STORE.phone + '</div>' +
+        '<div class="mt-16"><div class="t-label c-secondary">' + (s === 'READY_FOR_PICKUP' ? 'READY_NOW' : finalDone ? 'PULLED' : 'READY_FOR_PICKUP_AT') + '</div><div class="t-price-lg c-green">' + (s === 'READY_FOR_PICKUP' ? 'at the counter' : finalDone ? 'done' : s === 'CANCELLED' || s.indexOf('PAYMENT') === 0 ? '--:--' : GP.hhmm(new Date(Date.now() + readyRem * 1000)) + ' (' + GP.mmss(readyRem) + ')') + '</div></div></section>';
+    }
+    var t = o.t;
+    right += '<section class="panel panel-pad"><div class="section-label"><span class="ms" aria-hidden="true">inventory_2</span>ORDER CONFIGURATION</div>' + o.lines.map(function (l) { var p = GP.BY_CODE[l.p];
+      return '<div class="ord-line"><div><span class="c-green">' + l.qty + '×</span> <span class="c-primary">' + E(p.name) + '</span><div class="t-micro c-muted">' + E(GP.lineMods(l).join(' · ')) + '</div></div><span>' + GP.money(GP.unitPrice(l) * l.qty) + '</span></div>'; }).join('') +
+      '<div class="sum-total"><span class="t-label">DEPLOYMENT_COST</span><span class="t-price-lg c-primary">' + GP.money(t.total) + '</span></div>' +
+      '<div class="row mt-16"><a class="btn btn-ghost btn-sm" href="SCR-13-order-detail-and-receipt.html?id=MX-' + o.no + '"><span class="ms sm" aria-hidden="true">receipt_long</span>View receipt</a></div>' +
+      (rb ? '<hr class="div">' + rb : '') + '</section>';
+    var lb = page.querySelector('.logbox'), atBottom = !lb || lb.scrollTop + lb.clientHeight >= lb.scrollHeight - 8, keep = lb ? lb.scrollTop : 0;
+    setTimeout(function () { var nb = page.querySelector('.logbox'); if (nb) nb.scrollTop = atBottom ? nb.scrollHeight : keep; }, 0);
+    var ev = events(ls);
+    var log = ev.map(function (e) { return '<div class="log-line"><span class="ts">[' + GP.hhmmss(e[0]) + ']</span><span class="tag ' + e[2] + '">[' + e[1] + ']</span><span>' + E(e[3]) + '</span></div>'; }).join('') + (FIN(s) ? '' : '<div class="c-green mt-8">mxdev@pizza:~$ <span class="cursor"></span></div>');
+    page.innerHTML = '<div class="trk-head"><div><div class="t-micro c-muted">./track.log</div><h1 class="t-display c-primary" style="font-size:clamp(28px,5vw,48px)">DEPLOYMENT_STATUS</h1>' +
+      '<div class="t-small mt-8">ORDER: <span class="c-primary">MX-' + o.no + '</span> | COMMIT: <span class="c-green">#' + o.hash + '</span> | PLACED: ' + E(o.placed) + ' | ' + (deliv ? 'DELIVERY' : 'PICKUP') + '</div></div>' +
+      '<div class="row">' + GP.statusBadge(s) + '<span class="t-small c-secondary">' + meta.plain + '</span>' + (FIN(s) ? '' : '<span class="chip tag-badge"><span class="live-dot" aria-hidden="true"></span>LIVE PIPELINE MONITORING</span>') + '</div></div>' + banner +
+      '<div class="trk"><div class="stack-lg"><section class="panel panel-pad" aria-labelledby="pw-t"><h2 class="t-label c-secondary" id="pw-t" style="margin:0 0 24px">PIPELINE WORKFLOW</h2>' + stepper + (detail ? '<div class="stage-detail" aria-live="polite">' + detail + '</div>' : '') + '</section>' +
+      '<section class="term" aria-label="Order log"><div class="term-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span style="margin-left:auto">bash — track.log</span></div><div class="term-body logbox" aria-live="polite">' + log + '</div></section></div>' +
+      '<div class="stack-lg">' + right + '</div></div>';
+  }
+  function FIN(s) { return !!GP.FINAL[s]; }
+  page.addEventListener('click', function (e) {
+    if (!e.target.closest('#rollback')) return;
+    var s = GP.liveStatus(o).status;
+    var refund = s === 'QUEUED' ? "Your order hasn't gone into the oven yet. You'll get a full refund of " + GP.money(o.t.total) + ' to ' + (o.method === 'CARD' ? GP.TEST_CARDS[o.card].label : GP.METHODS[o.method]) + ' (simulated).' : 'Nothing was charged.';
+    GP.confirmDialog({ title: 'Rollback order MX-' + o.no + '?', body: refund, ok: 'Rollback order', okLabel: 'Cancel order', cancel: 'Keep order', danger: true, icon: 'undo', onOk: function () {
+      var now = GP.liveStatus(o).status;
+      if (now !== 'QUEUED' && now !== 'PAYMENT_FAILED') { GP.toast('ROLLBACK REJECTED — your order is already in the oven.', 'error'); render(); return; }
+      o.fixed = 'CANCELLED'; o.frozenAt = now === 'QUEUED' ? 'QUEUED' : null; o.cancelledBy = 'GUEST';
+      o.cancelReason = now === 'QUEUED' ? 'Cancelled by customer' : 'Cancelled by customer before payment';
+      if (o.paid) { o.paymentStatus = 'REFUNDED'; o.refundId = 'rfd_sim_' + GP.hex(12); }
+      if (o.history) { st.orders.push(o); o.history = false; }
+      GP.saveOrder(o); render(); GP.toast('Order MX-' + o.no + ' rolled back.' + (o.paid ? ' Refund issued (simulated).' : ''), 'info');
+    } });
+  });
+  render();
+  var tick = setInterval(function () { if (FIN(GP.liveStatus(o).status) && o.fixed) { clearInterval(tick); } render(); }, 1000);
+})();
+</script>
+</body>
+</html>

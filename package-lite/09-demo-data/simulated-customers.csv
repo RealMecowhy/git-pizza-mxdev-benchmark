@@ -1,0 +1,29 @@
+code,firstName,lastName,email,phone,line1,line2,city,state,zip,deliveryNotes,inDeliveryZone
+SC-01,Marcus,Johnson,marcus.johnson@example.com,(415) 555-0121,1025 Folsom Street,Unit 612,San Francisco,CA,94103,Code 0612 at the gate.,true
+SC-02,Maya,Thompson,maya.thompson@example.net,(415) 555-0122,3368 22nd Street,,San Francisco,CA,94110,,true
+SC-03,Daniel,Okafor,daniel.okafor@example.com,(415) 555-0124,1544 Page Street,Apt 2,San Francisco,CA,94117,"Blue door, ring twice.",true
+SC-04,Sarah,Goldberg,sarah.goldberg@example.org,(415) 555-0125,455 Noe Street,,San Francisco,CA,94114,"Leave on the porch bench, please.",true
+SC-05,Tom,Becker,tom.becker@example.com,(415) 555-0126,2955 Harrison Street,Apt 1,San Francisco,CA,94110,,true
+SC-06,Aisha,Patel,aisha.patel@example.com,(415) 555-0127,88 Clementina Street,Apt 7,San Francisco,CA,94105,,true
+SC-07,Kevin,Nguyen,kevin.nguyen@example.net,(415) 555-0128,360 Hayes Street,Apt 5,San Francisco,CA,94102,Call when you arrive.,true
+SC-08,Grace,Liu,grace.liu@example.com,(415) 555-0129,300 Berry Street,Apt 1104,San Francisco,CA,94158,Concierge will sign for it.,true
+SC-09,Samuel,Park,samuel.park@example.org,(415) 555-0130,1320 Waller Street,,San Francisco,CA,94117,,true
+SC-10,Ryan,O'Connor,ryan.oconnor@example.com,(415) 555-0131,201 Spear Street,Floor 11,San Francisco,CA,94105,Reception desk on the 11th floor.,true
+SC-11,Hannah,Schmidt,hannah.schmidt@example.com,(415) 555-0132,620 Minnesota Street,Unit 210,San Francisco,CA,94107,Side entrance on 19th Street.,true
+SC-12,Ethan,Walsh,ethan.walsh@example.com,(415) 555-0133,535 Mission Street,Floor 9,San Francisco,CA,94105,Team lunch: ask for Ethan at the front desk.,true
+SC-13,Luis,Hernández,luis.hernandez@example.net,(415) 555-0134,958 Valencia Street,Apt 3,San Francisco,CA,94110,,true
+SC-14,Chloe,Dubois,chloe.dubois@example.com,(415) 555-0135,525 Octavia Street,Apt 2,San Francisco,CA,94102,"Buzzer 2, then up the stairs.",true
+SC-15,Noah,Fischer,noah.fischer@example.org,(415) 555-0136,720 Clayton Street,,San Francisco,CA,94117,"Garden unit, gate code 4410.",true
+SC-16,Isabella,Moreno,isabella.moreno@example.com,(415) 555-0137,3150 18th Street,Apt 4,San Francisco,CA,94110,,true
+SC-17,Olivia,Martinez,olivia.martinez@example.com,(415) 555-0138,2780 Bryant Street,,San Francisco,CA,94110,Ring the top bell.,true
+SC-18,Ben,Whitfield,ben.whitfield@example.net,(415) 555-0139,4021 19th Street,,San Francisco,CA,94114,,true
+SC-19,Priyanka,Rao,priyanka.rao@example.com,(415) 555-0140,1200 4th Street,Apt 805,San Francisco,CA,94158,,true
+SC-20,Emily,Chen,emily.chen@example.com,(415) 555-0170,1450 18th Street,Apt 3,San Francisco,CA,94107,"Third floor, door on the right.",true
+SC-21,Jacob,Weiss,jacob.weiss@example.org,(415) 555-0171,3800 24th Street,Apt 6,San Francisco,CA,94114,,true
+SC-22,Sophie,Laurent,sophie.laurent@example.com,(415) 555-0172,180 Linden Street,,San Francisco,CA,94102,,true
+SC-23,Anthony,Russo,anthony.russo@example.net,(415) 555-0173,1160 Howard Street,Unit 3,San Francisco,CA,94103,Leave with the bike shop downstairs if no answer.,true
+SC-24,Rachel,Adler,rachel.adler@example.com,(415) 555-0174,2240 Mission Street,Apt 5,San Francisco,CA,94110,,true
+SC-25,Omar,Haddad,omar.haddad@example.com,(415) 555-0175,1010 Tennessee Street,Unit 4,San Francisco,CA,94107,,true
+SC-26,Lena,Hoffmann,lena.hoffmann@example.org,(415) 555-0176,550 Mission Bay Boulevard North,Apt 1502,San Francisco,CA,94158,Front desk will call up.,true
+SC-27,Victor,Chang,victor.chang@example.com,(415) 555-0177,1688 Page Street,,San Francisco,CA,94117,,true
+SC-28,Natalie,Ward,natalie.ward@example.net,(415) 555-0178,725 Ellis Street,Apt 9,San Francisco,CA,94109,,false

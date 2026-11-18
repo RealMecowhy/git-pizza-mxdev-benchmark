@@ -1,0 +1,14 @@
+{
+  "storeName": "Git Pizza MxDev — Mission Kitchen",
+  "addressLine": "2140 Folsom Street, San Francisco, CA 94110",
+  "phone": "(415) 555-0142",
+  "timeZone": "America/Los_Angeles",
+  "intakeStatus": "OPEN",
+  "taxRatePercent": 8.625,
+  "deliveryFee": 3.99,
+  "freeDeliveryThreshold": 40,
+  "minDeliverySubtotal": 15,
+  "maxQuantityPerLine": 10,
+  "maxItemsPerOrder": 30,
+  "maxPaymentAttempts": 3
+}

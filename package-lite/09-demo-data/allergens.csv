@@ -1,0 +1,15 @@
+key,shortCode,caption,sortOrder
+GLUTEN,GLU,Cereals containing gluten,1
+CRUSTACEANS,CRU,Crustaceans,2
+EGGS,EGG,Eggs,3
+FISH,FSH,Fish,4
+PEANUTS,PNT,Peanuts,5
+SOYBEANS,SOY,Soybeans,6
+MILK,MLK,Milk,7
+TREE_NUTS,TNT,Tree nuts,8
+CELERY,CEL,Celery,9
+MUSTARD,MUS,Mustard,10
+SESAME,SES,Sesame,11
+SULPHITES,SUL,Sulphur dioxide and sulphites,12
+LUPIN,LUP,Lupin,13
+MOLLUSCS,MOL,Molluscs,14

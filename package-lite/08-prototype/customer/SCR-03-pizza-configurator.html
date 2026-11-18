@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<title>Configurator — Git Pizza MxDev</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Geist:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link rel="stylesheet" href="_shared/proto.css">
+<style>
+  .conf { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px; margin-top: 24px; align-items: start; }
+  .conf-left { position: sticky; top: calc(var(--header-h) + var(--banner-h) + 16px); display: grid; gap: 16px; }
+  .conf-left .img-frame { max-width: 480px; }
+  .live-tag { position: absolute; left: 12px; bottom: 12px; background: rgba(14,14,14,0.85); border: 1px solid var(--border); padding: 4px 8px; font-size: 11px; display: flex; gap: 6px; align-items: center; }
+  .group { margin-top: 28px; }
+  .group-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .opts { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
+  .extras { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 8px; }
+  .xopt { display: flex; gap: 12px; align-items: center; padding: 10px 12px; background: var(--surface-container); border: 1px solid var(--border); border-radius: var(--r-sm); cursor: pointer; min-height: 56px; }
+  .xopt:hover { background: var(--surface-high); }
+  .xopt input { width: 18px; height: 18px; accent-color: var(--primary); flex-shrink: 0; }
+  .xopt.on { border-color: var(--primary); background: var(--primary-subtle); }
+  .xopt.dis { opacity: 0.38; cursor: not-allowed; }
+  .xopt .nm { font-weight: 700; font-size: 13px; } .xopt .vt { font-size: 11px; color: var(--text-muted); }
+  .xopt .pr { margin-left: auto; font-size: 12px; color: var(--success-text); white-space: nowrap; }
+  .ing { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-bottom: 1px solid var(--border-subtle); }
+  .ing:last-child { border-bottom: 0; }
+  .ing.removed .nm { text-decoration: line-through; color: var(--text-disabled); }
+  .ctabar { margin-top: 32px; }
+  @media (max-width: 1023px) { .conf { grid-template-columns: 1fr; } .conf-left { position: static; } .conf-left .img-frame { max-width: 360px; } }
+  @media (max-width: 767px) {
+    .ctabar { position: fixed; left: 0; right: 0; bottom: calc(var(--bottomnav-h) + env(safe-area-inset-bottom)); z-index: 95; margin: 0; padding: 10px 16px; background: var(--surface-container); border-top: 1px solid var(--border-strong); box-shadow: var(--shadow-top); }
+    .page { padding-bottom: 140px; }
+  }
+</style>
+</head>
+<body data-screen="SCR-03" data-nav="menu">
+<main id="main"><div class="page" id="page"></div></main>
+<script src="_shared/proto.js"></script>
+<script>
+(function () {
+  var st = GP.state(), E = GP.esc;
+  GP.registerStates([['new', 'New'], ['editing', 'Editing a cart line'], ['max-extras', 'Max extras reached'], ['option-unavailable', 'Option unavailable (jalapeños)']]);
+  var mode = GP.currentState();
+  var code = GP.param('p') || 'PZ-05', editIdx = GP.param('line');
+  if (mode === 'option-unavailable' && code !== 'PZ-05') { location.href = 'SCR-03-pizza-configurator.html?p=PZ-05&state=option-unavailable'; return; }
+  if (mode === 'editing' && editIdx == null) {
+    var demoLine = GP.defaultLine('PZ-05'); demoLine.size = 'LARGE'; demoLine.extras = ['EX-21']; GP.addLine(demoLine);
+    var ix = st.cart.lines.findIndex(function (l) { return GP.configKey(l) === GP.configKey(demoLine); });
+    location.href = 'SCR-03-pizza-configurator.html?p=PZ-05&line=' + ix + '&state=editing'; return;
+  }
+  var p = GP.BY_CODE[code];
+  if (!p || p.kind !== 'PIZZA') { location.href = 'SCR-04-item-info.html?p=' + code; return; }
+  var editing = editIdx != null && st.cart.lines[editIdx] && st.cart.lines[editIdx].p === code;
+  var line = editing ? JSON.parse(JSON.stringify(st.cart.lines[editIdx])) : GP.defaultLine(code);
+  if (mode === 'max-extras' && !editing) { line.size = 'LARGE'; line.extras = ['EX-01', 'EX-03', 'EX-04', 'EX-16', 'EX-21']; }
+  var notice = '';
+  var orderable = GP.isOrderable(p);
+  var sizes = Object.keys(p.prices);
+
+  function sur(o, group) { return o.code === p[group] ? 0 : o.sur; }
+  function surLabel(c) { return c ? '+' + GP.money(c) : 'included'; }
+  function optGroup(group, field, title, devKey, icon) {
+    var opts = Object.keys(GP.OPTIONS).map(function (k) { return GP.OPTIONS[k]; }).filter(function (o) { return o.group === group; });
+    var fixed = group === 'CRUST' && !p.crustSel;
+    var h = '<div class="group" role="radiogroup" aria-labelledby="g-' + field + '"><div class="group-head"><h2 class="section-label" id="g-' + field + '" style="margin:0"><span class="ms" aria-hidden="true">' + icon + '</span>' + devKey + ' <span class="c-muted" style="text-transform:none;font-weight:500">// ' + title + '</span></h2></div>';
+    if (fixed) return h + '<div class="notice info"><span class="ms" aria-hidden="true">lock</span><div>Crust is fixed for this module: <strong>' + GP.OPTIONS[p.crust].name + '</strong>. A calzone is folded from our Neapolitan dough.</div></div></div>';
+    h += '<div class="opts">' + opts.map(function (o) {
+      var sizeOk = o.sizes.indexOf(line.size) >= 0, avail = GP.optAvailable(o.code), dis = !sizeOk || !avail;
+      var sub = !avail ? 'unavailable today' : !sizeOk ? (o.sizes.length === 1 ? 'Small 10" only' : 'Medium & Large only') : surLabel(sur(o, field)) + (o.code === p[field] ? ' · default' : '');
+      return '<button type="button" class="opt" role="radio" aria-checked="' + (line[field] === o.code) + '" data-field="' + field + '" data-opt="' + o.code + '"' + (dis ? ' disabled aria-disabled="true"' : '') + ' title="' + E(o.desc || o.name) + '">' +
+        '<span class="o-title">' + E(o.name) + '</span><span class="o-sub">' + o.key + ' · ' + sub + '</span></button>';
+    }).join('') + '</div></div>';
+    return h;
+  }
+  function render() {
+    var unit = GP.unitPrice(line), all = GP.lineAllergens(line), diet = GP.lineDiet(line);
+    var max = p.max, n = line.extras.length;
+    var pg = document.getElementById('page');
+    var h = '<div class="between"><span class="crumb"><span class="ms sm" aria-hidden="true">folder_open</span>src › modules › <b>configure_module.ts</b></span><a class="t-small" href="SCR-02-menu.html">← back to ./menu.ts</a></div>';
+    if (editing) h += '<div class="notice info mt-16"><span class="ms" aria-hidden="true">edit</span><div>Editing a manifest line. Committing replaces it in your cart.</div></div>';
+    if (!orderable) h += '<div class="notice error mt-16"><span class="ms" aria-hidden="true">block</span><div><strong>404: OUT_OF_STOCK.</strong> ' + E(p.name) + ' is sold out today. Choose another module from the menu.</div></div>';
+    h += '<div class="conf"><div class="conf-left"><div style="position:relative">' + GP.imgHtml(p) + '<span class="live-tag"><span class="live-dot" aria-hidden="true"></span>LIVE_RENDER: ' + p.key + '@' + p.ver + '</span></div>' +
+      '<div class="term"><div class="term-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span>manifest.json</span><span style="margin-left:auto" class="c-green">preview</span></div><pre class="code" style="border:0;border-radius:0;margin:0" aria-label="Live summary of this pizza as JSON">' + manifest(unit, all, diet) + '</pre></div></div>';
+    h += '<div><div class="t-micro c-muted">./pizzas/' + p.key + '.ts · ' + p.code + '</div><h1 class="t-h1 mt-8">' + E(p.name) + '</h1><div class="c-secondary t-small">' + E(p.real) + '</div>' +
+      '<p class="t-body-long" style="margin:12px 0 0">' + E(p.desc) + '</p><div class="row mt-16" style="gap:6px">' + GP.badgesHtml(p, line) + '</div>';
+    // size
+    h += '<div class="group"><h2 class="section-label"><span class="ms" aria-hidden="true">straighten</span>scale_factor <span class="c-muted" style="text-transform:none;font-weight:500">// size</span></h2><div class="seg" role="radiogroup" aria-label="Size">' + sizes.map(function (s) {
+      return '<button type="button" class="opt" role="radio" aria-checked="' + (line.size === s) + '" data-size="' + s + '"><span class="o-title">' + s + '</span><span class="o-sub">' + GP.SIZES[s].inches + '" · ' + (p.slices || GP.SIZES[s].slices) + (p.slices === 1 ? ' piece' : ' slices') + ' · ' + GP.money(p.prices[s]) + '</span></button>';
+    }).join('') + '</div>' + (notice ? '<div class="notice warn mt-8" role="status"><span class="ms" aria-hidden="true">warning</span><div>' + notice + '</div></div>' : '') + '</div>';
+    h += optGroup('CRUST', 'crust', 'crust', 'core_kernel', 'layers') + optGroup('SAUCE', 'sauce', 'sauce', 'base_layer', 'water_drop') + optGroup('CHEESE', 'cheese', 'cheese', 'cheese_driver', 'egg_alt');
+    // default ingredients
+    h += '<div class="group"><h2 class="section-label"><span class="ms" aria-hidden="true">account_tree</span>default_recipe <span class="c-muted" style="text-transform:none;font-weight:500">// Default ingredients</span></h2><div class="panel">' + p.r.map(function (r) {
+      var nm = GP.INGR[r[0]][0], inStock = GP.ingrInStock(r[0]), removed = line.removed.indexOf(r[0]) >= 0;
+      var right = !r[2] ? '<span class="chip" title="Signature ingredient, cannot be removed"><span class="ms sm" aria-hidden="true">lock</span>fixed</span>'
+        : !inStock ? '<span class="chip tag-spice">unavailable today</span>'
+        : '<button class="btn btn-sm ' + (removed ? 'btn-secondary' : 'btn-ghost') + '" data-unlink="' + r[0] + '" aria-pressed="' + removed + '" aria-label="' + (removed ? 'Add back ' : 'Remove ') + E(nm) + '">' + (removed ? 'relink' : 'unlink') + '</button>';
+      return '<div class="ing' + (removed ? ' removed' : '') + '"><span class="ms sm ' + (removed ? 'c-disabled' : 'c-green') + '" aria-hidden="true">' + (removed ? 'link_off' : 'link') + '</span><span class="nm">' + E(nm) + '</span><span class="t-micro c-muted">' + (r[1] === 'F' ? 'finish' : 'topping') + '</span><span style="margin-left:auto">' + right + '</span></div>';
+    }).join('') + '</div></div>';
+    // extras
+    var full = n >= max;
+    h += '<div class="group"><div class="group-head"><h2 class="section-label" style="margin:0"><span class="ms" aria-hidden="true">extension</span>dependencies <span class="c-muted" style="text-transform:none;font-weight:500">// Extra toppings</span></h2><span class="t-small ' + (full ? 'c-warn' : 'c-green') + '" aria-live="polite">' + n + ' / ' + max + ' dependencies</span></div>' +
+      (full ? '<div class="notice warn" role="status" style="margin-bottom:8px"><span class="ms" aria-hidden="true">warning</span><div>Maximum of ' + max + ' extra toppings reached. Remove one to add another.</div></div>' : '') +
+      '<div class="t-micro c-muted" style="margin-bottom:8px">Standard ' + GP.money(GP.EXTRA_PRICE.STANDARD[line.size]) + ' · Premium ' + GP.money(GP.EXTRA_PRICE.PREMIUM[line.size]) + ' for ' + GP.SIZES[line.size].label + '</div><div class="extras">' +
+      Object.keys(GP.OPTIONS).filter(function (k) { return GP.OPTIONS[k].group === 'EXTRA'; }).map(function (k) {
+        var o = GP.OPTIONS[k], on = line.extras.indexOf(k) >= 0, avail = GP.optAvailable(k), dis = !on && (full || !avail);
+        return '<label class="xopt' + (on ? ' on' : '') + (dis ? ' dis' : '') + '"><input type="checkbox" data-extra="' + k + '"' + (on ? ' checked' : '') + (dis ? ' disabled' : '') + '><span><span class="nm">' + o.key + '</span><br><span class="vt">' + E(o.name) + ' · ' + (avail ? o.ver : 'unavailable today') + '</span></span><span class="pr">+' + GP.money(GP.EXTRA_PRICE[o.cls][line.size]) + '</span></label>';
+      }).join('') + '</div></div>';
+    // allergens & price
+    var rows = '<div class="sum-row"><span class="lbl">' + GP.SIZES[line.size].label + '</span><span>' + GP.money(p.prices[line.size]) + '</span></div>';
+    ['crust', 'sauce', 'cheese'].forEach(function (g) { var o = GP.OPTIONS[line[g]], c = sur(o, g); if (c) rows += '<div class="sum-row"><span class="lbl">' + E(o.name) + '</span><span>+' + GP.money(c) + '</span></div>'; });
+    line.extras.forEach(function (x) { var o = GP.OPTIONS[x]; rows += '<div class="sum-row"><span class="lbl">+ ' + E(o.name) + '</span><span>+' + GP.money(GP.EXTRA_PRICE[o.cls][line.size]) + '</span></div>'; });
+    h += '<div class="grid-2 group"><div class="panel panel-pad"><h2 class="section-label"><span class="ms" aria-hidden="true">health_and_safety</span>allergens</h2><div class="t-small" aria-live="polite">' + GP.allergenText(all) + '</div>' +
+      '<div class="row mt-8" style="gap:6px"><span class="chip ' + (diet.veg ? 'tag-badge' : '') + '">' + (diet.veg ? '✓' : '✗') + ' Vegetarian</span><span class="chip ' + (diet.vegan ? 'tag-badge' : '') + '">' + (diet.vegan ? '✓' : '✗') + ' Vegan</span></div>' +
+      '<div class="t-micro c-muted mt-8">Recalculated for this configuration. Cross-contact possible, see allergen notice on the menu.</div></div>' +
+      '<div class="panel panel-pad"><h2 class="section-label"><span class="ms" aria-hidden="true">receipt_long</span>unit price</h2>' + rows + '<hr class="div" style="margin:8px 0"><div class="sum-row"><span class="lbl">Unit price</span><span class="price">' + GP.money(unit) + '</span></div><div class="t-micro c-muted">Removing ingredients is free. Prices exclude sales tax.</div></div></div>';
+    // CTA
+    h += '<div class="ctabar"><div class="between"><div class="stepper" role="group" aria-label="Quantity"><span class="lbl hide-phone">instances:</span><button type="button" data-qty="-1" aria-label="Decrease quantity"' + (line.qty <= 1 ? ' disabled' : '') + '>−</button><span class="val" aria-live="polite">' + line.qty + '</span><button type="button" data-qty="1" aria-label="Increase quantity"' + (line.qty >= 10 ? ' disabled' : '') + '>+</button></div>' +
+      '<div style="text-align:right"><div class="t-micro c-muted">line total</div><div class="t-price-lg c-primary">' + GP.money(unit * line.qty) + '</div></div></div>' +
+      '<button class="btn btn-primary btn-lg btn-block mt-16" id="deploy"' + (orderable ? '' : ' disabled') + ' aria-label="' + (editing ? 'Update this line in the cart' : 'Add to cart') + '"><span class="ms" aria-hidden="true">rocket_launch</span>' + (!orderable ? 'SOLD_OUT' : editing ? 'Commit to manifest' : 'Build &amp; Deploy') + '</button>' + '</div>';
+    h += '</div></div>';
+    pg.innerHTML = h;
+  }
+  function manifest(unit, all, diet) {
+    function s(v) { return '<span class="s">"' + E(v) + '"</span>'; }
+    function arr(a) { return '<span class="p">[</span>' + a.map(s).join('<span class="p">, </span>') + '<span class="p">]</span>'; }
+    var rows = [
+      // keys and order of SCR-03 E-10 / FD-03 BR-CONF-14
+      ['module', s(p.key)], ['version', s(p.ver)], ['size', s(line.size)],
+      ['core_kernel', s(GP.OPTIONS[line.crust].key)], ['base_layer', s(GP.OPTIONS[line.sauce].key)], ['cheese_driver', s(GP.OPTIONS[line.cheese].key)],
+      ['dependencies', arr(line.extras.map(function (x) { return GP.OPTIONS[x].key; }))], ['unlinked', arr(line.removed)],
+      ['instances', '<span class="n">' + line.qty + '</span>'], ['unit_price', '<span class="n">' + (unit / 100).toFixed(2) + '</span>'],
+      ['allergens', arr(all)], ['vegetarian', '<span class="b">' + diet.veg + '</span>'], ['vegan', '<span class="b">' + diet.vegan + '</span>']
+    ];
+    return '<span class="p">{</span>\n' + rows.map(function (r, i) { return '  <span class="f">"' + r[0] + '"</span><span class="p">:</span> ' + r[1] + (i < rows.length - 1 ? '<span class="p">,</span>' : ''); }).join('\n') + '\n<span class="p">}</span>';
+  }
+  document.getElementById('page').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b || b.disabled) return;
+    if (b.dataset.size) {
+      notice = ''; line.size = b.dataset.size;
+      var cr = GP.OPTIONS[line.crust];
+      if (cr.sizes.indexOf(line.size) < 0) { notice = '<code>core_kernel</code> reset to <code>neapolitan_core</code>: ' + E(cr.name) + ' is not available in ' + E(GP.SIZES[line.size].label) + '.'; line.crust = 'CR-01'; }
+      render(); return;
+    }
+    if (b.dataset.opt) { line[b.dataset.field] = b.dataset.opt; notice = ''; render(); return; }
+    if (b.dataset.unlink) { var i = line.removed.indexOf(b.dataset.unlink); if (i >= 0) line.removed.splice(i, 1); else line.removed.push(b.dataset.unlink); render(); return; }
+    if (b.dataset.qty) { line.qty = Math.max(1, Math.min(10, line.qty + parseInt(b.dataset.qty, 10))); render(); return; }
+    if (b.id === 'deploy') {
+      GP.addLine(line, editing ? parseInt(editIdx, 10) : null);
+      location.href = 'SCR-05-cart.html?added=' + encodeURIComponent(p.name) + (editing ? '&updated=1' : '');
+    }
+  });
+  document.getElementById('page').addEventListener('change', function (e) {
+    var x = e.target.dataset.extra; if (!x) return;
+    var i = line.extras.indexOf(x); if (i >= 0) line.extras.splice(i, 1); else if (line.extras.length < p.max) line.extras.push(x);
+    render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

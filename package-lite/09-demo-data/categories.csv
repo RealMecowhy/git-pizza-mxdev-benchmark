@@ -1,0 +1,5 @@
+code,fileName,displayName,productKind,sortOrder
+PIZZAS,pizzas.json,Pizzas,PIZZA,1
+SIDES,sides.yml,Sides & Dips,SIDE,2
+DRINKS,drinks.env,Drinks,DRINK,3
+DESSERTS,desserts.md,Desserts,DESSERT,4

@@ -1,0 +1,58 @@
+[
+  {
+    "zip": "94110",
+    "neighborhood": "Mission",
+    "distanceMiles": 0.8,
+    "isActive": true,
+    "tripSecondsAt1x": 92
+  },
+  {
+    "zip": "94103",
+    "neighborhood": "SoMa",
+    "distanceMiles": 1.4,
+    "isActive": true,
+    "tripSecondsAt1x": 116
+  },
+  {
+    "zip": "94114",
+    "neighborhood": "Castro / Noe Valley",
+    "distanceMiles": 1.6,
+    "isActive": true,
+    "tripSecondsAt1x": 124
+  },
+  {
+    "zip": "94107",
+    "neighborhood": "Potrero Hill / Dogpatch",
+    "distanceMiles": 1.9,
+    "isActive": true,
+    "tripSecondsAt1x": 136
+  },
+  {
+    "zip": "94102",
+    "neighborhood": "Hayes Valley / Civic Center",
+    "distanceMiles": 2,
+    "isActive": true,
+    "tripSecondsAt1x": 140
+  },
+  {
+    "zip": "94158",
+    "neighborhood": "Mission Bay",
+    "distanceMiles": 2.3,
+    "isActive": true,
+    "tripSecondsAt1x": 152
+  },
+  {
+    "zip": "94117",
+    "neighborhood": "Haight-Ashbury",
+    "distanceMiles": 2.6,
+    "isActive": true,
+    "tripSecondsAt1x": 164
+  },
+  {
+    "zip": "94105",
+    "neighborhood": "Rincon Hill / Financial District",
+    "distanceMiles": 2.8,
+    "isActive": true,
+    "tripSecondsAt1x": 172
+  }
+]

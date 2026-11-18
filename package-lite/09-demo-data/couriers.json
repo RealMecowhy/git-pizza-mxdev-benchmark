@@ -1,0 +1,62 @@
+[
+  {
+    "code": "CU-01",
+    "name": "Marek Nowak",
+    "nodeHandle": "Marek // Moto-v3",
+    "vehicleType": "SCOOTER",
+    "plate": "8MXD992",
+    "phone": "(415) 555-0161",
+    "status": "DELIVERING",
+    "statusChangedAt": "T-00:01:50",
+    "currentOrder": "MX-1030",
+    "tripProgressPercent": 64
+  },
+  {
+    "code": "CU-02",
+    "name": "Alex Kim",
+    "nodeHandle": "Alex // Node-v2",
+    "vehicleType": "CAR",
+    "plate": "9KRX204",
+    "phone": "(415) 555-0162",
+    "status": "TO_STORE",
+    "statusChangedAt": "T-00:00:12",
+    "currentOrder": "MX-1035",
+    "tripProgressPercent": 40
+  },
+  {
+    "code": "CU-03",
+    "name": "Sofia Alvarez",
+    "nodeHandle": "Sofia // eBike-v4",
+    "vehicleType": "E_BIKE",
+    "plate": null,
+    "phone": "(415) 555-0163",
+    "status": "DELIVERING",
+    "statusChangedAt": "T-00:01:10",
+    "currentOrder": "MX-1031",
+    "tripProgressPercent": 76
+  },
+  {
+    "code": "CU-04",
+    "name": "Jamal Carter",
+    "nodeHandle": "Jamal // Moto-v2",
+    "vehicleType": "SCOOTER",
+    "plate": "7JMC218",
+    "phone": "(415) 555-0164",
+    "status": "RETURNING",
+    "statusChangedAt": "T-00:01:01",
+    "currentOrder": "MX-1029",
+    "tripProgressPercent": 45
+  },
+  {
+    "code": "CU-05",
+    "name": "Mei Tanaka",
+    "nodeHandle": "Mei // eBike-v1",
+    "vehicleType": "E_BIKE",
+    "plate": null,
+    "phone": "(415) 555-0165",
+    "status": "OFF_DUTY",
+    "statusChangedAt": "D-1 22:30:00",
+    "currentOrder": null,
+    "tripProgressPercent": 0
+  }
+]

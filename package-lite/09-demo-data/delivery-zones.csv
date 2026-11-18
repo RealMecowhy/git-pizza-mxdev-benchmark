@@ -1,0 +1,9 @@
+zip,neighborhood,distanceMiles,isActive,tripSecondsAt1x
+94110,Mission,0.80,true,92
+94103,SoMa,1.40,true,116
+94114,Castro / Noe Valley,1.60,true,124
+94107,Potrero Hill / Dogpatch,1.90,true,136
+94102,Hayes Valley / Civic Center,2,true,140
+94158,Mission Bay,2.300,true,152
+94117,Haight-Ashbury,2.60,true,164
+94105,Rincon Hill / Financial District,2.80,true,172

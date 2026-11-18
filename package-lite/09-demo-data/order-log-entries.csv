@@ -1,0 +1,479 @@
+orderNumber,seq,loggedAt,level,tag,message,isCustomerVisible
+1001,1,D-118 20:14:05,INFO,INIT,Order MX-1001 staged. Commit #1a36494 signed.,true
+1001,2,D-118 20:14:05,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1001,3,D-118 20:14:08,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_e24f084b17d1,true
+1001,4,D-118 20:14:08,INFO,KITCHEN,Order queued at position 1.,true
+1001,5,D-118 20:14:32,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1001,6,D-118 20:14:32,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1001,7,D-118 20:16:03,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1001,8,D-118 20:16:03,INFO,QA,Quality check started.,true
+1001,9,D-118 20:16:34,SUCCESS,QA,"Passed: 16 slices, dips added, box sealed.",true
+1001,10,D-118 20:16:34,INFO,ROUTER,Waiting for courier…,true
+1001,11,D-118 20:16:34,INFO,ROUTER,"Courier Marek // Moto-v3 assigned, en route to the store.",true
+1001,12,D-118 20:17:09,INFO,ROUTER,Handed over to Marek // Moto-v3.,true
+1001,13,D-118 20:17:09,INFO,COURIER,On the way. Distance 1.4 mi.,true
+1001,14,D-118 20:19:05,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1002,1,D-111 12:31:40,INFO,INIT,Order MX-1002 staged. Commit #6799053 signed.,true
+1002,2,D-111 12:31:40,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1002,3,D-111 12:31:43,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_515679a1f2b3,true
+1002,4,D-111 12:31:43,INFO,KITCHEN,Order queued at position 1.,true
+1002,5,D-111 12:32:13,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1002,6,D-111 12:32:13,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1002,7,D-111 12:33:44,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1002,8,D-111 12:33:44,INFO,QA,Quality check started.,true
+1002,9,D-111 12:34:15,SUCCESS,QA,"Passed: 8 slices, dips added, box sealed.",true
+1002,10,D-111 12:34:15,INFO,ROUTER,Waiting for courier…,true
+1002,11,D-111 12:34:15,INFO,ROUTER,"Courier Sofia // eBike-v4 assigned, en route to the store.",true
+1002,12,D-111 12:34:50,INFO,ROUTER,Handed over to Sofia // eBike-v4.,true
+1002,13,D-111 12:34:50,INFO,COURIER,On the way. Distance 2.8 mi.,true
+1002,14,D-111 12:37:42,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1003,1,D-104 21:47:12,INFO,INIT,Order MX-1003 staged. Commit #7da2ea2 signed.,true
+1003,2,D-104 21:47:12,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1003,3,D-104 21:47:15,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_bfc8194845b1,true
+1003,4,D-104 21:47:15,INFO,KITCHEN,Order queued at position 1.,true
+1003,5,D-104 21:47:39,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1003,6,D-104 21:47:39,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1003,7,D-104 21:49:10,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1003,8,D-104 21:49:10,INFO,QA,Quality check started.,true
+1003,9,D-104 21:49:41,SUCCESS,QA,"Passed: 8 slices, dips added, box sealed.",true
+1003,10,D-104 21:49:41,INFO,ROUTER,Waiting for courier…,true
+1003,11,D-104 21:49:41,INFO,ROUTER,"Courier Jamal // Moto-v2 assigned, en route to the store.",true
+1003,12,D-104 21:50:16,INFO,ROUTER,Handed over to Jamal // Moto-v2.,true
+1003,13,D-104 21:50:16,INFO,COURIER,On the way. Distance 1.4 mi.,true
+1003,14,D-104 21:52:12,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1004,1,D-97 19:05:33,INFO,INIT,Order MX-1004 staged. Commit #9fc096f signed.,true
+1004,2,D-97 19:05:33,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1004,3,D-97 19:05:36,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_c0094953a464,true
+1004,4,D-97 19:05:36,INFO,KITCHEN,Order queued at position 1.,true
+1004,5,D-97 19:05:58,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1004,6,D-97 19:05:58,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1004,7,D-97 19:07:29,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1004,8,D-97 19:07:29,INFO,QA,Quality check started.,true
+1004,9,D-97 19:07:59,SUCCESS,QA,Passed: box sealed.,true
+1004,10,D-97 19:07:59,INFO,DEPLOY,Ready for pickup at the counter.,true
+1004,11,D-97 19:09:09,SUCCESS,DEPLOY,Picked up. Enjoy your build!,true
+1005,1,D-90 22:38:20,INFO,INIT,Order MX-1005 staged. Commit #0eb350d signed.,true
+1005,2,D-90 22:38:20,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1005,3,D-90 22:38:23,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_5029ec6517d2,true
+1005,4,D-90 22:38:23,INFO,KITCHEN,Order queued at position 1.,true
+1005,5,D-90 22:38:47,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1005,6,D-90 22:38:47,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1005,7,D-90 22:40:18,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1005,8,D-90 22:40:18,INFO,QA,Quality check started.,true
+1005,9,D-90 22:40:49,SUCCESS,QA,"Passed: 8 slices, dips added, box sealed.",true
+1005,10,D-90 22:40:49,INFO,ROUTER,Waiting for courier…,true
+1005,11,D-90 22:40:49,INFO,ROUTER,"Courier Alex // Node-v2 assigned, en route to the store.",true
+1005,12,D-90 22:41:24,INFO,ROUTER,Handed over to Alex // Node-v2.,true
+1005,13,D-90 22:41:24,INFO,COURIER,On the way. Distance 1.4 mi.,true
+1005,14,D-90 22:43:20,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1006,1,D-83 12:20:08,INFO,INIT,Order MX-1006 staged. Commit #09b99ed signed.,true
+1006,2,D-83 12:20:08,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1006,3,D-83 12:20:11,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_652367df1042,true
+1006,4,D-83 12:20:11,INFO,KITCHEN,Order queued at position 1.,true
+1006,5,D-83 12:20:35,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1006,6,D-83 12:20:35,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1006,7,D-83 12:22:06,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1006,8,D-83 12:22:06,INFO,QA,Quality check started.,true
+1006,9,D-83 12:22:37,SUCCESS,QA,"Passed: 8 slices, dips added, box sealed.",true
+1006,10,D-83 12:22:37,INFO,ROUTER,Waiting for courier…,true
+1006,11,D-83 12:22:37,INFO,ROUTER,"Courier Marek // Moto-v3 assigned, en route to the store.",true
+1006,12,D-83 12:23:12,INFO,ROUTER,Handed over to Marek // Moto-v3.,true
+1006,13,D-83 12:23:12,INFO,COURIER,On the way. Distance 2.8 mi.,true
+1006,14,D-83 12:26:04,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1007,1,D-76 20:56:44,INFO,INIT,Order MX-1007 staged. Commit #1d3c783 signed.,true
+1007,2,D-76 20:56:44,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1007,3,D-76 20:56:47,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_6c3ca8cc4deb,true
+1007,4,D-76 20:56:47,INFO,KITCHEN,Order queued at position 1.,true
+1007,5,D-76 20:57:11,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1007,6,D-76 20:57:11,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1007,7,D-76 20:58:42,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1007,8,D-76 20:58:42,INFO,QA,Quality check started.,true
+1007,9,D-76 20:59:13,SUCCESS,QA,"Passed: 8 slices, dips added, box sealed.",true
+1007,10,D-76 20:59:13,INFO,ROUTER,Waiting for courier…,true
+1007,11,D-76 20:59:13,INFO,ROUTER,"Courier Mei // eBike-v1 assigned, en route to the store.",true
+1007,12,D-76 20:59:48,INFO,ROUTER,Handed over to Mei // eBike-v1.,true
+1007,13,D-76 20:59:48,INFO,COURIER,On the way. Distance 1.4 mi.,true
+1007,14,D-76 21:01:44,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1008,1,D-69 23:12:02,INFO,INIT,Order MX-1008 staged. Commit #3e6e235 signed.,true
+1008,2,D-69 23:12:02,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1008,3,D-69 23:12:05,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_a1701f67b7e1,true
+1008,4,D-69 23:12:05,INFO,KITCHEN,Order queued at position 1.,true
+1008,5,D-69 23:12:29,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1008,6,D-69 23:12:29,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1008,7,D-69 23:14:00,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1008,8,D-69 23:14:00,INFO,QA,Quality check started.,true
+1008,9,D-69 23:14:31,SUCCESS,QA,"Passed: 8 slices, dips added, box sealed.",true
+1008,10,D-69 23:14:31,INFO,ROUTER,Waiting for courier…,true
+1008,11,D-69 23:14:31,INFO,ROUTER,"Courier Jamal // Moto-v2 assigned, en route to the store.",true
+1008,12,D-69 23:15:06,INFO,ROUTER,Handed over to Jamal // Moto-v2.,true
+1008,13,D-69 23:15:06,INFO,COURIER,On the way. Distance 1.4 mi.,true
+1008,14,D-69 23:17:02,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1009,1,D-62 19:40:15,INFO,INIT,Order MX-1009 staged. Commit #8c435bc signed.,true
+1009,2,D-62 19:40:15,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1009,3,D-62 19:40:18,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_8fa8d06fa58d,true
+1009,4,D-62 19:40:18,INFO,KITCHEN,Order queued at position 1.,true
+1009,5,D-62 19:40:29,WARN,ROLLBACK,Order rolled back by customer. Refund issued.,true
+1010,1,D-62 19:48:31,INFO,INIT,Order MX-1010 staged. Commit #5459f08 signed.,true
+1010,2,D-62 19:48:31,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1010,3,D-62 19:48:34,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_e05be2a6aa3e,true
+1010,4,D-62 19:48:34,INFO,KITCHEN,Order queued at position 1.,true
+1010,5,D-62 19:48:58,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1010,6,D-62 19:48:58,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1010,7,D-62 19:50:29,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1010,8,D-62 19:50:29,INFO,QA,Quality check started.,true
+1010,9,D-62 19:51:00,SUCCESS,QA,"Passed: 8 slices, dips added, box sealed.",true
+1010,10,D-62 19:51:00,INFO,ROUTER,Waiting for courier…,true
+1010,11,D-62 19:51:00,INFO,ROUTER,"Courier Alex // Node-v2 assigned, en route to the store.",true
+1010,12,D-62 19:51:35,INFO,ROUTER,Handed over to Alex // Node-v2.,true
+1010,13,D-62 19:51:35,INFO,COURIER,On the way. Distance 2.8 mi.,true
+1010,14,D-62 19:54:27,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1011,1,D-55 12:45:10,INFO,INIT,Order MX-1011 staged. Commit #d3436ad signed.,true
+1011,2,D-55 12:45:10,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1011,3,D-55 12:45:13,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_d5be0f8ccddf,true
+1011,4,D-55 12:45:13,INFO,KITCHEN,Order queued at position 1.,true
+1011,5,D-55 12:45:33,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1011,6,D-55 12:45:33,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1011,7,D-55 12:47:04,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1011,8,D-55 12:47:04,INFO,QA,Quality check started.,true
+1011,9,D-55 12:47:34,SUCCESS,QA,Passed: box sealed.,true
+1011,10,D-55 12:47:34,INFO,DEPLOY,Ready for pickup at the counter.,true
+1011,11,D-55 12:48:59,SUCCESS,DEPLOY,Picked up. Enjoy your build!,true
+1012,1,D-48 21:15:27,INFO,INIT,Order MX-1012 staged. Commit #5fe3e42 signed.,true
+1012,2,D-48 21:15:27,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1012,3,D-48 21:15:30,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_d32035f67847,true
+1012,4,D-48 21:15:30,INFO,KITCHEN,Order queued at position 1.,true
+1012,5,D-48 21:15:54,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1012,6,D-48 21:15:54,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1012,7,D-48 21:17:25,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1012,8,D-48 21:17:25,INFO,QA,Quality check started.,true
+1012,9,D-48 21:17:56,SUCCESS,QA,"Passed: 16 slices, dips added, box sealed.",true
+1012,10,D-48 21:17:56,INFO,ROUTER,Waiting for courier…,true
+1012,11,D-48 21:17:56,INFO,ROUTER,"Courier Sofia // eBike-v4 assigned, en route to the store.",true
+1012,12,D-48 21:18:31,INFO,ROUTER,Handed over to Sofia // eBike-v4.,true
+1012,13,D-48 21:18:31,INFO,COURIER,On the way. Distance 1.4 mi.,true
+1012,14,D-48 21:20:27,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1013,1,D-41 20:02:51,INFO,INIT,Order MX-1013 staged. Commit #cbbef90 signed.,true
+1013,2,D-41 20:02:51,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1013,3,D-41 20:02:54,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_3f8b976d9c3e,true
+1013,4,D-41 20:02:54,INFO,KITCHEN,Order queued at position 1.,true
+1013,5,D-41 20:03:18,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1013,6,D-41 20:03:18,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1013,7,D-41 20:04:49,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1013,8,D-41 20:04:49,INFO,QA,Quality check started.,true
+1013,9,D-41 20:05:20,SUCCESS,QA,"Passed: 8 slices, dips added, box sealed.",true
+1013,10,D-41 20:05:20,INFO,ROUTER,Waiting for courier…,true
+1013,11,D-41 20:05:20,INFO,ROUTER,"Courier Marek // Moto-v3 assigned, en route to the store.",true
+1013,12,D-41 20:05:55,INFO,ROUTER,Handed over to Marek // Moto-v3.,true
+1013,13,D-41 20:05:55,INFO,COURIER,On the way. Distance 1.4 mi.,true
+1013,14,D-41 20:07:51,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1014,1,D-34 22:50:09,INFO,INIT,Order MX-1014 staged. Commit #e0ed6e6 signed.,true
+1014,2,D-34 22:50:09,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1014,3,D-34 22:50:12,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_645744b6b16a,true
+1014,4,D-34 22:50:12,INFO,KITCHEN,Order queued at position 1.,true
+1014,5,D-34 22:50:36,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1014,6,D-34 22:50:36,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1014,7,D-34 22:52:07,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1014,8,D-34 22:52:07,INFO,QA,Quality check started.,true
+1014,9,D-34 22:52:38,SUCCESS,QA,"Passed: 16 slices, dips added, box sealed.",true
+1014,10,D-34 22:52:38,INFO,ROUTER,Waiting for courier…,true
+1014,11,D-34 22:52:38,INFO,ROUTER,"Courier Jamal // Moto-v2 assigned, en route to the store.",true
+1014,12,D-34 22:53:13,INFO,ROUTER,Handed over to Jamal // Moto-v2.,true
+1014,13,D-34 22:53:13,INFO,COURIER,On the way. Distance 2.8 mi.,true
+1014,14,D-34 22:56:05,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1015,1,D-27 19:30:40,INFO,INIT,Order MX-1015 staged. Commit #0ce1dc3 signed.,true
+1015,2,D-27 19:30:40,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1015,3,D-27 19:30:43,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_688e223d81bd,true
+1015,4,D-27 19:30:43,INFO,KITCHEN,Order queued at position 1.,true
+1015,5,D-27 19:31:05,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1015,6,D-27 19:31:05,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1015,7,D-27 19:32:36,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1015,8,D-27 19:32:36,INFO,QA,Quality check started.,true
+1015,9,D-27 19:33:06,SUCCESS,QA,Passed: box sealed.,true
+1015,10,D-27 19:33:06,INFO,DEPLOY,Ready for pickup at the counter.,true
+1015,11,D-27 19:34:16,SUCCESS,DEPLOY,Picked up. Enjoy your build!,true
+1016,1,D-20 21:41:18,INFO,INIT,Order MX-1016 staged. Commit #b8b2342 signed.,true
+1016,2,D-20 21:41:18,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1016,3,D-20 21:41:21,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_069fbf8b6709,true
+1016,4,D-20 21:41:21,INFO,KITCHEN,Order queued at position 1.,true
+1016,5,D-20 21:41:45,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1016,6,D-20 21:41:45,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1016,7,D-20 21:43:16,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1016,8,D-20 21:43:16,INFO,QA,Quality check started.,true
+1016,9,D-20 21:43:47,SUCCESS,QA,"Passed: 16 slices, dips added, box sealed.",true
+1016,10,D-20 21:43:47,INFO,ROUTER,Waiting for courier…,true
+1016,11,D-20 21:43:47,INFO,ROUTER,"Courier Alex // Node-v2 assigned, en route to the store.",true
+1016,12,D-20 21:44:22,INFO,ROUTER,Handed over to Alex // Node-v2.,true
+1016,13,D-20 21:44:22,INFO,COURIER,On the way. Distance 1.4 mi.,true
+1016,14,D-20 21:46:18,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1017,1,D-13 12:10:55,INFO,INIT,Order MX-1017 staged. Commit #d06a2f0 signed.,true
+1017,2,D-13 12:10:55,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1017,3,D-13 12:10:58,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_68aef0bd7b8d,true
+1017,4,D-13 12:10:58,INFO,KITCHEN,Order queued at position 1.,true
+1017,5,D-13 12:11:33,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1017,6,D-13 12:11:33,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1017,7,D-13 12:13:04,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1017,8,D-13 12:13:04,INFO,QA,Quality check started.,true
+1017,9,D-13 12:13:35,SUCCESS,QA,"Passed: 32 slices, dips added, box sealed.",true
+1017,10,D-13 12:13:35,INFO,ROUTER,Waiting for courier…,true
+1017,11,D-13 12:13:35,INFO,ROUTER,"Courier Alex // Node-v2 assigned, en route to the store.",true
+1017,12,D-13 12:14:10,INFO,ROUTER,Handed over to Alex // Node-v2.,true
+1017,13,D-13 12:14:10,INFO,COURIER,On the way. Distance 2.8 mi.,true
+1017,14,D-13 12:17:02,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1018,1,D-6 23:05:36,INFO,INIT,Order MX-1018 staged. Commit #8c1e3ec signed.,true
+1018,2,D-6 23:05:36,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1018,3,D-6 23:05:39,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_e491fb94f114,true
+1018,4,D-6 23:05:39,INFO,KITCHEN,Order queued at position 1.,true
+1018,5,D-6 23:06:03,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1018,6,D-6 23:06:03,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1018,7,D-6 23:07:34,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1018,8,D-6 23:07:34,INFO,QA,Quality check started.,true
+1018,9,D-6 23:08:05,SUCCESS,QA,"Passed: 8 slices, dips added, box sealed.",true
+1018,10,D-6 23:08:05,INFO,ROUTER,Waiting for courier…,true
+1018,11,D-6 23:08:05,INFO,ROUTER,"Courier Jamal // Moto-v2 assigned, en route to the store.",true
+1018,12,D-6 23:08:40,INFO,ROUTER,Handed over to Jamal // Moto-v2.,true
+1018,13,D-6 23:08:40,INFO,COURIER,On the way. Distance 1.4 mi.,true
+1018,14,D-6 23:10:36,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1019,1,T-01:52:10,INFO,INIT,Order MX-1019 staged. Commit #974bc9c signed.,true
+1019,2,T-01:52:10,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1019,3,T-01:52:07,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_79b3147e0101,true
+1019,4,T-01:52:07,INFO,KITCHEN,Order queued at position 1.,true
+1019,5,T-01:51:41,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1019,6,T-01:51:41,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1019,7,T-01:50:10,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1019,8,T-01:50:10,INFO,QA,Quality check started.,true
+1019,9,T-01:49:39,SUCCESS,QA,"Passed: 8 slices, dips added, box sealed.",true
+1019,10,T-01:49:39,INFO,ROUTER,Waiting for courier…,true
+1019,11,T-01:49:39,INFO,ROUTER,"Courier Marek // Moto-v3 assigned, en route to the store.",true
+1019,12,T-01:49:04,INFO,ROUTER,Handed over to Marek // Moto-v3.,true
+1019,13,T-01:49:04,INFO,COURIER,On the way. Distance 1.4 mi.,true
+1019,14,T-01:47:08,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1020,1,T-01:41:30,INFO,INIT,Order MX-1020 staged. Commit #cdf372b signed.,true
+1020,2,T-01:41:30,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1020,3,T-01:41:27,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_5986d0b40b6b,true
+1020,4,T-01:41:27,INFO,KITCHEN,Order queued at position 1.,true
+1020,5,T-01:41:06,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1020,6,T-01:41:06,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1020,7,T-01:39:35,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1020,8,T-01:39:35,INFO,QA,Quality check started.,true
+1020,9,T-01:39:05,SUCCESS,QA,Passed: box sealed.,true
+1020,10,T-01:39:05,INFO,DEPLOY,Ready for pickup at the counter.,true
+1020,11,T-01:37:37,SUCCESS,DEPLOY,Picked up. Enjoy your build!,true
+1021,1,T-01:30:05,INFO,INIT,Order MX-1021 staged. Commit #f99c29f signed.,true
+1021,2,T-01:30:05,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1021,3,T-01:30:02,ERROR,PAYMENT,ERROR 402: Card declined by issuer. Attempt 1 of 3.,true
+1021,4,T-01:29:38,INFO,PAYMENT,Retrying payment (attempt 2 of 3)…,true
+1021,5,T-01:29:35,ERROR,PAYMENT,ERROR 402: Insufficient funds. Attempt 2 of 3.,true
+1021,6,T-01:28:54,INFO,PAYMENT,Retrying payment (attempt 3 of 3)…,true
+1021,7,T-01:28:44,ERROR,PAYMENT,ERROR 402: Payment gateway timed out. Attempt 3 of 3.,true
+1021,8,T-01:28:44,WARN,ROLLBACK,Order rolled back: payment failed 3 times.,true
+1022,1,T-01:18:40,INFO,INIT,Order MX-1022 staged. Commit #42ca87f signed.,true
+1022,2,T-01:18:40,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1022,3,T-01:18:37,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_93e769754307,true
+1022,4,T-01:18:37,INFO,KITCHEN,Order queued at position 1.,true
+1022,5,T-01:18:15,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1022,6,T-01:18:15,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1022,7,T-01:16:43,SUCCESS,OVEN,Pulled from OVEN_01 after 01:32.,true
+1022,8,T-01:16:43,INFO,QA,Quality check started.,true
+1022,9,T-01:16:29,WARN,QA,Check failed: crust under-baked at the center. Rebuilding your order.,true
+1022,10,T-01:16:23,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1022,11,T-01:16:23,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1022,12,T-01:14:53,SUCCESS,OVEN,Pulled from OVEN_01 after 01:30.,true
+1022,13,T-01:14:53,INFO,QA,Quality check started.,true
+1022,14,T-01:14:24,SUCCESS,QA,"Passed: 16 slices, dips added, box sealed.",true
+1022,15,T-01:14:24,INFO,ROUTER,Waiting for courier…,true
+1022,16,T-01:14:24,INFO,ROUTER,"Courier Alex // Node-v2 assigned, en route to the store.",true
+1022,17,T-01:13:49,INFO,ROUTER,Handed over to Alex // Node-v2.,true
+1022,18,T-01:13:49,INFO,COURIER,On the way. Distance 1.6 mi.,true
+1022,19,T-01:11:45,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1023,1,T-01:05:20,INFO,INIT,Order MX-1023 staged. Commit #5b5a518 signed.,true
+1023,2,T-01:05:20,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1023,3,T-01:05:17,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_2c5c2821382f,true
+1023,4,T-01:05:17,INFO,KITCHEN,Order queued at position 1.,true
+1023,5,T-01:05:05,WARN,ROLLBACK,Order rolled back by customer. Refund issued.,true
+1024,1,T-00:52:45,INFO,INIT,Order MX-1024 staged. Commit #3f00677 signed.,true
+1024,2,T-00:52:45,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1024,3,T-00:52:42,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_1ae36989c14c,true
+1024,4,T-00:52:42,INFO,KITCHEN,Order queued at position 1.,true
+1024,5,T-00:52:19,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1024,6,T-00:52:19,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1024,7,T-00:50:48,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1024,8,T-00:50:48,INFO,QA,Quality check started.,true
+1024,9,T-00:50:18,SUCCESS,QA,Passed: box sealed.,true
+1024,10,T-00:50:18,INFO,DEPLOY,Ready for pickup at the counter.,true
+1024,11,T-00:49:14,SUCCESS,DEPLOY,Picked up. Enjoy your build!,true
+1025,1,T-00:41:10,INFO,INIT,Order MX-1025 staged. Commit #9bb4d8e signed.,true
+1025,2,T-00:41:10,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1025,3,T-00:41:07,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_bea310ebff82,true
+1025,4,T-00:41:07,INFO,KITCHEN,Order queued at position 1.,true
+1025,5,T-00:40:42,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1025,6,T-00:40:42,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1025,7,T-00:40:01,WARN,ROLLBACK,Order cancelled by the store. Refund issued.,true
+1025,8,T-00:40:01,WARN,OPS,"Cancelled by demo.manager: Customer called the store: wrong delivery address, will order again",false
+1026,1,T-00:33:30,INFO,INIT,Order MX-1026 staged. Commit #da68b5a signed.,true
+1026,2,T-00:33:30,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1026,3,T-00:33:27,ERROR,PAYMENT,ERROR 402: Card declined by issuer. Attempt 1 of 3.,true
+1026,4,T-00:33:08,INFO,PAYMENT,Retrying payment (attempt 2 of 3)…,true
+1026,5,T-00:33:05,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_24ae6882e8ee,true
+1026,6,T-00:33:05,INFO,KITCHEN,Order queued at position 1.,true
+1026,7,T-00:32:41,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1026,8,T-00:32:41,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1026,9,T-00:31:10,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1026,10,T-00:31:10,INFO,QA,Quality check started.,true
+1026,11,T-00:30:40,SUCCESS,QA,"Passed: 8 slices, dips added, box sealed.",true
+1026,12,T-00:30:40,INFO,ROUTER,Waiting for courier…,true
+1026,13,T-00:30:40,INFO,ROUTER,"Courier Sofia // eBike-v4 assigned, en route to the store.",true
+1026,14,T-00:30:05,INFO,ROUTER,Handed over to Sofia // eBike-v4.,true
+1026,15,T-00:30:05,INFO,COURIER,On the way. Distance 2.3 mi.,true
+1026,16,T-00:27:33,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1027,1,T-00:24:50,INFO,INIT,Order MX-1027 staged. Commit #3ef2652 signed.,true
+1027,2,T-00:24:50,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1027,3,T-00:24:47,ERROR,PAYMENT,ERROR 402: Insufficient funds. Attempt 1 of 3.,true
+1027,4,T-00:24:09,WARN,ROLLBACK,Order rolled back by customer before payment.,true
+1028,1,T-00:16:20,INFO,INIT,Order MX-1028 staged. Commit #5072ebb signed.,true
+1028,2,T-00:16:20,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1028,3,T-00:16:17,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_55a4f8edf539,true
+1028,4,T-00:16:17,INFO,KITCHEN,Order queued at position 1.,true
+1028,5,T-00:15:56,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1028,6,T-00:15:56,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1028,7,T-00:14:25,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1028,8,T-00:14:25,INFO,QA,Quality check started.,true
+1028,9,T-00:13:54,SUCCESS,QA,"Passed: 8 slices, dips added, box sealed.",true
+1028,10,T-00:13:54,INFO,ROUTER,Waiting for courier…,true
+1028,11,T-00:13:54,INFO,ROUTER,"Courier Alex // Node-v2 assigned, en route to the store.",true
+1028,12,T-00:13:19,INFO,ROUTER,Handed over to Alex // Node-v2.,true
+1028,13,T-00:13:19,INFO,COURIER,On the way. Distance 2.8 mi.,true
+1028,14,T-00:10:27,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1029,1,T-00:06:21,INFO,INIT,Order MX-1029 staged. Commit #e5a4df1 signed.,true
+1029,2,T-00:06:21,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1029,3,T-00:06:18,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_aaf59a470144,true
+1029,4,T-00:06:18,INFO,KITCHEN,Order queued at position 1.,true
+1029,5,T-00:05:54,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1029,6,T-00:05:54,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1029,7,T-00:04:23,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1029,8,T-00:04:23,INFO,QA,Quality check started.,true
+1029,9,T-00:03:52,SUCCESS,QA,"Passed: 16 slices, dips added, box sealed.",true
+1029,10,T-00:03:52,INFO,ROUTER,Waiting for courier…,true
+1029,11,T-00:03:52,INFO,ROUTER,"Courier Jamal // Moto-v2 assigned, en route to the store.",true
+1029,12,T-00:03:17,INFO,ROUTER,Handed over to Jamal // Moto-v2.,true
+1029,13,T-00:03:17,INFO,COURIER,On the way. Distance 1.9 mi.,true
+1029,14,T-00:01:01,SUCCESS,DEPLOY,Delivered. Enjoy your build!,true
+1030,1,T-00:04:57,INFO,INIT,Order MX-1030 staged. Commit #f958317 signed.,true
+1030,2,T-00:04:57,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1030,3,T-00:04:54,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_b258c17ada2e,true
+1030,4,T-00:04:54,INFO,KITCHEN,Order queued at position 1.,true
+1030,5,T-00:04:26,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1030,6,T-00:04:26,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1030,7,T-00:02:55,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1030,8,T-00:02:55,INFO,QA,Quality check started.,true
+1030,9,T-00:02:25,SUCCESS,QA,"Passed: 24 slices, dips added, box sealed.",true
+1030,10,T-00:02:25,INFO,ROUTER,Waiting for courier…,true
+1030,11,T-00:02:25,INFO,ROUTER,"Courier Marek // Moto-v3 assigned, en route to the store.",true
+1030,12,T-00:01:50,INFO,ROUTER,Handed over to Marek // Moto-v3.,true
+1030,13,T-00:01:50,INFO,COURIER,On the way. Distance 2.8 mi.,true
+1031,1,T-00:04:11,INFO,INIT,Order MX-1031 staged. Commit #fc5fdf0 signed.,true
+1031,2,T-00:04:11,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1031,3,T-00:04:08,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_d6a70e7f0b94,true
+1031,4,T-00:04:08,INFO,KITCHEN,Order queued at position 1.,true
+1031,5,T-00:03:46,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1031,6,T-00:03:46,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1031,7,T-00:02:15,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1031,8,T-00:02:15,INFO,QA,Quality check started.,true
+1031,9,T-00:01:45,SUCCESS,QA,"Passed: 8 slices, dips added, box sealed.",true
+1031,10,T-00:01:45,INFO,ROUTER,Waiting for courier…,true
+1031,11,T-00:01:45,INFO,ROUTER,"Courier Sofia // eBike-v4 assigned, en route to the store.",true
+1031,12,T-00:01:10,INFO,ROUTER,Handed over to Sofia // eBike-v4.,true
+1031,13,T-00:01:10,INFO,COURIER,On the way. Distance 0.8 mi.,true
+1032,1,T-00:03:50,INFO,INIT,Order MX-1032 staged. Commit #dedb731 signed.,true
+1032,2,T-00:03:50,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1032,3,T-00:03:47,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_3a36f6572883,true
+1032,4,T-00:03:47,INFO,KITCHEN,Order queued at position 2.,true
+1032,5,T-00:03:26,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1032,6,T-00:03:26,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1032,7,T-00:01:55,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1032,8,T-00:01:55,INFO,QA,Quality check started.,true
+1032,9,T-00:01:25,SUCCESS,QA,Passed: box sealed.,true
+1032,10,T-00:01:25,INFO,DEPLOY,Ready for pickup at the counter.,true
+1033,1,T-00:03:06,INFO,INIT,Order MX-1033 staged. Commit #e99b329 signed.,true
+1033,2,T-00:03:06,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1033,3,T-00:03:03,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_091a29a2ec13,true
+1033,4,T-00:03:03,INFO,KITCHEN,Order queued at position 1.,true
+1033,5,T-00:02:40,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1033,6,T-00:02:40,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1033,7,T-00:01:09,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1033,8,T-00:01:09,INFO,QA,Quality check started.,true
+1033,9,T-00:00:09,WARN,QA,Check failed: extra jalapeños missing. Rebuilding your order.,true
+1034,1,T-00:02:58,INFO,INIT,Order MX-1034 staged. Commit #1db2871 signed.,true
+1034,2,T-00:02:58,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1034,3,T-00:02:55,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_2226e9960a43,true
+1034,4,T-00:02:55,INFO,KITCHEN,Order queued at position 2.,true
+1034,5,T-00:02:31,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1034,6,T-00:02:31,INFO,OVEN,Entered OVEN_02 at 780°F. Bake timer 01:30.,true
+1034,7,T-00:01:00,SUCCESS,OVEN,Pulled from OVEN_02 after 01:31.,true
+1034,8,T-00:01:00,INFO,QA,Quality check started.,true
+1034,9,T-00:00:10,SUCCESS,QA,"Passed: 8 slices, dips added, box sealed.",true
+1034,10,T-00:00:10,INFO,ROUTER,Waiting for courier…,true
+1035,1,T-00:02:43,INFO,INIT,Order MX-1035 staged. Commit #d711dfc signed.,true
+1035,2,T-00:02:43,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1035,3,T-00:02:40,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_c62be23d16b0,true
+1035,4,T-00:02:40,INFO,KITCHEN,Order queued at position 2.,true
+1035,5,T-00:02:14,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1035,6,T-00:02:14,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1035,7,T-00:00:43,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1035,8,T-00:00:43,INFO,QA,Quality check started.,true
+1035,9,T-00:00:12,SUCCESS,QA,"Passed: 8 slices, dips added, box sealed.",true
+1035,10,T-00:00:12,INFO,ROUTER,Waiting for courier…,true
+1035,11,T-00:00:12,INFO,ROUTER,"Courier Alex // Node-v2 assigned, en route to the store.",true
+1036,1,T-00:02:15,INFO,INIT,Order MX-1036 staged. Commit #145cce0 signed.,true
+1036,2,T-00:02:15,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1036,3,T-00:02:12,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_0a9de601b647,true
+1036,4,T-00:02:12,INFO,KITCHEN,Order queued at position 1.,true
+1036,5,T-00:01:49,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1036,6,T-00:01:49,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1036,7,T-00:00:18,SUCCESS,OVEN,Pulled from OVEN_01 after 01:31.,true
+1036,8,T-00:00:18,INFO,QA,Quality check started.,true
+1037,1,T-00:02:05,INFO,INIT,Order MX-1037 staged. Commit #561af63 signed.,true
+1037,2,T-00:02:05,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1037,3,T-00:02:02,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_09b1e6995ae7,true
+1037,4,T-00:02:02,INFO,KITCHEN,Order queued at position 2.,true
+1037,5,T-00:01:37,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1037,6,T-00:01:37,INFO,OVEN,Entered OVEN_02 at 780°F. Bake timer 01:30.,true
+1037,7,T-00:00:06,SUCCESS,OVEN,Pulled from OVEN_02 after 01:31.,true
+1037,8,T-00:00:06,INFO,QA,Quality check started.,true
+1038,1,T-00:01:50,INFO,INIT,Order MX-1038 staged. Commit #80d95ef signed.,true
+1038,2,T-00:01:50,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1038,3,T-00:01:47,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_7b45c3138eac,true
+1038,4,T-00:01:47,INFO,KITCHEN,Order queued at position 2.,true
+1038,5,T-00:01:20,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1038,6,T-00:01:20,INFO,OVEN,Entered OVEN_02 at 780°F. Bake timer 01:30.,true
+1039,1,T-00:01:38,INFO,INIT,Order MX-1039 staged. Commit #b835a89 signed.,true
+1039,2,T-00:01:38,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1039,3,T-00:01:35,ERROR,PAYMENT,ERROR 402: Card declined by issuer. Attempt 1 of 3.,true
+1040,1,T-00:01:26,INFO,INIT,Order MX-1040 staged. Commit #28317dd signed.,true
+1040,2,T-00:01:26,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1040,3,T-00:01:23,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_cd000af63f7d,true
+1040,4,T-00:01:23,INFO,KITCHEN,Order queued at position 2.,true
+1040,5,T-00:01:02,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1040,6,T-00:01:02,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1041,1,T-00:01:00,INFO,INIT,Order MX-1041 staged. Commit #35cb1f8 signed.,true
+1041,2,T-00:01:00,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1041,3,T-00:00:57,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_7332f7933e0e,true
+1041,4,T-00:00:57,INFO,KITCHEN,Order queued at position 1.,true
+1041,5,T-00:00:35,INFO,KITCHEN,"Dough stretched, toppings injected.",true
+1041,6,T-00:00:35,INFO,OVEN,Entered OVEN_01 at 850°F. Bake timer 01:30.,true
+1042,1,T-00:00:31,INFO,INIT,Order MX-1042 staged. Commit #2e37ea1 signed.,true
+1042,2,T-00:00:31,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1042,3,T-00:00:28,ERROR,PAYMENT,ERROR 402: Card declined by issuer. Attempt 1 of 3.,true
+1042,4,T-00:00:02,INFO,PAYMENT,Retrying payment (attempt 2 of 3)…,true
+1043,1,T-00:00:17,INFO,INIT,Order MX-1043 staged. Commit #f534a53 signed.,true
+1043,2,T-00:00:17,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1043,3,T-00:00:14,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_de59ef49774d,true
+1043,4,T-00:00:14,INFO,KITCHEN,Order queued at position 1.,true
+1044,1,T-00:00:09,INFO,INIT,Order MX-1044 staged. Commit #ce8cec3 signed.,true
+1044,2,T-00:00:09,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1044,3,T-00:00:06,ERROR,PAYMENT,ERROR 402: Insufficient funds. Attempt 1 of 3.,true
+1045,1,T-00:00:06,INFO,INIT,Order MX-1045 staged. Commit #9619250 signed.,true
+1045,2,T-00:00:06,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true
+1045,3,T-00:00:03,SUCCESS,PAYMENT,Payment confirmed. TxID txn_sim_d97c19182fc2,true
+1045,4,T-00:00:03,INFO,KITCHEN,Order queued at position 3.,true
+1046,1,T-00:00:01,INFO,INIT,Order MX-1046 staged. Commit #92f030f signed.,true
+1046,2,T-00:00:01,INFO,PAYMENT,Handshake with payment gateway (simulated)…,true

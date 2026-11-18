@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<title>Cart — Git Pizza MxDev</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Geist:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link rel="stylesheet" href="_shared/proto.css">
+<style>
+  .cline { background: var(--surface-container); border: 1px solid var(--border); border-radius: var(--r-md); padding: 14px; display: grid; gap: 10px; }
+  .cline.unavail { border-color: var(--error); }
+  .cline-top { display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: start; }
+  .cline-top .img-frame { width: 56px; border-radius: var(--r-md); }
+  .cline-top .img-ph .cap { display: none; } .cline-top .img-ph img { width: 20px; height: 20px; }
+  .cline .nm { color: var(--primary-light); font-weight: 700; }
+  .cline .mods { font-size: 12px; color: var(--text-secondary); }
+  .cline .amt { text-align: right; } .cline .amt .price { font-size: 18px; }
+  .coupon { background: var(--surface-container); border: 1px solid var(--border); border-radius: var(--r-md); padding: 14px; }
+  .coupon form { display: flex; gap: 8px; } .coupon .input { text-transform: uppercase; }
+  .backdrop-hint { opacity: 0.35; pointer-events: none; }
+</style>
+</head>
+<body data-screen="SCR-05" data-nav="cart">
+<main id="main"><div class="page backdrop-hint" aria-hidden="true"><h1 class="t-display">Build Your Instance</h1><p class="c-muted">./menu.ts</p></div></main>
+<script src="_shared/proto.js"></script>
+<script>
+(function () {
+  var st = GP.state(), E = GP.esc, c = st.cart;
+  GP.registerStates([['lines', 'With lines'], ['empty', 'Empty cart'], ['coupon-valid', 'Coupon valid'], ['coupon-notfound', 'Coupon not found'], ['coupon-expired', 'Coupon expired'],
+    ['coupon-delivery', 'Coupon: delivery only'], ['coupon-min', 'Coupon: minimum'], ['below-min', 'Below delivery minimum']]);
+  var mode = GP.currentState(), P = function (code, size, qty, ex) { var l = GP.defaultLine(code); if (size) l.size = size; l.qty = qty || 1; if (ex) l.extras = ex; return l; };
+  var couponError = '';
+  if (!GP.param('ok') && mode !== 'lines') {
+    var setups = {
+      empty: function () { GP.clearCart(); },
+      'coupon-valid': function () { c.lines = [P('PZ-01'), P('SD-01')]; c.coupon = 'GITHUB_STUDENT'; },
+      'coupon-notfound': function () { c.lines = [P('PZ-05', 'LARGE', 1, ['EX-21']), P('DR-01')]; c.coupon = null; },
+      'coupon-expired': function () { c.lines = [P('PZ-05', 'LARGE', 1, ['EX-21']), P('DR-01')]; c.coupon = null; },
+      'coupon-delivery': function () { c.lines = [P('PZ-02'), P('DR-03')]; c.coupon = 'FREE_DISPATCH'; st.checkout.type = 'PICKUP'; },
+      'coupon-min': function () { c.lines = [P('PZ-01', 'SMALL')]; c.coupon = 'GITHUB_STUDENT'; st.checkout.type = 'DELIVERY'; },
+      'below-min': function () { c.lines = [P('SD-01'), P('DR-03')]; c.coupon = null; st.checkout.type = 'DELIVERY'; }
+    };
+    if (setups[mode]) { setups[mode](); GP.save(); location.href = 'SCR-05-cart.html?state=' + mode + '&ok=1'; return; }
+  }
+  if (mode === 'coupon-notfound') couponError = 'Coupon not found: PIZZA50';
+  if (mode === 'coupon-expired') couponError = 'Coupon HOTFIX10 has expired';
+  var couponInput = mode === 'coupon-notfound' ? 'PIZZA50' : mode === 'coupon-expired' ? 'HOTFIX10' : '';
+
+  var added = GP.param('added');
+  var scrim = GP.h('<div class="scrim" style="z-index:290"></div>');
+  var d = GP.h('<aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="cart-t"></aside>');
+  function close() { location.href = document.referrer && document.referrer.indexOf('SCR-05') < 0 && document.referrer.indexOf(location.host) >= 0 ? document.referrer : 'SCR-02-menu.html'; }
+
+  function render() {
+    var lines = c.lines, n = GP.itemCount(), t = GP.cartTotals();
+    var type = st.checkout.type;
+    var head = '<div class="drawer-head"><div class="between" style="flex-wrap:nowrap"><div class="row" style="gap:10px;flex-wrap:nowrap"><span class="ms c-green" aria-hidden="true">inventory_2</span><div><h2 class="t-h2 c-primary" id="cart-t">MANIFEST.LOCK <span class="sr-only">— your cart</span></h2>' +
+      '<div class="t-small c-muted">' + (n ? '<span class="c-green">' + n + ' ' + (n === 1 ? 'DEPENDENCY' : 'DEPENDENCIES') + ' INSTALLED</span>' : '0 DEPENDENCIES INSTALLED') + '</div></div></div>' +
+      '<button class="btn btn-ghost btn-sm" id="close" aria-label="Close cart"><span class="ms sm" aria-hidden="true">close</span>[x] SIGINT</button></div></div>';
+    if (!lines.length) {
+      d.innerHTML = head + '<div class="drawer-body" style="text-align:center"><div style="aspect-ratio:4/3;position:relative;max-width:300px;margin:24px auto 0;width:100%">' + GP.illus('illustrations/empty-cart.png', '') + '</div>' +
+        '<h3 class="t-h3 mt-16">MANIFEST.LOCK is empty</h3><p class="t-small c-muted"><span class="cm">// No dependencies installed. Import a module from the menu to start a build.</span></p></div>' +
+        '<div class="drawer-foot"><a class="btn btn-primary btn-block btn-lg" href="SCR-02-menu.html"><span class="ms" aria-hidden="true">terminal</span>git checkout menu</a></div>';
+      return;
+    }
+    var anyUnavail = lines.some(function (l) { return !GP.lineAvailable(l); });
+    var body = (added ? '<div class="notice success" role="status"><span class="ms" aria-hidden="true">check_circle</span><div>' + E(added) + (GP.param('updated') ? ' updated in' : ' added to') + ' the manifest.</div></div>' : '') +
+      lines.map(function (l, i) {
+        var p = GP.BY_CODE[l.p], unit = GP.unitPrice(l), av = GP.lineAvailable(l);
+        var folder = { PIZZA: 'pizzas', SIDE: 'sides', DRINK: 'drinks', DESSERT: 'desserts' }[p.kind];
+        return '<div class="cline' + (av ? '' : ' unavail') + '"><div class="cline-top">' + GP.imgHtml(p) + '<div><div class="nm">' + E(p.name) + '</div><div class="t-micro c-muted">./' + folder + '/' + p.key + '.ts</div>' +
+          '<div class="mods">' + E(GP.lineMods(l).join(', ')) + '</div><div class="t-micro c-muted mt-8">Allergens: ' + E(GP.allergenText(GP.lineAllergens(l))) + '</div>' +
+          (av ? '' : '<div class="field-error mt-8"><span class="ms sm" aria-hidden="true">error</span>This module is no longer available. Remove it to continue.</div>') + '</div>' +
+          '<div class="amt"><div class="price">' + GP.money(unit * l.qty) + '</div><div class="t-micro c-muted">' + GP.money(unit) + '/unit</div></div></div>' +
+          '<div class="between"><div class="stepper" role="group" aria-label="Quantity of ' + E(p.name) + '"><span class="lbl">instances:</span><button data-dec="' + i + '" aria-label="Decrease quantity"' + (l.qty <= 1 ? ' disabled' : '') + '>−</button><span class="val">' + l.qty + '</span><button data-inc="' + i + '" aria-label="Increase quantity"' + (l.qty >= 10 ? ' disabled' : '') + '>+</button></div>' +
+          '<div class="row" style="gap:6px">' + (p.kind === 'PIZZA' ? '<a class="btn btn-ghost btn-sm" href="SCR-03-pizza-configurator.html?p=' + p.code + '&line=' + i + '" aria-label="Edit ' + E(p.name) + '"><span class="ms sm" aria-hidden="true">tune</span>edit</a>' : '') +
+          '<button class="btn btn-ghost btn-sm" data-rm="' + i + '" aria-label="Remove ' + E(p.name) + ' from cart"><span class="ms sm" aria-hidden="true">delete</span>rm</button></div></div></div>';
+      }).join('');
+    // coupon
+    var cc = t.coupon, cbox = '<div class="coupon"><div class="field-label" style="margin-bottom:8px"><label for="cp">$ coupon --apply</label></div>';
+    if (c.coupon) {
+      var badge = cc.state === 'APPLIED' ? '<span class="badge st-deployed"><span class="ms sm" aria-hidden="true">verified</span>VALIDATED (' + (t.discount ? GP.money(-t.discount) : 'FREE_DISPATCH') + ')</span>' : '<span class="badge st-staged">NOT_APPLIED</span>';
+      var msg = E(cc.msg);
+      cbox += '<div class="between"><span class="c-primary" style="font-weight:700">' + E(c.coupon) + '</span>' + badge + '</div><div class="t-small mt-8 ' + (cc.state === 'APPLIED' ? 'c-green' : 'c-warn') + '">' + (cc.state === 'APPLIED' ? '&gt;&gt; ' : '') + msg + '</div>' +
+        (cc.state !== 'APPLIED' ? '<div class="t-micro c-muted mt-8">The code stays attached and applies automatically once the condition is met. It does not block your order.</div>' : '') +
+        '<button class="btn btn-ghost btn-sm mt-8" id="rm-coupon" aria-label="Remove coupon ' + E(c.coupon) + '">rm coupon</button>';
+    } else {
+      cbox += '<form id="cp-form"><input class="input" id="cp" placeholder="CODE" aria-label="Coupon code" value="' + E(couponInput) + '" autocomplete="off" aria-describedby="cp-err"><button class="btn btn-secondary" aria-label="Apply coupon">APPLY</button></form>' +
+        (couponError ? '<div class="field-error mt-8" id="cp-err" role="alert"><span class="ms sm" aria-hidden="true">error</span>' + E(couponError) + '</div>' : '<div id="cp-err"></div>');
+    }
+    cbox += '</div>';
+    body += cbox;
+    var drinksOnly = lines.every(function (l) { return GP.BY_CODE[l.p].kind === 'DRINK'; }), tooMany = n > GP.STORE.maxItems;
+    if (drinksOnly) body += '<div class="field-error" role="alert"><span class="ms sm" aria-hidden="true">error</span>Add at least one pizza, side or dessert. Drinks-only orders can\'t be deployed.</div>';
+    if (tooMany) body += '<div class="field-error" role="alert"><span class="ms sm" aria-hidden="true">error</span>Max ' + GP.STORE.maxItems + ' items per order. Remove ' + (n - GP.STORE.maxItems) + ' to continue.</div>';
+    if (t.belowMin) body += '<div class="notice warn"><span class="ms" aria-hidden="true">warning</span><div>Delivery minimum is ' + GP.money(GP.STORE.minDelivery) + '. Add ' + GP.money(t.missingForMin) + ' more, or choose pickup at checkout.</div></div>';
+    else if (t.toFree > 0) body += '<div class="notice info"><span class="ms" aria-hidden="true">local_shipping</span><div>Add ' + GP.money(t.toFree) + ' more for <code>FREE_DISPATCH</code> (free delivery from ' + GP.money(GP.STORE.freeThreshold) + ').</div></div>';
+    else body += '<div class="notice success"><span class="ms" aria-hidden="true">local_shipping</span><div><code>FREE_DISPATCH</code> unlocked: delivery is free for this order.</div></div>';
+    body += '<button class="btn btn-danger btn-sm" id="clear" style="justify-self:start" aria-label="Empty the cart"><span class="ms sm" aria-hidden="true">delete_sweep</span>CLEAR (rm -rf)</button>';
+
+    var foot = '<div class="sum-row"><span class="lbl">Dependencies Subtotal</span><span>' + GP.money(t.subtotal) + '</span></div>' +
+      (t.discount ? '<div class="sum-row discount"><span class="lbl">Coupon Subsidy (' + E(c.coupon) + ')</span><span>' + GP.money(-t.discount) + '</span></div>' : '') +
+      '<div class="sum-row"><span class="lbl">Pipeline Transit Fee</span><span class="c-muted">calculated at checkout</span></div>' +
+      '<div class="sum-row"><span class="lbl">SALES_TAX</span><span class="c-muted">calculated at checkout</span></div>' +
+      '<div class="sum-total"><div><div class="t-label">EXEC_TOTAL_OUTPUT</div><div class="t-micro c-muted mt-8">before delivery fee, tax and tip</div></div><div class="t-price-lg c-primary">' + GP.money(t.subtotal - t.discount) + '</div></div>';
+    var blocked = anyUnavail || drinksOnly || tooMany;
+    foot += '<a class="btn btn-primary btn-block btn-lg mt-16' + (blocked ? ' is-disabled' : '') + '" ' + (blocked ? 'aria-disabled="true"' : 'href="SCR-06-checkout.html"') + ' aria-label="Go to checkout"><span class="ms" aria-hidden="true">rocket_launch</span>PROCEED TO ./checkout.yml</a>';
+    d.innerHTML = head + '<div class="drawer-body">' + body + '</div><div class="drawer-foot">' + foot + '</div>';
+  }
+  d.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b || b.disabled) return;
+    if (b.id === 'close') return close();
+    if (b.dataset.inc) { GP.setQty(+b.dataset.inc, c.lines[+b.dataset.inc].qty + 1); }
+    else if (b.dataset.dec) { GP.setQty(+b.dataset.dec, c.lines[+b.dataset.dec].qty - 1); }
+    else if (b.dataset.rm) { var nm = GP.BY_CODE[c.lines[+b.dataset.rm].p].name; GP.removeLine(+b.dataset.rm); GP.toast('Removed ' + E(nm) + ' from MANIFEST.LOCK.', 'info'); }
+    else if (b.id === 'rm-coupon') { GP.toast('Coupon ' + E(c.coupon) + ' removed.', 'info'); c.coupon = null; GP.save(); couponError = ''; couponInput = ''; }
+    else if (b.id === 'clear') { GP.confirmDialog({ title: 'rm -rf MANIFEST.LOCK?', body: 'This removes all ' + GP.itemCount() + ' items and the coupon from your cart.', ok: 'rm -rf', okLabel: 'Empty the cart', danger: true, icon: 'delete_sweep', onOk: function () { GP.clearCart(); added = null; render(); GP.refreshCartCount(); GP.toast('MANIFEST.LOCK cleared.', 'info'); } }); return; }
+    else return;
+    added = null; render(); GP.refreshCartCount();
+  });
+  d.addEventListener('submit', function (e) {
+    e.preventDefault(); var v = (document.getElementById('cp').value || '').trim().toUpperCase(); couponInput = v;
+    if (!v) { couponError = 'Enter a coupon code.'; render(); return; }
+    var r = GP.couponCheck(v, GP.cartTotals().subtotal, st.checkout.type);
+    if (r.state === 'INVALID') { couponError = r.msg; render(); document.getElementById('cp').focus(); return; }
+    c.coupon = v; GP.save(); couponError = ''; render();
+  });
+  scrim.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  render();
+  document.body.appendChild(scrim); document.body.appendChild(d);
+})();
+</script>
+</body>
+</html>

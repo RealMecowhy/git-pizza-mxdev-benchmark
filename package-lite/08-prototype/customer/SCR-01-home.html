@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<title>Git Pizza MxDev — Architect Your Perfect Crust</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Geist:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link rel="stylesheet" href="_shared/proto.css">
+<style>
+  .hero { position: relative; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; align-items: center; padding: 56px 0 40px; }
+  .hero .glow1, .hero .glow2 { position: absolute; width: 360px; height: 360px; border-radius: 9999px; filter: blur(120px); opacity: 0.18; pointer-events: none; z-index: 0; }
+  .hero .glow1 { background: var(--primary); top: 0; right: 0; } .hero .glow2 { background: var(--success); bottom: 0; left: -80px; }
+  .hero > * { position: relative; z-index: 1; }
+  .env-chip { display: inline-flex; gap: 8px; align-items: center; padding: 4px 12px; border: 1px solid var(--border-strong); background: var(--surface-container); font-size: 12px; color: var(--text-secondary); margin-bottom: 20px; }
+  .hero h1 span { color: var(--primary-light); }
+  .hero-logo { width: 240px; height: 240px; justify-self: center; }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+  /* E-08 pipeline strip */
+  .pipe-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
+  .pipe-strip > div { display: flex; gap: 12px; align-items: flex-start; padding: 16px; background: var(--surface-low); border: 1px solid var(--border); border-radius: var(--r-md); }
+  .pipe-strip img { width: 40px; height: 40px; flex: none; }
+  @media (max-width: 767px) { .pipe-strip { grid-template-columns: 1fr; } }
+  .feat-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin: 48px 0 20px; }
+  .carousel { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 40px) / 2.25); gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .carousel::-webkit-scrollbar { display: none; }
+  .carousel .pcard { scroll-snap-align: start; }
+  /* peek of the next card (1/4 card) + edge fades show that the row scrolls */
+  @media (min-width: 1200px) { .carousel { grid-auto-columns: calc((100% - 60px) / 3.25); } }
+  .carousel { --fade-l: 0px; --fade-r: 72px; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--fade-l), #000 calc(100% - var(--fade-r)), transparent 100%); mask-image: linear-gradient(to right, transparent 0, #000 var(--fade-l), #000 calc(100% - var(--fade-r)), transparent 100%); }
+  .carousel.not-start { --fade-l: 48px; } .carousel.at-end { --fade-r: 0px; }
+  /* E-10 carousel navigation */
+  .car-nav { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+  .car-pos { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; font-size: 12px; color: var(--text-muted); }
+  .car-pos b { color: var(--primary-light); font-weight: 700; }
+  .pager { display: flex; gap: 4px; } .pager i { width: 10px; height: 10px; background: var(--surface-highest); border-radius: 1px; transition: background .2s; }
+  .pager i.on { background: var(--primary); }
+  .car-btn { width: 44px; height: 44px; display: grid; place-items: center; border-radius: var(--r-sm); border: 1px solid var(--primary); background: var(--primary-subtle); color: var(--primary-light); cursor: pointer; transition: background .15s, color .15s, box-shadow .15s; }
+  .car-btn .ms { font-size: 26px; }
+  .car-btn:hover:not([disabled]) { background: var(--primary); color: var(--primary-on); box-shadow: var(--glow-m); }
+  .car-btn[disabled] { border-color: var(--border); background: transparent; color: var(--text-disabled); cursor: not-allowed; }
+  .car-nav-phone { display: none; justify-content: center; align-items: center; gap: 12px; margin-top: 14px; font-size: 12px; color: var(--text-muted); }
+  .car-nav-phone b { color: var(--primary-light); }
+  @media (max-width: 767px) { .car-nav-phone { display: flex; } .carousel { --fade-r: 40px; } .carousel.not-start { --fade-l: 24px; } }
+  /* E-12 KPI pixel board */
+  .kpis { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 16px; margin-top: 40px; }
+  .kpi { background: var(--surface-low); border: 1px solid var(--border); border-radius: var(--r-md); padding: 18px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .kpi .h { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: .05em; color: var(--text-secondary); min-width: 0; }
+  .kpi .h .lbl { overflow-wrap: anywhere; }
+  .kpi .h .ms { font-size: 18px; color: var(--primary); flex-shrink: 0; }
+  .kpi .h .live { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; color: var(--success-text); font-size: 11px; flex-shrink: 0; }
+  .kpi .v { font-size: 32px; font-weight: 700; line-height: 1; color: var(--primary); }
+  .kpi .v small { font-size: 16px; color: var(--text-muted); font-weight: 500; margin-left: 4px; }
+  .kpi .px { display: grid; grid-template-columns: repeat(20, 1fr); gap: 3px; }
+  .kpi .px b { aspect-ratio: 1; background: var(--surface-highest); border-radius: 1px; }
+  .kpi .px b.on { background: var(--primary); } .kpi .px b.new { background: var(--primary-light); }
+  .kpi .pipe { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; }
+  .kpi .pipe b { height: 10px; background: var(--primary); border-radius: 1px; }
+  .kpi .pipe b:nth-child(1) { opacity: .35; } .kpi .pipe b:nth-child(2) { opacity: .55; } .kpi .pipe b:nth-child(3) { opacity: .7; } .kpi .pipe b:nth-child(4) { opacity: .85; }
+  .kpi .pipe.off b { background: var(--surface-highest); opacity: 1; }
+  .kpi .pl { display: grid; grid-template-columns: repeat(5, 1fr); font-size: 9px; color: var(--text-muted); letter-spacing: .04em; margin-top: 4px; }
+  .kpi .units { display: flex; gap: 6px; flex-wrap: wrap; }
+  .kpi .units span { width: 28px; height: 28px; display: grid; place-items: center; border-radius: var(--r-sm); background: var(--surface-highest); color: var(--text-disabled); border: 1px solid transparent; }
+  .kpi .units span .ms { font-size: 18px; }
+  .kpi .units span.on { background: var(--primary-subtle); color: var(--primary); border-color: var(--primary-border); }
+  .kpi .units.green span.on { background: var(--success-subtle); color: var(--success-text); border-color: rgba(114,255,112,.3); }
+  .kpi .sub { font-size: 11px; color: var(--text-muted); margin-top: auto; }
+  @media (max-width: 1199px) { .kpis { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 1023px) { .hero { grid-template-columns: 1fr; padding-top: 24px; } .hero-logo { width: 128px; height: 128px; grid-row: 1; justify-self: start; } }
+  @media (max-width: 767px) { .hero-logo { width: 96px; height: 96px; } .kpis { gap: 10px; } .kpi { padding: 14px; gap: 10px; } .kpi .h { font-size: 10px; } .kpi .h .live { font-size: 0; gap: 0; } .kpi .v { font-size: 24px; } .kpi .pl { display: none; } .kpi .units span { width: 24px; height: 24px; } .carousel { grid-auto-columns: 82%; gap: 12px; } }
+</style>
+</head>
+<body class="grid-bg" data-screen="SCR-01" data-nav="home">
+<main id="main">
+  <div class="page">
+    <section class="hero" aria-labelledby="hero-t">
+      <div class="glow1"></div><div class="glow2"></div>
+      <div>
+        <div class="env-chip" id="env-chip"><span class="live-dot" aria-hidden="true"></span><span class="c-green">PIPELINE_OPEN //</span> Kitchen online</div>
+        <h1 id="hero-t" class="t-display">Architect Your <span>Perfect Crust</span></h1>
+        <p class="t-body-long" style="max-width:620px;margin-top:20px">Git Pizza MxDev is a Neapolitan pizza kitchen built for engineers. Pick a module, inject your toppings and deploy dinner to your door — or pull it fresh from our Mission counter.</p>
+        <div class="term mt-24" style="max-width:560px">
+          <div class="term-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span>zsh — 80x24</span></div>
+          <div class="term-body" aria-hidden="true">
+            <div><span class="c-green">➜</span> <span class="c-primary">~</span> <span id="typing"></span><span class="cursor" id="cursor1"></span></div>
+            <div class="c-muted" id="term-lines" style="margin-top:6px"></div>
+          </div>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-lg" href="SCR-02-menu.html" aria-label="Open the menu"><span class="ms" aria-hidden="true">terminal</span>git checkout menu</a>
+          <a class="btn btn-secondary btn-lg" id="cta-track" href="SCR-10-track-order-lookup.html" aria-label="Track an order"><span class="ms" aria-hidden="true">receipt_long</span>./track.log</a>
+        </div>
+      </div>
+      <img class="hero-logo" src="../../assets/brand/logo-mark.svg" width="240" height="240" alt="Git Pizza MxDev logo">
+    </section>
+
+    <section class="pipe-strip" aria-label="How it works">
+      <div><img src="../../assets/icons/icon-pizza-module.svg" alt=""><div><div class="t-label c-primary">1 · import</div><div class="t-small c-secondary">Pick a module and inject your toppings.</div></div></div>
+      <div><img src="../../assets/icons/icon-terminal-cli.svg" alt=""><div><div class="t-label c-primary">2 · deploy</div><div class="t-small c-secondary">Execute the order. Payment is simulated.</div></div></div>
+      <div><img src="../../assets/icons/icon-ci-cd-pipeline.svg" alt=""><div><div class="t-label c-primary">3 · track</div><div class="t-small c-secondary">Watch the pipeline: oven, QA, courier.</div></div></div>
+    </section>
+
+    <section id="active-order" aria-live="polite"></section>
+
+    <section aria-labelledby="feat-t">
+      <div class="feat-head">
+        <div><h2 id="feat-t" class="t-h2">Available Modules</h2><p class="t-small c-muted" style="margin:6px 0 0">Hand-picked builds from the Mission Kitchen, ready to import.</p></div>
+        <div class="car-nav hide-phone">
+          <div class="car-pos"><span aria-live="polite" data-pos>01–03 / 06</span><span class="pager" data-pager aria-hidden="true"></span></div>
+          <button class="car-btn" data-scroll="-1" aria-label="Previous modules" disabled><span class="ms">chevron_left</span></button>
+          <button class="car-btn" data-scroll="1" aria-label="Next modules"><span class="ms">chevron_right</span></button>
+        </div>
+      </div>
+      <div class="carousel" id="carousel" tabindex="0" aria-label="Featured modules carousel"></div>
+      <div class="car-nav-phone" aria-hidden="true"><span class="pager" data-pager></span><span data-pos>01 / 06</span></div>
+    </section>
+
+    <section class="kpis" id="kpis" aria-label="Demo kitchen in numbers"></section>
+    <p class="t-micro c-muted mt-8">Demo KPIs are read from the live demo data (simulated orders included). Values shown are an example.</p>
+  </div>
+</main>
+<script src="_shared/proto.js"></script>
+<script>
+(function () {
+  var st = GP.state();
+  GP.registerStates([['default', 'Default'], ['active', 'With active order'], ['nokpi', 'KPIs: no completed order yet'], ['heavy', 'KPIs: kitchen load HEAVY']]);
+  var mode = GP.currentState();
+
+  // E-01 status chip and E-05 terminal (TXT-MENU-01, TXT-MENU-04 … 08): values are read at page load
+  var paused = !!st.intakePaused;
+  if (paused) document.getElementById('env-chip').innerHTML = '<span class="live-dot" style="background:var(--warning)" aria-hidden="true"></span><span class="c-orange">PIPELINE_PAUSED //</span> Kitchen paused';
+  var soldOutN = GP.PRODUCTS.filter(function (p) { return !GP.isOrderable(p); }).length;
+  var termLines = ['added ' + GP.PRODUCTS.length + ' modules from 4 registries in 2s',
+    soldOutN === 0 ? 'found 0 vulnerabilities' : 'found ' + soldOutN + ' sold-out module' + (soldOutN === 1 ? '' : 's'),
+    paused ? '<span class="c-orange">Git Pizza MxDev — Mission Kitchen is paused. New deployments are on hold.</span>' : '<span class="c-green">Git Pizza MxDev — Mission Kitchen is online. Ready for deployment.</span>'];
+  var cmd = 'npm install @git-pizza/menu', ci = 0, el = document.getElementById('typing'), tl = document.getElementById('term-lines');
+  function showLines(k) { tl.innerHTML = termLines.slice(0, k).join('<br>'); if (k < termLines.length) setTimeout(function () { showLines(k + 1); }, 300); }
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches, seen = false;
+  try { seen = sessionStorage.getItem('gp-home-typed') === '1'; sessionStorage.setItem('gp-home-typed', '1'); } catch (e) {}
+  function type() { ci++; el.textContent = cmd.slice(0, ci); if (ci < cmd.length) setTimeout(type, 40); else setTimeout(function () { showLines(1); }, 300); }
+  if (reduce || seen) { el.textContent = cmd; tl.innerHTML = termLines.join('<br>'); } else type();
+  document.getElementById('cta-track').href = GP.trackHref();
+
+  // E-12 KPI pixel board (values are an example; the app reads them from live data, BR-MENU-17)
+  (function () {
+    // Default = values of the Lite seed right after a reset (09-demo-data). KITCHEN_LOAD (BR-SIM-16d): busy oven slots / all slots of the ONLINE ovens (2 ovens × 3 slots); COURIERS_ON_DUTY: CU-05 is always OFF_DUTY (BR-DEMO-03a), the value is the number on duty (SCR-01 E-12)
+    var K = mode === 'nokpi' ? { deploys: 0, avg: null, load: [0, 6], couriers: [4, 5] } : { deploys: 7, avg: '05:07', load: mode === 'heavy' ? [6, 6] : [3, 6], couriers: [4, 5] };
+    var CELLS = 40, per = Math.max(1, Math.ceil(K.deploys / CELLS)), lit = Math.ceil(K.deploys / per), i, px = '';
+    for (i = 0; i < CELLS; i++) px += '<b class="' + (i < lit - 1 ? 'on' : i === lit - 1 ? 'new' : '') + '"></b>';
+    function units(on, n, icon, cls) { var s = ''; for (var j = 0; j < n; j++) s += '<span class="' + (j < on ? 'on' : '') + '"><span class="ms">' + icon + '</span></span>'; return '<div class="units ' + (cls || '') + '" aria-hidden="true">' + s + '</div>'; }
+    function head(icon, key, extra) { return '<div class="h"><span class="ms" aria-hidden="true">' + icon + '</span><span class="lbl">' + key + '</span>' + (extra || '') + '</div>'; }
+    var dash = '—', loadPct = Math.round(K.load[0] / K.load[1] * 100);
+    document.getElementById('kpis').innerHTML =
+      '<div class="kpi" role="group" aria-label="Orders completed today: ' + K.deploys + '">' + head('rocket_launch', 'DEPLOYED_TODAY', '<span class="live"><span class="live-dot" aria-hidden="true"></span>LIVE</span>') +
+        '<div class="v" id="kpi-orders">' + (K.deploys || dash) + '</div><div class="px" aria-hidden="true">' + px + '</div>' +
+        '<div class="sub">' + (per === 1 ? '1 px = 1 order' : '1 px = ' + per + ' orders') + '</div></div>' +
+      '<div class="kpi" role="group" aria-label="Average time from payment to delivery or pickup today: ' + (K.avg || 'no data yet') + '">' + head('timer', 'AVG_PIPELINE_TIME') +
+        '<div class="v">' + (K.avg || dash) + '</div><div aria-hidden="true"><div class="pipe' + (K.avg ? '' : ' off') + '"><b></b><b></b><b></b><b></b><b></b></div>' +
+        '<div class="pl"><span>QUEUED</span><span>BAKING</span><span>QA</span><span>DISPATCH</span><span>DEPLOYED</span></div></div></div>' +
+      '<div class="kpi" role="group" aria-label="Kitchen load: ' + K.load[0] + ' of ' + K.load[1] + ' oven slots busy, ' + loadPct + '%' + (loadPct >= 85 ? ', heavy' : '') + '">' + head('local_fire_department', 'KITCHEN_LOAD', loadPct >= 85 ? '<span class="chip tag-spice" style="margin-left:auto">HEAVY</span>' : '') + /* TXT-MENU-63: chip HEAVY from 85 % */
+        '<div class="v">' + K.load[0] + '/' + K.load[1] + '<small style="white-space:nowrap">· ' + loadPct + '%</small></div>' + units(K.load[0], K.load[1], 'local_fire_department') + '</div>' +
+      '<div class="kpi" role="group" aria-label="Couriers on duty: ' + K.couriers[0] + '">' + head('electric_moped', 'COURIERS_ON_DUTY') +
+        '<div class="v">' + K.couriers[0] + '</div>' + units(K.couriers[0], K.couriers[1], 'electric_moped', 'green') + '</div>';
+  })();
+
+  // featured carousel
+  var feat = GP.PRODUCTS.filter(function (p) { return p.featured; });
+  document.getElementById('carousel').innerHTML = feat.map(function (p) {
+    var ok = GP.isOrderable(p);
+    return '<article class="pcard' + (ok ? '' : ' sold-out') + '">' +
+      '<div class="pcard-head"><span class="ms sm c-orange" aria-hidden="true">data_object</span><span class="fname">./pizzas/' + p.key + '.ts</span><span class="t-micro c-green">' + p.ver + '</span></div>' +
+      '<div style="position:relative">' + (ok ? '' : '<span class="chip tag-sold sold-ribbon">SOLD_OUT</span>') + GP.imgHtml(p) + '</div>' +
+      '<div class="pcard-body"><div class="pcard-title"><h3 class="t-h3">' + GP.esc(p.name) + '</h3><span class="price">' + GP.money(GP.cardPrice(p)) + ' · ' + GP.sizeShort(p) + '</span></div>' +
+      '<div class="real">' + GP.esc(p.real) + '</div><p class="t-body-long" style="font-size:14px;margin:0">' + GP.esc(p.short) + '</p><div class="row" style="gap:6px">' + GP.badgesHtml(p) + '</div></div>' +
+      '<div class="pcard-foot">' + (ok ? '<button class="btn btn-primary" data-import="' + p.code + '" aria-label="Add ' + GP.esc(p.name) + ', Medium, to cart">+ import</button>' : '<button class="btn btn-primary" disabled aria-label="' + GP.esc(p.name) + ' is sold out">404: OUT_OF_STOCK</button>') +
+      '<a class="btn btn-ghost" href="SCR-03-pizza-configurator.html?p=' + p.code + '" aria-label="Configure ' + GP.esc(p.name) + '"><span class="ms md">tune</span></a></div></article>';
+  }).join('');
+  document.getElementById('carousel').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-import]'); if (!b) return;
+    var p = GP.BY_CODE[b.dataset.import]; GP.addLine(GP.defaultLine(p.code)); GP.refreshCartCount();
+    GP.toast(GP.esc(p.name) + ' (Medium 12") added to the manifest.', '', 'SCR-05-cart.html', 'View manifest');
+  });
+  // E-10: arrows scroll by one card, disabled at the ends; counter + pixel pager show the position
+  (function () {
+    var c = document.getElementById('carousel'), cards = c.children, n = cards.length;
+    var pad = function (x) { return (x < 10 ? '0' : '') + x; };
+    function step() { return cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : c.clientWidth; }
+    function update() {
+      var s = step(), max = c.scrollWidth - c.clientWidth, atStart = c.scrollLeft <= 2, atEnd = c.scrollLeft >= max - 2;
+      var visible = Math.max(1, Math.floor((c.clientWidth + 20) / s)), first = atEnd ? n - visible : Math.round(c.scrollLeft / s), last = Math.min(n, first + visible);
+      c.classList.toggle('not-start', !atStart); c.classList.toggle('at-end', atEnd);
+      Array.prototype.forEach.call(document.querySelectorAll('[data-scroll]'), function (b) { b.disabled = b.dataset.scroll === '-1' ? atStart : atEnd; });
+      Array.prototype.forEach.call(document.querySelectorAll('[data-pos]'), function (el) {
+        var phone = el.parentNode.classList.contains('car-nav-phone');
+        el.innerHTML = phone ? '<b>' + pad(first + 1) + '</b> / ' + pad(n) : '<b>' + pad(first + 1) + '–' + pad(last) + '</b> / ' + pad(n);
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('[data-pager]'), function (el) {
+        var h = ''; for (var i = 0; i < n; i++) h += '<i class="' + (i >= first && i < last ? 'on' : '') + '"></i>'; el.innerHTML = h;
+      });
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-scroll]'), function (b) {
+      b.addEventListener('click', function () { c.scrollBy({ left: step() * parseInt(b.dataset.scroll, 10), behavior: 'smooth' }); setTimeout(update, 450); });
+    });
+    c.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); c.scrollBy({ left: step() * (e.key === 'ArrowRight' ? 1 : -1), behavior: 'smooth' }); } });
+    c.addEventListener('scroll', update, { passive: true }); c.addEventListener('scrollend', update);
+    window.addEventListener('resize', update); update();
+  })();
+
+  // live build status of the viewer's latest active order
+  var box = document.getElementById('active-order');
+  var o = GP.activeOrder();
+  if (!o && mode === 'active') {
+    // a paid guest order of this session that is baking now (Lite has no accounts)
+    var a = GP.defaultLine('PZ-04'); a.size = 'LARGE'; st.cart.lines = [a, GP.defaultLine('DR-01')]; st.cart.coupon = null;
+    st.checkout.type = 'DELIVERY'; st.checkout.addr = { line1: '2290 Mission Street', line2: 'Apt 5', city: 'San Francisco', state: 'CA', zip: '94110', notes: '' };
+    st.checkout.contact = { name: 'Taylor Brooks', email: 'taylor.brooks@example.com', phone: '(415) 555-0128' };
+    o = GP.createOrder(); o.fixed = null; o.paid = true; o.paymentStatus = 'PAID'; o.method = 'CARD'; o.card = 'VISA_4242'; o.txn = 'txn_sim_' + GP.hex(12); o.paidTs = Date.now() - 50000;
+    o.attempts = [{ n: 1, method: 'CARD', card: 'VISA_4242', status: 'SUCCEEDED', txn: o.txn }]; GP.setElapsed(o, GP.DUR.queueWait + 30); GP.saveOrder(o);
+    st.cart = { lines: [], coupon: null }; st.pendingOrder = null; st.lastOrder = o.no; GP.save(); location.reload(); return;
+  }
+  // E-13 (SCR-01 section 5): hidden without an open order; a final state stays visible for 60 s, then the panel disappears
+  var finalSince = null;
+  var LOG = { QUEUED: ['ORDER', 'tag-info', 'Payment confirmed. Order queued.'], BAKING: ['OVEN', 'tag-warn', 'Baking started.'], QA_CHECK: ['QA', 'tag-qa', 'Quality check started.'],
+    READY_FOR_DISPATCH: ['ROUTER', 'tag-info', 'Waiting for courier…'], OUT_FOR_DELIVERY: ['COURIER', 'tag-info', 'On the way.'], READY_FOR_PICKUP: ['DEPLOY', 'tag-success', 'Ready for pickup at the counter.'],
+    DELIVERED: ['DEPLOY', 'tag-success', 'Delivered. Enjoy your build!'], PICKED_UP: ['DEPLOY', 'tag-success', 'Picked up. Enjoy your build!'] };
+  function renderActive() {
+    if (!o) { box.innerHTML = ''; return; }
+    var ls = GP.liveStatus(o), m = GP.STATUS[ls.status], fin = ls.status === 'DELIVERED' || ls.status === 'PICKED_UP' || ls.status === 'CANCELLED';
+    if (fin) { finalSince = finalSince || Date.now(); if (Date.now() - finalSince > 60000) { box.innerHTML = ''; return; } }
+    var deliv = o.type === 'DELIVERY';
+    var stages = deliv ? ['QUEUED', 'BAKING', 'QA_CHECK', 'DISPATCH', 'DEPLOYED'] : ['QUEUED', 'BAKING', 'QA_CHECK', 'READY_TO_PULL', 'PULLED'];
+    var map = { QUEUED: 0, BAKING: 1, QA_CHECK: 2, READY_FOR_DISPATCH: 3, OUT_FOR_DELIVERY: 3, READY_FOR_PICKUP: 3, DELIVERED: 4, PICKED_UP: 4 };
+    var idx = map[ls.status] == null ? -1 : map[ls.status];
+    var pct = ls.status === 'BAKING' ? Math.round(ls.inStatus / ls.dur * 100) : null;
+    // ETA (TXT-MENU-18): delivery = end of the pipeline, pickup = ready for pickup
+    var rem = 0, eta = '';
+    if (ls.segs && !fin) { for (var i = ls.idx; i < ls.segs.length && (deliv || ['QUEUED', 'BAKING', 'QA_CHECK'].indexOf(ls.segs[i][0]) >= 0); i++) rem += ls.segs[i][1]; rem -= ls.inStatus || 0;
+      eta = (deliv ? 'Est. completion: ~' : 'Ready at: ~') + GP.hhmm(new Date(Date.now() + Math.max(0, rem) * 1000)); }
+    // last 3 customer-visible log lines (simplified: one line per reached status)
+    var lines = [];
+    if (ls.segs) { var acc = 0; for (var k = 0; k <= ls.idx && k < ls.segs.length; k++) { var L = LOG[ls.segs[k][0]]; if (L) lines.push([new Date(Date.now() - ((ls.el || 0) - acc) * 1000), L]); acc += ls.segs[k][1]; } }
+    var log = lines.slice(-3).map(function (x) { return '<div class="log-line"><span class="ts">[' + GP.hhmmss(x[0]) + ']</span><span class="tag ' + x[1][1] + '">[' + x[1][0] + ']</span><span>' + x[1][2] + '</span></div>'; }).join('');
+    box.innerHTML = '<a class="glass panel-pad mt-24" style="display:block;color:inherit;text-decoration:none" href="SCR-09-order-tracking.html?id=MX-' + o.no + '" aria-label="Track this order"><div class="between"><div class="row"><span class="ms c-green" aria-hidden="true">sync</span><h2 class="t-h3">Live Build Status: Order MX-' + o.no + '</h2></div>' + GP.statusBadge(ls.status) + '</div>' +
+      '<div class="progress mt-16" aria-hidden="true"><i style="width:' + (fin ? 100 : Math.max(4, (idx + (pct != null ? pct / 100 : 0.5)) / 5 * 100)) + '%"></i></div>' +
+      '<div class="between mt-8 t-micro">' + stages.map(function (s, i) { var done = fin && ls.status !== 'CANCELLED' || i < idx; return '<span class="' + (done ? 'c-green' : i === idx ? 'c-primary' : 'c-disabled') + '">' + (done ? '✓ ' : '') + s + (i === idx && pct != null ? ' (' + pct + '%)' : '') + '</span>'; }).join('') + '</div>' +
+      (log ? '<div class="code mt-16" style="font-size:12px">' + log + '</div>' : '') +
+      '<div class="between mt-16"><span class="t-small c-secondary">' + m.plain + (eta ? ' · ' + eta : '') + '</span><span class="btn btn-secondary btn-sm">MONITOR PIPELINE →</span></div></a>';
+  }
+  renderActive(); setInterval(renderActive, 2000);
+})();
+</script>
+</body>
+</html>

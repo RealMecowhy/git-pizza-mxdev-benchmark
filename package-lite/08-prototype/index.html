@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/brand/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
+<title>Prototype index — Git Pizza MxDev</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Geist:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #131313; --low: #1b1b1c; --cont: #202020; --lowest: #0e0e0e; --text: #e5e2e1; --sec: #dac2ad; --muted: #a28d79; --border: #333333; --strong: #544433;
+    --primary: #ff9d00; --primary-light: #ffc485; --green: #72ff70; --info: #38bdf8; --warn: #f1fa8c; --mono: 'JetBrains Mono', Menlo, Consolas, monospace; --body: 'Geist', system-ui, sans-serif; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.5 var(--mono); }
+  a { color: var(--primary-light); } a:hover { color: #fff; }
+  :focus-visible { outline: 2px solid var(--primary-light); outline-offset: 2px; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; }
+  header { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; padding-bottom: 24px; border-bottom: 1px solid var(--strong); }
+  header img { width: 96px; height: 96px; }
+  h1 { font-size: 32px; margin: 0; letter-spacing: -0.01em; } h1 span { color: var(--primary); }
+  h2 { font-size: 20px; margin: 40px 0 12px; color: var(--primary-light); }
+  p.lead { font-family: var(--body); font-size: 16px; color: var(--sec); max-width: 860px; }
+  .note { border: 1px solid rgba(241,250,140,.35); background: rgba(241,250,140,.08); color: var(--warn); padding: 12px 14px; border-radius: 4px; font-size: 13px; margin-top: 16px; }
+  .starts { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+  .start { display: block; background: var(--low); border: 1px solid var(--border); border-radius: 4px; padding: 16px; text-decoration: none; color: var(--text); }
+  .start:hover { border-color: var(--primary-light); box-shadow: 0 0 12px rgba(255,196,133,.3); }
+  .start b { color: var(--primary-light); display: block; margin-bottom: 6px; } .start span { color: var(--muted); font-size: 12px; }
+  .tw { overflow-x: auto; border: 1px solid var(--border); border-radius: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 760px; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid #2a2a2a; vertical-align: top; }
+  th { background: var(--cont); color: var(--muted); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; }
+  td.id { color: var(--green); white-space: nowrap; font-weight: 700; }
+  td code, p code { color: var(--sec); }
+  .pending { color: var(--muted); font-style: italic; }
+  .btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 2px; border: 1px solid var(--primary-light); color: var(--primary-light); background: transparent; font: 700 13px var(--mono); cursor: pointer; }
+  .btn:hover { background: rgba(255,157,0,.12); }
+  footer { margin-top: 48px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--border); padding-top: 16px; }
+  /* Scrollbars: thin and dark, matching the theme */
+  html { color-scheme: dark; }
+  * { scrollbar-width: thin; scrollbar-color: #393939 transparent; }
+  *:hover { scrollbar-color: #544433 transparent; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img src="../assets/brand/logo-mark.svg" alt="" width="96" height="96">
+    <div><div style="color:var(--muted);font-size:12px">08-prototype</div><h1>Git Pizza <span>MxDev</span> — clickable prototype</h1><div style="color:var(--sec);margin-top:6px">Guest screens · desktop and phone · English · USD</div></div>
+  </header>
+
+  <p class="lead">A clickable HTML prototype of every screen in the screen inventory (<code>01-product-brief/ids-and-traceability.md</code>, section 4). The app has one kind of user, the guest: there are no accounts, no sign-in and no staff screens. Kitchen, couriers and order traffic run by themselves. The prototype shows layout, navigation, texts and the mandatory states; data and simulation are faked in the browser so the journeys can be clicked end to end.</p>
+  <div class="note"><strong>Visual reference only.</strong> When the prototype and the specification disagree, the specification wins (precedence in <code>00-README.md</code> section 6.5: foundation → functional design → user stories → UI specification → prototype). Every page has a dashed <strong>◧ Prototype</strong> button (bottom left) that switches screen states and demo data; it is not part of the app.</div>
+
+  <h2>Start a journey</h2>
+  <div class="starts">
+    <a class="start" href="customer/SCR-01-home.html"><b>Guest order (delivery)</b><span>Home → menu → configurator → cart → checkout → simulated payment → confirmation → tracking</span></a>
+    <a class="start" href="customer/SCR-06-checkout.html?state=guest-filled"><b>Failed payment and retry</b><span>Pre-filled checkout: pick Visa •••• 0002, then retry with Apple Pay</span></a>
+    <a class="start" href="customer/SCR-06-checkout.html?state=pickup"><b>Guest pickup</b><span>Checkout with pickup at Mission Kitchen (no fee, no tip) → payment → tracking until <code>PULLED</code></span></a>
+    <a class="start" href="customer/SCR-10-track-order-lookup.html"><b>Find an order (lookup)</b><span>Order number + email, e.g. <code>MX-1018</code> / <code>jordan.lee@example.com</code> (seed order) → tracking</span></a>
+    <a class="start" href="customer/SCR-13-order-detail-and-receipt.html?state=completed"><b>Receipt</b><span>Completed seed order <code>MX-1014</code>: lines, totals, payment, status history, print</span></a>
+    <a class="start" href="customer/SCR-40-not-found.html?what=/track/MX-9999"><b>Error pages</b><span><code>ERROR 404 // CRUST_NOT_FOUND</code> and <code>ERROR 500 // SEG_FAULT</code></span></a>
+  </div>
+
+  <h2>Guest screens — <code>customer/</code></h2>
+  <div class="tw"><table>
+    <thead><tr><th scope="col">ID</th><th scope="col">Screen (dev label)</th><th scope="col">Type</th><th scope="col">File</th><th scope="col">States in the ◧ Prototype panel</th></tr></thead>
+    <tbody>
+      <tr><td class="id">SCR-01</td><td>Home (<code>./main.js</code>)</td><td>Page</td><td><a href="customer/SCR-01-home.html">SCR-01-home.html</a></td><td>default · with active order · KPIs without a completed order · kitchen load <code>HEAVY</code></td></tr>
+      <tr><td class="id">SCR-02</td><td>Menu (<code>./menu.ts</code>, module explorer)</td><td>Page</td><td><a href="customer/SCR-02-menu.html">SCR-02-menu.html</a></td><td>results · loading · no search results · item sold out (Tiramisu Stack)</td></tr>
+      <tr><td class="id">SCR-03</td><td>Pizza configurator (<code>configure_module.ts</code>)</td><td>Page</td><td><a href="customer/SCR-03-pizza-configurator.html?p=PZ-05">SCR-03-pizza-configurator.html</a></td><td>new · editing a cart line · max extras reached · option unavailable (jalapeños)</td></tr>
+      <tr><td class="id">SCR-04</td><td>Item info (<code>module.info</code>)</td><td>Modal / bottom sheet</td><td><a href="customer/SCR-04-item-info.html?p=SD-01">SCR-04-item-info.html</a></td><td>default · drink · pizza allergen info · sold out (Tiramisu Stack)</td></tr>
+      <tr><td class="id">SCR-05</td><td>Cart (<code>MANIFEST.LOCK</code>)</td><td>Drawer / full page</td><td><a href="customer/SCR-05-cart.html">SCR-05-cart.html</a></td><td>with lines · empty · coupon valid · not found · expired · delivery only · minimum · below delivery minimum</td></tr>
+      <tr><td class="id">SCR-06</td><td>Checkout (<code>checkout_config.json</code>)</td><td>Page</td><td><a href="customer/SCR-06-checkout.html">SCR-06-checkout.html</a></td><td>delivery · pickup · empty form · pre-filled · validation errors · outside zone · empty cart redirect</td></tr>
+      <tr><td class="id">SCR-07</td><td>Payment sheet (<code>PAYMENT_PROTOCOL</code>)</td><td>Modal / bottom sheet</td><td><a href="customer/SCR-07-payment-sheet.html?state=processing">SCR-07-payment-sheet.html</a></td><td>processing · declined · insufficient funds · gateway timeout · third failure (rolled back)</td></tr>
+      <tr><td class="id">SCR-08</td><td>Order confirmation (<code>DEPLOYMENT SUCCESSFUL // 200 OK</code>)</td><td>Modal</td><td><a href="customer/SCR-08-order-confirmation.html">SCR-08-order-confirmation.html</a></td><td>delivery with tracking link and queue position · pickup</td></tr>
+      <tr><td class="id">SCR-09</td><td>Order tracking (<code>DEPLOYMENT_STATUS</code>)</td><td>Page</td><td><a href="customer/SCR-09-order-tracking.html?state=QUEUED">SCR-09-order-tracking.html</a></td><td>every <code>OrderStatus</code> (11) with queue position and bake progress · rollback allowed / rejected · cancelled by the guest · invalid link · live simulation</td></tr>
+      <tr><td class="id">SCR-10</td><td>Track order lookup (<code>git log --grep</code>)</td><td>Page</td><td><a href="customer/SCR-10-track-order-lookup.html">SCR-10-track-order-lookup.html</a></td><td>empty form · not found · found</td></tr>
+      <tr><td class="id">SCR-13</td><td>Order detail and receipt (<code>git show &lt;hash&gt;</code>)</td><td>Page</td><td><a href="customer/SCR-13-order-detail-and-receipt.html?state=completed">SCR-13-order-detail-and-receipt.html</a></td><td>completed · cancelled with refund</td></tr>
+      <tr><td class="id">SCR-16</td><td>Customer shell and navigation</td><td>Shell</td><td><a href="customer/SCR-16-customer-shell.html">SCR-16-customer-shell.html</a></td><td>cart empty / non-empty (shell is visible on every guest page)</td></tr>
+    </tbody></table></div>
+
+  <h2>Error pages — <code>customer/</code></h2>
+  <div class="tw"><table>
+    <thead><tr><th scope="col">ID</th><th scope="col">Screen (dev label)</th><th scope="col">Type</th><th scope="col">File</th><th scope="col">States in the ◧ Prototype panel</th></tr></thead>
+    <tbody>
+      <tr><td class="id">SCR-40</td><td>Not found (<code>ERROR 404 // CRUST_NOT_FOUND</code>)</td><td>Page (minimal frame)</td><td><a href="customer/SCR-40-not-found.html?what=/track/MX-9999">SCR-40-not-found.html</a></td><td>default (<code>?what=&lt;path&gt;</code> sets the path in the stack trace)</td></tr>
+      <tr><td class="id">SCR-41</td><td>Unexpected error (<code>ERROR 500 // SEG_FAULT</code>)</td><td>Page (minimal frame)</td><td><a href="customer/SCR-41-unexpected-error.html">SCR-41-unexpected-error.html</a></td><td>default</td></tr>
+    </tbody></table></div>
+
+  <h2>Prototype data</h2>
+  <p style="color:var(--sec);max-width:860px">Cart, the guest's orders and simulation progress are kept in this browser's local storage (key <code>gitpizza-proto-lite-v1</code>). Nothing leaves the browser. Stock is fixed by the demo seed: Tiramisu Stack is sold out and jalapeños are out of stock.</p>
+  <button class="btn" id="reset" type="button">Reset all prototype data in this browser</button> <span id="reset-msg" role="status" style="color:var(--green);margin-left:12px"></span>
+
+  <footer>Git Pizza MxDev — Mission Kitchen · 2140 Folsom Street, San Francisco, CA 94110 (fictional) · How to open and known simplifications: <a href="README.md">README.md</a></footer>
+</div>
+<script>
+  document.getElementById('reset').addEventListener('click', function () {
+    try { Object.keys(localStorage).forEach(function (k) { if (k.indexOf('gitpizza-proto-lite-') === 0) localStorage.removeItem(k); }); document.getElementById('reset-msg').textContent = 'Done. All prototype data is back to the start.'; }
+    catch (e) { document.getElementById('reset-msg').textContent = 'Local storage is not available in this browser; nothing to reset.'; }
+  });
+</script>
+</body>
+</html>

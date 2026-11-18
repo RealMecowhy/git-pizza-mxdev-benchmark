@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<title>Customer shell — Git Pizza MxDev</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Geist:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link rel="stylesheet" href="_shared/proto.css">
+<style>
+  table.ref { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.ref th, table.ref td { text-align: left; padding: 10px; border-bottom: 1px solid var(--border-subtle); vertical-align: top; }
+  table.ref th { font-size: 11px; color: var(--text-muted); letter-spacing: 0.05em; background: var(--surface-container); }
+  .tw { overflow-x: auto; }
+</style>
+</head>
+<body data-screen="SCR-16" data-nav="home">
+<main id="main"><div class="page" id="page">
+  <div class="t-micro c-muted">SCR-16 · reference page of the prototype</div>
+  <h1 class="t-h1 c-primary mt-8">Customer shell and navigation</h1>
+  <p class="t-body-long" style="max-width:820px">This page is not a screen of the app. It shows the persistent frame used by every guest screen: DEMO MODE banner, header, Project Explorer sidebar (desktop), phone bottom tabs, footer and toasts. Resize the window, or use <strong>◧ Prototype</strong> (bottom left) to switch between an empty and a filled cart.</p>
+  <div class="row mt-16"><button class="btn btn-secondary" id="t1">Show success toast</button><button class="btn btn-ghost" id="t2">Show info toast</button><button class="btn btn-danger" id="t3">Show error toast</button></div>
+  <section class="panel mt-24"><div class="tw"><table class="ref"><caption class="sr-only">Shell elements</caption>
+    <thead><tr><th scope="col">Element</th><th scope="col">Desktop ≥ 1200 px</th><th scope="col">Tablet 768–1199 px</th><th scope="col">Phone &lt; 768 px</th><th scope="col">Behavior in the prototype</th></tr></thead>
+    <tbody>
+      <tr><td>DEMO MODE banner</td><td colspan="3">Always visible, 32 px, sticky on top</td><td>Text "payment, kitchen and delivery are simulated" (TXT-NAV-28, TXT-NAV-29). No role switch, no link.</td></tr>
+      <tr><td>Logo</td><td colspan="2">Horizontal logo <code>logo-horizontal.svg</code>, 32 px high (tablet 32 px); the wordmark is part of the logo</td><td>Mark only <code>logo-mark.svg</code> 32 px; Home is reached via the logo</td><td>→ SCR-01 Home.</td></tr>
+      <tr><td>Main nav</td><td colspan="2"><code>./main.js</code> · <code>./menu.ts</code> · <code>./checkout.yml</code> · <code>./track.log</code></td><td>Hidden (bottom tabs)</td><td><code>./checkout.yml</code> is disabled with a hint while the cart is empty. <code>./track.log</code> opens the active order (or the guest's last order), otherwise SCR-10.</td></tr>
+      <tr><td>Search (<code>grep</code>)</td><td>Header field</td><td>Header field (≥ 1024 px), else on the menu page</td><td>On the menu page</td><td>Submits to SCR-02 with the query.</td></tr>
+      <tr><td>Cart button</td><td colspan="3">Icon with count bubble (total quantity)</td><td>→ SCR-05 cart drawer; count updates immediately after "+ import".</td></tr>
+      <tr><td>Project Explorer sidebar</td><td>256 px, sticky</td><td colspan="2">Hidden</td><td>Root · Categories (4 files) · Active_Deployments (only with an order in this session) · New Branch.</td></tr>
+      <tr><td>Bottom tabs</td><td colspan="2">Hidden</td><td>Source · Deploy · Trace</td><td>Menu · Cart (with count) · Track.</td></tr>
+      <tr><td>Footer</td><td colspan="3">Store line (TXT-NAV-35), version line (TXT-NAV-36); links</td><td>menu.ts, track.log, allergens.md (dialog).</td></tr>
+      <tr><td>Toasts</td><td colspan="2">Bottom right</td><td>Above the bottom tabs</td><td>Auto-hide after 4.5 s; optional action link.</td></tr>
+      <tr><td>PROTOTYPE controls</td><td colspan="3">Dashed light button, bottom left</td><td><strong>Not part of the app.</strong> Switches prototype data and screen states.</td></tr>
+    </tbody></table></div></section>
+</div></main>
+<script src="_shared/proto.js"></script>
+<script>
+  GP.registerStates([['cart-empty', 'Cart empty'], ['cart-filled', 'Cart non-empty']]);
+  (function () {
+    var st = GP.state(), m = GP.currentState();
+    if (GP.param('state') && !GP.param('ok')) {
+      if (m === 'cart-empty') GP.clearCart(); if (m === 'cart-filled') { st.cart.lines = [GP.defaultLine('PZ-04'), GP.defaultLine('DR-01')]; }
+      GP.save(); location.href = 'SCR-16-customer-shell.html?state=' + m + '&ok=1'; return;
+    }
+    document.getElementById('t1').onclick = function () { GP.toast('Inferno Payload (Medium 12") added to the manifest.', '', 'SCR-05-cart.html', 'View manifest'); };
+    document.getElementById('t2').onclick = function () { GP.toast('Copied to clipboard.', 'info'); };
+    document.getElementById('t3').onclick = function () { GP.toast('Could not refresh the order status. Retrying…', 'error'); };
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+code,name,composition,allergens,isVegetarian,isVegan,isInStock,sortOrder
+dough_neapolitan,Neapolitan dough,"""00"" wheat flour, water, sea salt, yeast; 48 h ferment",GLUTEN,true,true,true,1
+dough_thin,Thin-crust dough,"wheat flour, olive oil, salt, yeast",GLUTEN,true,true,true,2
+dough_sourdough,Sourdough,"wheat and rye flour, natural starter; 72 h",GLUTEN,true,true,true,3
+dough_stuffed,Neapolitan dough with a mozzarella-filled rim,,GLUTEN|MILK,true,false,true,4
+dough_gluten_free,Gluten-free base,"rice flour, tapioca, potato starch, psyllium, olive oil",,true,true,true,5
+tomato_san_marzano,San Marzano DOP tomato sauce,,,true,true,true,6
+bbq_sauce_smoked,Smoked hickory BBQ sauce,"tomato, molasses, cider vinegar, mustard, spices",MUSTARD,true,true,true,7
+garlic_cream,Garlic cream,"cream, roasted garlic, black pepper",MILK,true,false,true,8
+truffle_cream,Black truffle cream,"cream, black summer truffle, parmesan-style cheese",MILK,true,false,true,9
+tomato_yellow,Yellow datterini tomato purée,,,true,true,true,10
+fior_di_latte,Fior di latte mozzarella,,MILK,true,false,true,11
+buffalo_mozzarella,Buffalo mozzarella,Mozzarella di Bufala Campana DOP,MILK,true,false,true,12
+cashew_mozzarella,Cashew mozzarella,"cashews, coconut oil, tapioca",TREE_NUTS,true,true,true,13
+smoked_provolone,Smoked provolone,,MILK,true,false,true,14
+gorgonzola,Gorgonzola dolce,microbial rennet,MILK,true,false,true,15
+fontina,Fontina,microbial rennet,MILK,true,false,true,16
+parmesan_style,Parmesan-style hard cheese,microbial rennet,MILK,true,false,true,17
+ricotta,Whole-milk ricotta,,MILK,true,false,true,18
+stracciatella,Stracciatella,,MILK,true,false,true,19
+cashew_ricotta,Cashew ricotta,"cashews, lemon, olive oil",TREE_NUTS,true,true,true,20
+pepperoni,Cup-and-char pepperoni,pork and beef,,false,false,true,21
+spianata_calabrese,Spianata calabrese,spicy Calabrian pork salami,,false,false,true,22
+nduja,'Nduja,spreadable spicy pork salami,,false,false,true,23
+italian_sausage,Fennel Italian sausage,pork,,false,false,true,24
+smoked_bacon,Applewood-smoked bacon,,,false,false,true,25
+prosciutto_cotto,Prosciutto cotto,Italian cooked ham,,false,false,true,26
+pulled_pork,Hickory-smoked pulled pork,dry rub with mustard,MUSTARD,false,false,true,27
+grilled_chicken,Grilled chicken breast,,,false,false,true,28
+basil,Fresh basil,,,true,true,true,29
+oregano,Dried Sicilian oregano,,,true,true,true,30
+cremini,Cremini mushrooms,,,true,true,true,31
+porcini,Roasted porcini mushrooms,,,true,true,true,32
+red_onion,Red onion,,,true,true,true,33
+caramelized_onion,Caramelized onions,,,true,true,true,34
+green_pepper,Green bell pepper,,,true,true,true,35
+roasted_red_pepper,Roasted red peppers,,,true,true,true,36
+black_olives,Taggiasca olives,,,true,true,true,37
+jalapeno,Fresh jalapeños,,,true,true,false,38
+pineapple,Roasted pineapple,,,true,true,true,39
+cherry_tomatoes,Cherry tomatoes,,,true,true,true,40
+zucchini,Grilled zucchini,,,true,true,true,41
+eggplant,Roasted eggplant,,,true,true,true,42
+artichoke,Marinated artichoke hearts,,,true,true,true,43
+arugula,Wild arugula,,,true,true,true,44
+roasted_garlic,Roasted garlic cloves,,,true,true,true,45
+evoo,Extra-virgin olive oil,cold-pressed,,true,true,true,46
+hot_honey,Hot honey,"wildflower honey, chili",,true,false,true,47
+chili_oil,Calabrian chili oil,,,true,true,true,48
+chili_flakes,Crushed red pepper,,,true,true,true,49
+truffle_oil,Black truffle oil,,,true,true,true,50
+garlic_butter,Garlic butter,"butter, garlic, parsley",MILK,true,false,true,51

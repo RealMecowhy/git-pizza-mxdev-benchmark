@@ -1,0 +1,26 @@
+productCode,productName,GLUTEN,CRUSTACEANS,EGGS,FISH,PEANUTS,SOYBEANS,MILK,TREE_NUTS,CELERY,MUSTARD,SESAME,SULPHITES,LUPIN,MOLLUSCS,isVegetarian,isVegan
+PZ-01,The Root Pizza,true,false,false,false,false,false,true,false,false,false,false,false,false,false,true,false
+PZ-02,Boolean Pepperoni,true,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false
+PZ-03,SQL Supreme,true,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false
+PZ-04,Binary BBQ,true,false,false,false,false,false,true,false,false,true,false,false,false,false,false,false
+PZ-05,Inferno Payload,true,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false
+PZ-06,Kernel Panic Meat,true,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false
+PZ-07,Truffle Kernel,true,false,false,false,false,false,true,false,false,false,false,false,false,false,true,false
+PZ-08,Quad-Core Formaggi,true,false,false,false,false,false,true,false,false,false,false,false,false,false,true,false
+PZ-09,The Clean Code,true,false,false,false,false,false,true,false,false,false,false,false,false,false,true,false
+PZ-10,Low-Mem Garden,true,false,false,false,false,false,false,true,false,false,false,false,false,false,true,true
+PZ-11,Hawaiian Legacy Fix,true,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false
+PZ-12,Calzone Container,true,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false
+SD-01,Garlic Knot Loop,true,false,false,false,false,false,true,false,false,false,false,false,false,false,true,false
+SD-02,Caesar Cipher Salad,true,false,true,true,false,false,true,false,false,true,false,false,false,false,false,false
+SD-03,Hot Wings Webhook,false,false,true,false,false,false,true,false,true,false,false,false,false,false,false,false
+SD-04,Garlic Driver Dip,false,false,true,false,false,false,true,false,false,false,false,false,false,false,true,false
+SD-05,Jalapeño Patch Dip,false,false,true,false,false,false,true,false,false,false,false,false,false,false,true,false
+DR-01,Mate Compiler Tonic,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true
+DR-02,Cold Brew Commit,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true
+DR-03,Cola Cache,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true
+DR-04,Lemon Lint Soda,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true
+DR-05,Sparkling Stream Water,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true
+DS-01,Tiramisu Stack,true,false,true,false,false,false,true,false,false,false,false,false,false,false,true,false
+DS-02,Cannoli Callback,true,false,true,false,false,false,true,true,false,false,false,false,false,false,true,false
+DS-03,Lava Exception Cake,true,false,true,false,false,true,true,false,false,false,false,false,false,false,true,false

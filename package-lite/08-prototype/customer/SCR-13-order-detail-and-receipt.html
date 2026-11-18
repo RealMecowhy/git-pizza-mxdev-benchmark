@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<title>Order detail — Git Pizza MxDev</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Geist:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link rel="stylesheet" href="_shared/proto.css">
+<style>
+  .det { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 24px; margin-top: 24px; align-items: start; }
+  table.lines { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.lines th { text-align: left; font-size: 11px; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 700; padding: 8px; border-bottom: 1px solid var(--border); background: var(--surface-container); }
+  table.lines td { padding: 10px 8px; border-bottom: 1px solid var(--border-subtle); vertical-align: top; }
+  table.lines .num { text-align: right; white-space: nowrap; }
+  .mod { font-size: 12px; color: var(--text-secondary); } .mod.add { color: var(--success-text); } .mod.rem { color: var(--error-text); }
+  .hist { display: grid; gap: 6px; font-size: 13px; }
+  .hist div { display: flex; gap: 12px; } .hist .ts { color: var(--text-muted); width: 72px; flex-shrink: 0; }
+  .tablewrap { overflow-x: auto; }
+  @media (max-width: 1023px) { .det { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body data-screen="SCR-13" data-nav="track">
+<main id="main"><div class="page print-area" id="page"></div></main>
+<script src="_shared/proto.js"></script>
+<script>
+(function () {
+  var st = GP.state(), E = GP.esc;
+  GP.registerStates([['completed', 'Completed (MX-1014)'], ['cancelled', 'Cancelled with refund (MX-1009)']]);
+  var mode = GP.currentState();
+  if (GP.param('state') && !GP.param('ok')) {
+    location.href = 'SCR-13-order-detail-and-receipt.html?id=' + ({ completed: 'MX-1014', cancelled: 'MX-1009' }[mode] || 'MX-1014') + '&state=' + mode + '&ok=1'; return;
+  }
+  var page = document.getElementById('page');
+  var o = GP.findOrder(GP.param('id') || 'MX-1014');
+  if (!o) { location.replace(GP.PAGES.notFound + '?what=' + encodeURIComponent('/orders/' + (GP.param('id') || '') + '/receipt')); return; }
+  var ls = GP.liveStatus(o), s = ls.status;
+  var t = o.t, deliv = o.type === 'DELIVERY';
+  function mods(l) {
+    var p = GP.BY_CODE[l.p]; if (p.kind !== 'PIZZA') return '<div class="mod">' + E(p.serving) + '</div>';
+    var out = ['crust', 'sauce', 'cheese'].map(function (g) { var op = GP.OPTIONS[l[g]], def = l[g] === p[g]; return '<div class="mod">' + g.toUpperCase() + ': ' + E(op.name) + (def ? ' <span class="c-muted">(default)</span>' : op.sur ? ' +' + GP.money(op.sur) : '') + '</div>'; });
+    (l.extras || []).forEach(function (x) { var op = GP.OPTIONS[x]; out.push('<div class="mod add">ADD: ' + E(op.name) + ' +' + GP.money(GP.EXTRA_PRICE[op.cls][l.size]) + '</div>'); });
+    (l.removed || []).forEach(function (r) { out.push('<div class="mod rem">REMOVE: ' + E(GP.INGR[r][0]) + '</div>'); });
+    return out.join('');
+  }
+  // status history (customer view: time + status only)
+  function history() {
+    var base = new Date(o.placed.replace(' ', 'T') + ':00'), rows = [];
+    function add(sec, key) { rows.push([new Date(base.getTime() + sec * 1000), key]); }
+    add(0, 'PAYMENT_PENDING');
+    if (o.paid || o.history) add(3, 'QUEUED');
+    var path = deliv ? [['BAKING', 23], ['QA_CHECK', 113], ['READY_FOR_DISPATCH', 143], ['OUT_FOR_DELIVERY', 178], ['DELIVERED', 178 + 60 + 40 * (o.distance || (o.addr && GP.ZONES[o.addr.zip] ? GP.ZONES[o.addr.zip][1] : 2))]]
+                     : [['BAKING', 23], ['QA_CHECK', 113], ['READY_FOR_PICKUP', 143], ['PICKED_UP', 233]];
+    if (s === 'CANCELLED') { if (o.frozenAt === 'BAKING') add(23, 'BAKING'); add(o.frozenAt ? 60 : 30, 'CANCELLED'); return rows; }
+    var reached = true;
+    path.forEach(function (pp) { if (!reached) return; if (o.history && !o.active || GP.FINAL[s]) add(pp[1], pp[0]); else { var segs = GP.segments(o), idx = segs.map(function (x) { return x[0]; }).indexOf(s), pi = segs.map(function (x) { return x[0]; }).indexOf(pp[0]); if (pi <= idx) add(pp[1], pp[0]); else reached = false; } });
+    return rows;
+  }
+  function render() {
+    var pay = o.method === 'CARD' && o.card ? GP.TEST_CARDS[o.card].label : GP.METHODS[o.method || 'CARD'];
+    var h = '<div class="between no-print"><a class="t-small" href="SCR-09-order-tracking.html?id=MX-' + o.no + '">← back to tracking</a><div class="row"><button class="btn btn-ghost btn-sm" id="print"><span class="ms sm" aria-hidden="true">print</span>Print receipt</button></div></div>';
+    h += '<img class="print-only" src="' + GP.ASSETS + 'brand/logo-mono-black.png" alt="Git Pizza MxDev" style="height:40px;width:auto;margin-bottom:16px">';
+    h += '<div class="mt-16"><div class="t-micro c-muted">$ git show ' + o.hash + '</div><h1 class="t-h1 mt-8"><span class="c-green">commit ' + o.hash + '</span> <span class="c-muted t-h3">(MX-' + o.no + ')</span></h1>' +
+      '<div class="t-small mt-8">Author: ' + E(o.contact.name) + ' &lt;' + E(o.contact.email) + '&gt;<br>Date: ' + E(o.placed) + ' (America/Los_Angeles) · ' + (deliv ? 'DELIVERY' : 'PICKUP') + '</div><div class="row mt-8">' + GP.statusBadge(s) + '<span class="t-small c-secondary">' + GP.STATUS[s].plain + '</span></div></div>';
+    if (s === 'CANCELLED') h += '<div class="notice error mt-16"><span class="ms" aria-hidden="true">undo</span><div><strong>This order was rolled back.</strong> ' + (o.paymentStatus === 'REFUNDED' ? 'You cancelled it.' : 'Payment was not completed.') +
+      (o.paymentStatus === 'REFUNDED' ? ' Refund of ' + GP.money(t.total) + ' issued to ' + pay + ' (simulated) · ' + E(o.refundId) + '.' : '') + '</div></div>';
+    h += '<div class="det"><div class="stack-lg"><section class="panel"><div class="tablewrap"><table class="lines"><caption class="sr-only">Order lines</caption><thead><tr><th scope="col">Module</th><th scope="col" class="num">Qty</th><th scope="col" class="num">Unit</th><th scope="col" class="num">Total</th></tr></thead><tbody>' +
+      o.lines.map(function (l) { var p = GP.BY_CODE[l.p], up = GP.unitPrice(l);
+        return '<tr><td><div class="c-primary" style="font-weight:700">' + E(p.name) + '</div><div class="t-micro c-muted">' + E(p.real) + (p.kind === 'PIZZA' ? ' · ' + GP.SIZES[l.size].label : '') + '</div>' + mods(l) + '<div class="t-micro c-muted mt-8">Allergens: ' + E(GP.allergenText(GP.lineAllergens(l))) + '</div></td><td class="num">' + l.qty + '</td><td class="num">' + GP.money(up) + '</td><td class="num">' + GP.money(up * l.qty) + '</td></tr>'; }).join('') +
+      '</tbody></table></div><div class="panel-pad"><div class="sum-row"><span class="lbl">Subtotal</span><span>' + GP.money(t.subtotal) + '</span></div>' +
+      (t.discount ? '<div class="sum-row discount"><span class="lbl">Coupon ' + E(o.coupon) + '</span><span>' + GP.money(-t.discount) + '</span></div>' : '') +
+      (deliv ? '<div class="sum-row"><span class="lbl">Delivery fee</span><span>' + GP.money(t.deliveryFee) + (t.feeWaived ? ' (free from $40.00)' : '') + '</span></div>' : '') +
+      '<div class="sum-row"><span class="lbl">Sales tax 8.625 %</span><span>' + GP.money(t.tax) + '</span></div>' + (deliv ? '<div class="sum-row"><span class="lbl">Courier tip ' + t.tipPct + ' %</span><span>' + GP.money(t.tip) + '</span></div>' : '') +
+      '<div class="sum-total"><span class="t-label">TOTAL</span><span class="t-price-lg c-primary">' + GP.money(t.total) + '</span></div><p class="t-micro c-muted mt-8" style="margin-bottom:0">Prices are a snapshot from the time of ordering and never change afterwards.</p></div></section></div>';
+    h += '<div class="stack-lg"><section class="panel panel-pad"><h2 class="section-label"><span class="ms" aria-hidden="true">payments</span>Payment</h2><div class="t-small">' + pay + ' · <span class="' + (o.paymentStatus === 'REFUNDED' ? 'c-warn' : o.paid ? 'c-green' : 'c-error') + '">' + (o.paymentStatus || 'UNPAID') + '</span></div><div class="t-micro c-muted mt-8">TxID ' + E(o.txn || '—') + ' (simulated)</div></section>' +
+      '<section class="panel panel-pad"><h2 class="section-label"><span class="ms" aria-hidden="true">' + (deliv ? 'local_shipping' : 'storefront') + '</span>' + (deliv ? 'Delivered to' : 'Pickup') + '</h2>' +
+      (deliv && o.addr ? '<div class="t-small">' + E(o.addr.line1) + (o.addr.line2 ? ', ' + E(o.addr.line2) : '') + '<br>' + E(o.addr.city) + ', ' + o.addr.state + ' ' + o.addr.zip + '</div>' + (o.addr.notes ? '<div class="t-micro c-muted mt-8">' + E(o.addr.notes) + '</div>' : '') + (s === 'DELIVERED' ? '<div class="t-micro c-muted mt-8">Courier: Marek // Moto-v3</div>' : '')
+        : '<div class="t-small">' + E(GP.STORE.name) + '<br>' + E(GP.STORE.address) + '</div>') + '<div class="t-micro c-muted mt-8">Contact: ' + E(o.contact.phone) + '</div></section>' +
+      '<section class="panel panel-pad"><h2 class="section-label"><span class="ms" aria-hidden="true">timeline</span>Status history</h2><div class="hist">' + history().map(function (r) { return '<div><span class="ts">' + GP.hhmm(r[0]) + '</span>' + GP.statusBadge(r[1]) + '</div>'; }).join('') + '</div></section>' +
+      '<section class="panel panel-pad t-micro c-muted">' + E(GP.STORE.name) + ' · ' + E(GP.STORE.address) + ' · ' + GP.STORE.phone + '<br>Demo receipt — no real payment was made.</section></div></div>';
+    h += '<p class="print-only t-small" style="margin-top:24px">Receipt — demo order. No real payment was taken. Not a tax invoice.</p>'; /* TXT-PRF-37 */
+    page.innerHTML = h;
+  }
+  page.addEventListener('click', function (e) {
+    if (e.target.closest('#print')) window.print();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

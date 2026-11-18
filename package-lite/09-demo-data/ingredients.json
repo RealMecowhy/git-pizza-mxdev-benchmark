@@ -1,0 +1,551 @@
+[
+  {
+    "code": "dough_neapolitan",
+    "name": "Neapolitan dough",
+    "composition": "\"00\" wheat flour, water, sea salt, yeast; 48 h ferment",
+    "allergens": [
+      "GLUTEN"
+    ],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 1
+  },
+  {
+    "code": "dough_thin",
+    "name": "Thin-crust dough",
+    "composition": "wheat flour, olive oil, salt, yeast",
+    "allergens": [
+      "GLUTEN"
+    ],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 2
+  },
+  {
+    "code": "dough_sourdough",
+    "name": "Sourdough",
+    "composition": "wheat and rye flour, natural starter; 72 h",
+    "allergens": [
+      "GLUTEN"
+    ],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 3
+  },
+  {
+    "code": "dough_stuffed",
+    "name": "Neapolitan dough with a mozzarella-filled rim",
+    "composition": null,
+    "allergens": [
+      "GLUTEN",
+      "MILK"
+    ],
+    "isVegetarian": true,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 4
+  },
+  {
+    "code": "dough_gluten_free",
+    "name": "Gluten-free base",
+    "composition": "rice flour, tapioca, potato starch, psyllium, olive oil",
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 5
+  },
+  {
+    "code": "tomato_san_marzano",
+    "name": "San Marzano DOP tomato sauce",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 6
+  },
+  {
+    "code": "bbq_sauce_smoked",
+    "name": "Smoked hickory BBQ sauce",
+    "composition": "tomato, molasses, cider vinegar, mustard, spices",
+    "allergens": [
+      "MUSTARD"
+    ],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 7
+  },
+  {
+    "code": "garlic_cream",
+    "name": "Garlic cream",
+    "composition": "cream, roasted garlic, black pepper",
+    "allergens": [
+      "MILK"
+    ],
+    "isVegetarian": true,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 8
+  },
+  {
+    "code": "truffle_cream",
+    "name": "Black truffle cream",
+    "composition": "cream, black summer truffle, parmesan-style cheese",
+    "allergens": [
+      "MILK"
+    ],
+    "isVegetarian": true,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 9
+  },
+  {
+    "code": "tomato_yellow",
+    "name": "Yellow datterini tomato purée",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 10
+  },
+  {
+    "code": "fior_di_latte",
+    "name": "Fior di latte mozzarella",
+    "composition": null,
+    "allergens": [
+      "MILK"
+    ],
+    "isVegetarian": true,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 11
+  },
+  {
+    "code": "buffalo_mozzarella",
+    "name": "Buffalo mozzarella",
+    "composition": "Mozzarella di Bufala Campana DOP",
+    "allergens": [
+      "MILK"
+    ],
+    "isVegetarian": true,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 12
+  },
+  {
+    "code": "cashew_mozzarella",
+    "name": "Cashew mozzarella",
+    "composition": "cashews, coconut oil, tapioca",
+    "allergens": [
+      "TREE_NUTS"
+    ],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 13
+  },
+  {
+    "code": "smoked_provolone",
+    "name": "Smoked provolone",
+    "composition": null,
+    "allergens": [
+      "MILK"
+    ],
+    "isVegetarian": true,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 14
+  },
+  {
+    "code": "gorgonzola",
+    "name": "Gorgonzola dolce",
+    "composition": "microbial rennet",
+    "allergens": [
+      "MILK"
+    ],
+    "isVegetarian": true,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 15
+  },
+  {
+    "code": "fontina",
+    "name": "Fontina",
+    "composition": "microbial rennet",
+    "allergens": [
+      "MILK"
+    ],
+    "isVegetarian": true,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 16
+  },
+  {
+    "code": "parmesan_style",
+    "name": "Parmesan-style hard cheese",
+    "composition": "microbial rennet",
+    "allergens": [
+      "MILK"
+    ],
+    "isVegetarian": true,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 17
+  },
+  {
+    "code": "ricotta",
+    "name": "Whole-milk ricotta",
+    "composition": null,
+    "allergens": [
+      "MILK"
+    ],
+    "isVegetarian": true,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 18
+  },
+  {
+    "code": "stracciatella",
+    "name": "Stracciatella",
+    "composition": null,
+    "allergens": [
+      "MILK"
+    ],
+    "isVegetarian": true,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 19
+  },
+  {
+    "code": "cashew_ricotta",
+    "name": "Cashew ricotta",
+    "composition": "cashews, lemon, olive oil",
+    "allergens": [
+      "TREE_NUTS"
+    ],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 20
+  },
+  {
+    "code": "pepperoni",
+    "name": "Cup-and-char pepperoni",
+    "composition": "pork and beef",
+    "allergens": [],
+    "isVegetarian": false,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 21
+  },
+  {
+    "code": "spianata_calabrese",
+    "name": "Spianata calabrese",
+    "composition": "spicy Calabrian pork salami",
+    "allergens": [],
+    "isVegetarian": false,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 22
+  },
+  {
+    "code": "nduja",
+    "name": "'Nduja",
+    "composition": "spreadable spicy pork salami",
+    "allergens": [],
+    "isVegetarian": false,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 23
+  },
+  {
+    "code": "italian_sausage",
+    "name": "Fennel Italian sausage",
+    "composition": "pork",
+    "allergens": [],
+    "isVegetarian": false,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 24
+  },
+  {
+    "code": "smoked_bacon",
+    "name": "Applewood-smoked bacon",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": false,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 25
+  },
+  {
+    "code": "prosciutto_cotto",
+    "name": "Prosciutto cotto",
+    "composition": "Italian cooked ham",
+    "allergens": [],
+    "isVegetarian": false,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 26
+  },
+  {
+    "code": "pulled_pork",
+    "name": "Hickory-smoked pulled pork",
+    "composition": "dry rub with mustard",
+    "allergens": [
+      "MUSTARD"
+    ],
+    "isVegetarian": false,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 27
+  },
+  {
+    "code": "grilled_chicken",
+    "name": "Grilled chicken breast",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": false,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 28
+  },
+  {
+    "code": "basil",
+    "name": "Fresh basil",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 29
+  },
+  {
+    "code": "oregano",
+    "name": "Dried Sicilian oregano",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 30
+  },
+  {
+    "code": "cremini",
+    "name": "Cremini mushrooms",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 31
+  },
+  {
+    "code": "porcini",
+    "name": "Roasted porcini mushrooms",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 32
+  },
+  {
+    "code": "red_onion",
+    "name": "Red onion",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 33
+  },
+  {
+    "code": "caramelized_onion",
+    "name": "Caramelized onions",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 34
+  },
+  {
+    "code": "green_pepper",
+    "name": "Green bell pepper",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 35
+  },
+  {
+    "code": "roasted_red_pepper",
+    "name": "Roasted red peppers",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 36
+  },
+  {
+    "code": "black_olives",
+    "name": "Taggiasca olives",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 37
+  },
+  {
+    "code": "jalapeno",
+    "name": "Fresh jalapeños",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": false,
+    "sortOrder": 38
+  },
+  {
+    "code": "pineapple",
+    "name": "Roasted pineapple",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 39
+  },
+  {
+    "code": "cherry_tomatoes",
+    "name": "Cherry tomatoes",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 40
+  },
+  {
+    "code": "zucchini",
+    "name": "Grilled zucchini",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 41
+  },
+  {
+    "code": "eggplant",
+    "name": "Roasted eggplant",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 42
+  },
+  {
+    "code": "artichoke",
+    "name": "Marinated artichoke hearts",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 43
+  },
+  {
+    "code": "arugula",
+    "name": "Wild arugula",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 44
+  },
+  {
+    "code": "roasted_garlic",
+    "name": "Roasted garlic cloves",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 45
+  },
+  {
+    "code": "evoo",
+    "name": "Extra-virgin olive oil",
+    "composition": "cold-pressed",
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 46
+  },
+  {
+    "code": "hot_honey",
+    "name": "Hot honey",
+    "composition": "wildflower honey, chili",
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 47
+  },
+  {
+    "code": "chili_oil",
+    "name": "Calabrian chili oil",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 48
+  },
+  {
+    "code": "chili_flakes",
+    "name": "Crushed red pepper",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 49
+  },
+  {
+    "code": "truffle_oil",
+    "name": "Black truffle oil",
+    "composition": null,
+    "allergens": [],
+    "isVegetarian": true,
+    "isVegan": true,
+    "isInStock": true,
+    "sortOrder": 50
+  },
+  {
+    "code": "garlic_butter",
+    "name": "Garlic butter",
+    "composition": "butter, garlic, parsley",
+    "allergens": [
+      "MILK"
+    ],
+    "isVegetarian": true,
+    "isVegan": false,
+    "isInStock": true,
+    "sortOrder": 51
+  }
+]

@@ -1,0 +1,44 @@
+#!/bin/sh
+# Benchmark commit hook, installed into the project of every run.
+# Deliverables G.3, one commit per story with that story's work:
+#  1. a US-xxx commit must change something outside RUN/ (model, code, theme, resources);
+#  2. a commit names at most three stories (US-061, US-062, US-063 or a range US-061 to US-063);
+#  3. a commit that is not a story commit adds or changes at most two pages (model units of type Forms$Page).
+first=$(head -n 1 "$1" | tr -d '\r')
+head=${first%%:*}
+
+refuse() {
+  echo "Commit refused: $1" >&2
+  echo "One commit is one story (at most three that cannot be built apart); pages go only into US-xxx commits;" >&2
+  echo "notes about a blocked or partial story without code go into a 'Notes: ...' commit." >&2
+  exit 1
+}
+
+case "$first" in
+  US-[0-9]*)
+    # number of stories named before the colon, ranges counted in full
+    n=$(printf '%s\n' "$head" | awk '{
+          s=$0; n=0
+          while (match(s, /US-[0-9]+[ ]*(to|-|\.\.)[ ]*(US-)?[0-9]+/)) {
+            r=substr(s, RSTART, RLENGTH); gsub(/[^0-9 ]/, " ", r); split(r, a, " "); k=0
+            for (i in a) if (a[i] != "") { k++; v[k]=a[i]+0 }
+            n += (v[2] >= v[1] ? v[2] - v[1] + 1 : 2); s=substr(s, RSTART+RLENGTH)
+          }
+          while (match(s, /US-[0-9]+/)) { n++; s=substr(s, RSTART+RLENGTH) }
+          print n }')
+    if [ "${n:-0}" -gt 3 ]; then refuse "this commit names $n stories; at most three are allowed."; fi
+    if ! git diff --cached --name-only | grep -v '^RUN/' | grep -q .; then
+      refuse "a US-xxx commit must contain the model or code changes of that story, not only files in RUN/."
+    fi
+    exit 0 ;;
+esac
+
+# not a story commit: it may touch at most two pages (set-up tweaks of template pages); story pages go into US-xxx
+pages=0
+for f in $(git diff --cached --name-only --diff-filter=AM -- 'mprcontents/*.mxunit'); do
+  if git show ":$f" 2>/dev/null | tr '\0' '\n' | grep -qx 'Forms\$Page'; then pages=$((pages+1)); fi
+done
+if [ "$pages" -gt 2 ]; then
+  refuse "'${first}' adds or changes $pages pages; a commit that is not a story commit may touch at most two (set-up of template pages)."
+fi
+exit 0

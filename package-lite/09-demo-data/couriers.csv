@@ -1,0 +1,6 @@
+code,name,nodeHandle,vehicleType,plate,phone,status,statusChangedAt,currentOrder,tripProgressPercent
+CU-01,Marek Nowak,Marek // Moto-v3,SCOOTER,8MXD992,(415) 555-0161,DELIVERING,T-00:01:50,MX-1030,64
+CU-02,Alex Kim,Alex // Node-v2,CAR,9KRX204,(415) 555-0162,TO_STORE,T-00:00:12,MX-1035,40
+CU-03,Sofia Alvarez,Sofia // eBike-v4,E_BIKE,,(415) 555-0163,DELIVERING,T-00:01:10,MX-1031,76
+CU-04,Jamal Carter,Jamal // Moto-v2,SCOOTER,7JMC218,(415) 555-0164,RETURNING,T-00:01:01,MX-1029,45
+CU-05,Mei Tanaka,Mei // eBike-v1,E_BIKE,,(415) 555-0165,OFF_DUTY,D-1 22:30:00,,0

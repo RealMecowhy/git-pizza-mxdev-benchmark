@@ -1,0 +1,3 @@
+code,displayName,ovenType,targetTempF,currentTempF,capacityOrders,status
+OVEN_01,OVEN_01::CORE,"Stone deck, wood-fired",850,,3,ONLINE
+OVEN_02,OVEN_02::CONVECT,Electric deck,780,,3,ONLINE
