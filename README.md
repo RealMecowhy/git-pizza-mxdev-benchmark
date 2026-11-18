@@ -22,7 +22,7 @@ The task is a pizza ordering app for guests, "Git Pizza MxDev Lite": 111 user st
 ## What is not here
 
 - **MxCraft.** It is our own tool and it is not public. The MxCraft runs received the same package and the same common prompt as the others, followed by a tool section that says how to build with MxCraft. That section describes how the tool works, so it is not in this repository. MXCLI and Concord are public, and their sections are published in full.
-- **The results.** Numbers, charts and our review of the nine apps are in the report and the article. The link will be added here when they are published.
+- **The results.** Numbers, charts and our review of the nine apps are in the report: <https://mxbench.mecowhy.dev>. The report also shows all 111 user stories on one page and links to the nine apps the agents built.
 - **Session records and the agents' own journals.** We used them to count time, tokens and cost.
 
 ## Who we are in this comparison
